@@ -41,6 +41,10 @@
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -49,8 +53,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Walkways">
-      <HintPath>..\..\Walkways\Walkways\bin\Release\Walkways.dll</HintPath>
+    <Reference Include="Walkways, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Walkways.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -77,7 +82,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\LocalizationTranslator.cs" />
     <Compile Include="ViewModel\DocumentConverter.cs" />
     <Compile Include="View\Controls\PathwaySelector.xaml.cs">
       <DependentUpon>PathwaySelector.xaml</DependentUpon>
@@ -119,6 +123,9 @@
       <LastGenOutput>LocalisedUI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Libraries\Licenses\Walkways" />
+    <None Include="Libraries\Licenses\OokiiDialogs" />
+    <None Include="Libraries\Ookii.Dialogs.Wpf.dll.lastcodeanalysissucceeded" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -126,6 +133,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\Ookii.Dialogs.Wpf.dll" />
+    <Content Include="Libraries\Walkways.dll" />
+    <Content Include="Libraries\Walkways.pdb" />
+    <Resource Include="Libraries\Ookii.Dialogs.Wpf.dll.CodeAnalysisLog.xml" />
+    <Content Include="Libraries\Ookii.Dialogs.Wpf.pdb" />
+    <Resource Include="Libraries\Ookii.Dialogs.Wpf.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

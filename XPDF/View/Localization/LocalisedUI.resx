@@ -123,10 +123,16 @@
   <data name="Destination" xml:space="preserve">
     <value>Destination</value>
   </data>
+  <data name="FolderBrowserDescription" xml:space="preserve">
+    <value>Please Select A Folder</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="Source" xml:space="preserve">
     <value>Source</value>
+  </data>
+  <data name="TypePathHere" xml:space="preserve">
+    <value>Type Path Here</value>
   </data>
 </root>

@@ -79,6 +79,15 @@ namespace XPDF.View.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Select A Folder.
+        /// </summary>
+        internal static string FolderBrowserDescription {
+            get {
+                return ResourceManager.GetString("FolderBrowserDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         internal static string Search {
@@ -93,6 +102,15 @@ namespace XPDF.View.Localization {
         internal static string Source {
             get {
                 return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type Path Here.
+        /// </summary>
+        internal static string TypePathHere {
+            get {
+                return ResourceManager.GetString("TypePathHere", resourceCulture);
             }
         }
     }

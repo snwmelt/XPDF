@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Ookii.Dialogs.Wpf;
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using Walkways.MVVM.ViewModel;
@@ -12,6 +14,8 @@ namespace XPDF.ViewModel
         #region Private Properties
 
         private INPCInvoker _INPCInvoke;
+        private bool        _ConversionInProgress    = false;
+        private String      _PathwaySelectorPathPrompt;
         private String      _SearchLocationText;
         private String      _SelectDestinationText;
         private String      _SelectSourceText;
@@ -27,11 +31,30 @@ namespace XPDF.ViewModel
 
             InvokeITALocalizationCommand = new CommandRelay<Object>( InvokeITALocalization, CanLocalizeToITA );
             InvokeENGLocalizationCommand = new CommandRelay<Object>( InvokeENGLocalization, CanLocaliseToENG );
-            SelectDestinationCommand     = new CommandRelay<Object>( SelectDestination );
-            SelectSourceCommand          = new CommandRelay<Object>( SelectSource );
+            SelectDestinationCommand     = new CommandRelay<Object>( SelectDestination, ConversionInProgress );
+            SelectSourceCommand          = new CommandRelay<Object>( SelectSource, ConversionInProgress );
             XPDFConvertCommand           = new CommandRelay<Object>( XPDFConvert );
 
             UpdateUILables( );
+        }
+
+        private String GetFolderBrowserDialogPath( )
+        {
+            VistaFolderBrowserDialog FolderBrowser = new VistaFolderBrowserDialog
+            {
+                Description = LocalisedUI.FolderBrowserDescription,
+                UseDescriptionForTitle = true
+            };
+
+            if ( ( Boolean )FolderBrowser.ShowDialog( ) )
+                return FolderBrowser.SelectedPath;
+
+            return null;
+        }
+
+        private bool ConversionInProgress( object obj )
+        {
+            return !_ConversionInProgress;
         }
 
         private bool CanLocalizeToITA( object obj )
@@ -64,7 +87,20 @@ namespace XPDF.ViewModel
         }
 
         public CommandRelay<object> InvokeENGLocalizationCommand { get; }
-        
+
+        public String PathwaySelectorPathPrompt
+        {
+            get
+            {
+                return _PathwaySelectorPathPrompt;
+            }
+
+            set
+            {
+                _INPCInvoke.AssignPropertyValue<String>( ref PropertyChanged, ref _PathwaySelectorPathPrompt, value );
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public String SearchLocationText
@@ -82,7 +118,7 @@ namespace XPDF.ViewModel
 
         private void SelectDestination( object obj )
         {
-            throw new NotImplementedException( );
+            SelectedDestinationText = GetFolderBrowserDialogPath( );
         }
 
         public CommandRelay<object> SelectDestinationCommand { get; }
@@ -102,7 +138,7 @@ namespace XPDF.ViewModel
 
         private void SelectSource( object obj )
         {
-            throw new NotImplementedException( );
+            SelectedSourceText = GetFolderBrowserDialogPath( );
         }
 
         public CommandRelay<object> SelectSourceCommand { get; }
@@ -148,10 +184,11 @@ namespace XPDF.ViewModel
 
         private void UpdateUILables( )
         {
-            SelectDestinationText = LocalisedUI.Destination;
-            SelectSourceText      = LocalisedUI.Source;
-            XPDFConvertText       = LocalisedUI.Convert;
-            SearchLocationText    = LocalisedUI.Search;
+            SelectDestinationText     = LocalisedUI.Destination;
+            SelectSourceText          = LocalisedUI.Source;
+            XPDFConvertText           = LocalisedUI.Convert;
+            SearchLocationText        = LocalisedUI.Search;
+            PathwaySelectorPathPrompt = LocalisedUI.TypePathHere;
         }
 
         private void XPDFConvert( Object obj )
