@@ -85,10 +85,10 @@
     <Compile Include="View\DocumentConverter.xaml.cs">
       <DependentUpon>DocumentConverter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Localization\UX.en.Designer.cs">
+    <Compile Include="View\Localization\LocalisedUI.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UX.en.resx</DependentUpon>
+      <DependentUpon>LocalisedUI.resx</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -113,9 +113,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Localization\UX.en.resx">
+    <EmbeddedResource Include="View\Localization\LocalisedUI.It.resx" />
+    <EmbeddedResource Include="View\Localization\LocalisedUI.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UX.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>LocalisedUI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

@@ -6,7 +6,9 @@
       xmlns:vc="clr-namespace:XPDF.View.Controls"
       xmlns:vm="clr-namespace:XPDF.ViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="174.748" d:DesignWidth="800"
+      Width="600"
+      Height="Auto">
 
     <Page.DataContext>
         <vm:DocumentConverter/>
@@ -40,18 +42,21 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <vc:PathwaySelector x:Name="DestinationPathwaySelector" Grid.Row="0" Margin="0,0,0,6"
-                                TextBoxPlaceholder="{Binding Path=SelectDestinationPrompt, Mode=OneWay}"
+                                TextBoxPlaceholder="{Binding Path=SelectDestinationText, Mode=OneWay}"
                                 TextBoxText="{Binding Path=SelectedDestinationText}"
-                                ButtonCommand="{Binding Path=SelectDestinationCommand}"/>
+                                ButtonCommand="{Binding Path=SelectDestinationCommand}"
+                                ButtonContent="{Binding Path=SearchLocationText}"/>
             
             <vc:PathwaySelector x:Name="SourcePathwaySelector"  Grid.Row="1" Margin="1"
-                                TextBoxPlaceholder="{Binding Path=SelectSourcePrompt, Mode=OneWay}"
+                                TextBoxPlaceholder="{Binding Path=SelectSourceText, Mode=OneWay}"
                                 TextBoxText="{Binding Path=SelectedSourceText}"
-                                ButtonCommand="{Binding Path=SelectSourceCommand}"/>
+                                ButtonCommand="{Binding Path=SelectSourceCommand}"
+                                ButtonContent="{Binding Path=SearchLocationText}"/>
 
 
         </Grid>
 
-        <Button Grid.Row="4" HorizontalAlignment="Right" Width="105" Height="35" Margin="1,0"/>
+        <Button Grid.Row="4" HorizontalAlignment="Right" Width="105" Height="35" Margin="1,0"
+                Content="{Binding Path=XPDFConvertText}" Command="{Binding Path=XPDFConvertCommand}"/>
     </Grid>
 </Page>
