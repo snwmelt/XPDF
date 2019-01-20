@@ -1,10 +1,13 @@
 ﻿using Ookii.Dialogs.Wpf;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using Walkways.MVVM.ViewModel;
+using XPDF.Model;
+using XPDF.Model.Event;
+using XPDF.Model.Event.Interface;
+using XPDF.Model.Interface;
 using XPDF.View.Localization;
 
 namespace XPDF.ViewModel
@@ -13,15 +16,16 @@ namespace XPDF.ViewModel
     {
         #region Private Properties
 
-        private INPCInvoker _INPCInvoke;
-        private bool        _ConversionInProgress    = false;
-        private String      _PathwaySelectorPathPrompt;
-        private String      _SearchLocationText;
-        private String      _SelectDestinationText;
-        private String      _SelectSourceText;
-        private string      _SelectedDestinationText = "";
-        private string      _SelectedSourceText      = "";
-        private String      _XPDFConvertText;
+        private INPCInvoker     _INPCInvoke;
+        private bool            _ConversionInProgress      = false;
+        private String          _PathwaySelectorPathPrompt;
+        private String          _SearchLocationText;
+        private String          _SelectDestinationText;
+        private String          _SelectSourceText;
+        private string          _SelectedDestinationText   = "";
+        private string          _SelectedSourceText        = "";
+        private String          _XPDFConvertText;
+        private IXPDFConversionManager  _XPDFConverter             = new FatturaElecttronicaConversionManager( );
 
         #endregion
 
@@ -36,20 +40,13 @@ namespace XPDF.ViewModel
             XPDFConvertCommand           = new CommandRelay<Object>( XPDFConvert );
 
             UpdateUILables( );
+            _XPDFConverter.ProgressUpdateEvent += UpdateProgress;
+            //XPDFConvert( null ); // remove later
         }
 
-        private String GetFolderBrowserDialogPath( )
+        private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate> e )
         {
-            VistaFolderBrowserDialog FolderBrowser = new VistaFolderBrowserDialog
-            {
-                Description = LocalisedUI.FolderBrowserDescription,
-                UseDescriptionForTitle = true
-            };
-
-            if ( ( Boolean )FolderBrowser.ShowDialog( ) )
-                return FolderBrowser.SelectedPath;
-
-            return null;
+            throw new NotImplementedException( );
         }
 
         private bool ConversionInProgress( object obj )
@@ -65,6 +62,23 @@ namespace XPDF.ViewModel
         private bool CanLocaliseToENG( object obj )
         {
             return CultureInfo.CurrentUICulture.ThreeLetterISOLanguageName != "eng";
+        }
+
+        private String GetFolderBrowserDialogPath( Boolean ShowNewFolderButton = false )
+        {
+            VistaFolderBrowserDialog FolderBrowser = new VistaFolderBrowserDialog
+            {
+                Description = LocalisedUI.FolderBrowserDescription,
+                UseDescriptionForTitle = true,
+                ShowNewFolderButton = ShowNewFolderButton
+            };
+
+            
+
+            if ( ( Boolean )FolderBrowser.ShowDialog( ) )
+                return FolderBrowser.SelectedPath;
+
+            return null;
         }
 
         private void InvokeITALocalization( object obj )
@@ -118,7 +132,7 @@ namespace XPDF.ViewModel
 
         private void SelectDestination( object obj )
         {
-            SelectedDestinationText = GetFolderBrowserDialogPath( );
+            SelectedDestinationText = GetFolderBrowserDialogPath( true );
         }
 
         public CommandRelay<object> SelectDestinationCommand { get; }
@@ -182,18 +196,35 @@ namespace XPDF.ViewModel
             }
         }
 
+        private void ToggleConversionState()
+        {
+            _ConversionInProgress = !_ConversionInProgress;
+            XPDFConvertText       = _ConversionInProgress ? LocalisedUI.Cancel : LocalisedUI.Convert;
+        }
+
         private void UpdateUILables( )
         {
             SelectDestinationText     = LocalisedUI.Destination;
             SelectSourceText          = LocalisedUI.Source;
-            XPDFConvertText           = LocalisedUI.Convert;
+            XPDFConvertText           = _ConversionInProgress ? LocalisedUI.Cancel : LocalisedUI.Convert;
             SearchLocationText        = LocalisedUI.Search;
             PathwaySelectorPathPrompt = LocalisedUI.TypePathHere;
         }
 
         private void XPDFConvert( Object obj )
         {
-            throw new System.NotImplementedException( );
+            if ( _ConversionInProgress )
+            {
+                _XPDFConverter.Abort( );
+
+                ToggleConversionState( );
+            }
+            else
+            {
+                _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
+
+                ToggleConversionState( );
+            }
         }
 
         public CommandRelay<object> XPDFConvertCommand { get; }
