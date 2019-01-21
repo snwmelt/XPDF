@@ -126,6 +126,11 @@
     <Compile Include="Model\Interface\IXPDFConversionManager.cs" />
     <Compile Include="Model\Event\Interface\IProgressUpdate.cs" />
     <Compile Include="Model\Interface\IXPDFFIleConverter.cs" />
+    <Compile Include="Model\Localization\LocalisedString.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalisedString.resx</DependentUpon>
+    </Compile>
     <Compile Include="Model\XPDFConverter.cs" />
     <Compile Include="ViewModel\DocumentConverter.cs" />
     <Compile Include="View\Controls\PathwaySelector.xaml.cs">
@@ -158,6 +163,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Model\Localization\LocalisedString.It.resx" />
+    <EmbeddedResource Include="Model\Localization\LocalisedString.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalisedString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

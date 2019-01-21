@@ -16,15 +16,15 @@ namespace XPDF.ViewModel
     {
         #region Private Properties
 
-        private INPCInvoker     _INPCInvoke;
-        private bool            _ConversionInProgress      = false;
-        private String          _PathwaySelectorPathPrompt;
-        private String          _SearchLocationText;
-        private String          _SelectDestinationText;
-        private String          _SelectSourceText;
-        private string          _SelectedDestinationText   = "";
-        private string          _SelectedSourceText        = "";
-        private String          _XPDFConvertText;
+        private INPCInvoker             _INPCInvoke;
+        private bool                    _ConversionInProgress      = false;
+        private String                  _PathwaySelectorPathPrompt;
+        private String                  _SearchLocationText;
+        private String                  _SelectDestinationText;
+        private String                  _SelectSourceText;
+        private string                  _SelectedDestinationText   = "";
+        private string                  _SelectedSourceText        = "";
+        private String                  _XPDFConvertText;
         private IXPDFConversionManager  _XPDFConverter             = new FatturaElecttronicaConversionManager( );
 
         #endregion
@@ -41,12 +41,12 @@ namespace XPDF.ViewModel
 
             UpdateUILables( );
             _XPDFConverter.ProgressUpdateEvent += UpdateProgress;
-            //XPDFConvert( null ); // remove later
+            XPDFConvert( null ); // remove later
         }
 
         private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate> e )
         {
-            throw new NotImplementedException( );
+            //throw new NotImplementedException( );
         }
 
         private bool ConversionInProgress( object obj )
@@ -221,7 +221,7 @@ namespace XPDF.ViewModel
             }
             else
             {
-                _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
+                _XPDFConverter.ConvertAll( @"C:\Users\Fitzgerald\Desktop\XPDF\XML FILES", SelectedDestinationText );
 
                 ToggleConversionState( );
             }
