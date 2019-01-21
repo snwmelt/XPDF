@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cause" xml:space="preserve">
+    <value>Causale</value>
+  </data>
   <data name="Contacts" xml:space="preserve">
     <value>Contatti</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Divisa</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Tipo Documento</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -126,13 +138,34 @@
   <data name="Fax" xml:space="preserve">
     <value>Fax</value>
   </data>
+  <data name="GeneralData" xml:space="preserve">
+    <value>Dati generali</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Fattura</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Numero</value>
+  </data>
   <data name="Reciever" xml:space="preserve">
     <value>Destinatario</value>
+  </data>
+  <data name="Rounding" xml:space="preserve">
+    <value>Arrotondamento</value>
   </data>
   <data name="Sender" xml:space="preserve">
     <value>Emettitore</value>
   </data>
+  <data name="StampAmount" xml:space="preserve">
+    <value>Importo Bollo</value>
+  </data>
   <data name="Telephone" xml:space="preserve">
     <value>Telefono</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Importo Totale</value>
+  </data>
+  <data name="VirtualStamp" xml:space="preserve">
+    <value>Bollo Virtuale</value>
   </data>
 </root>

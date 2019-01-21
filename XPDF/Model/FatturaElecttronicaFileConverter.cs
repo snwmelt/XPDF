@@ -1,9 +1,10 @@
 ﻿using FatturaElettronica;
+using FatturaElettronica.FatturaElettronicaBody;
+using FatturaElettronica.FatturaElettronicaBody.DatiGenerali;
 using FatturaElettronica.FatturaElettronicaHeader;
 using FatturaElettronica.FatturaElettronicaHeader.CedentePrestatore;
 using FatturaElettronica.FatturaElettronicaHeader.CessionarioCommittente;
 using FatturaElettronica.Validators;
-using FluentValidation.Results;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
@@ -23,6 +24,8 @@ namespace XPDF.Model
         Fattura           _FatturaDocument   = null;
         FatturaValidator  _Validator         = new FatturaValidator( );
         XmlReaderSettings _XmlReaderSettings = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
+        Color             _HeaderColour      = Color.LIGHT_GRAY;
+        Color             _BorderColour      = Color.LIGHT_GRAY;
 
         #endregion
 
@@ -41,28 +44,101 @@ namespace XPDF.Model
                 _FatturaDocument.ReadXml( r );
             }
 
-            Document _PDFDocument = new Document( );
+            Document _PDFDocument = new Document( PageSize.LETTER, 0.0f, 0.0f, 36.0f, 36.0f );
+
 
             PdfWriter.GetInstance( _PDFDocument, new FileStream( OutputPDFPath, FileMode.OpenOrCreate ) );
 
             _PDFDocument.Open( );
 
+            _PDFDocument.Add( GeneratePDFHeader( _FatturaDocument.FatturaElettronicaHeader ) );
 
-            FatturaElettronicaHeader header = _FatturaDocument.FatturaElettronicaHeader;
-
-            //using ( var r = XmlWriter.Create( InputXMLFilePath + "_header", new XmlWriterSettings { Indent = true } ) )
-            //{
-            //    header.WriteXml( r );
-            //}
-
-            _PDFDocument.Add( GeneratePDFHeader( header ) );
-
-            foreach ( var x in _FatturaDocument.FatturaElettronicaBody )
+            for ( int i = 0; i < _FatturaDocument.FatturaElettronicaBody.Count; i++ )
             {
-
+                AddInvoiceBodyToPDFPage( _FatturaDocument.FatturaElettronicaBody[i], _PDFDocument, i );
             }
 
             _PDFDocument.Close( );
+        }
+
+        private void AddInvoiceBodyToPDFPage( FatturaElettronicaBody _FatturaElettronicaBody, Document _Document, int _PageNumber )
+        {
+            _Document.Add( AddGeneralDocumentData( _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento ) );
+        }
+
+        private IElement AddGeneralDocumentData( DatiGeneraliDocumento GeneralDocumentData )
+        {
+            PdfPTable _GeneralDocumentDataTable  = new PdfPTable( 8 );
+        
+            // creating header
+            
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.DocumentType ) ) { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Date ) )         { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Number ) )       { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Currency ) )     { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.TotalAmount ) )  { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Rounding ) )     { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.VirtualStamp ) ) { BackgroundColor = _HeaderColour } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.StampAmount ) )  { BackgroundColor = _HeaderColour } );
+
+            // filling rows
+
+            _GeneralDocumentDataTable.AddCell( LocalisedString.Invoice );
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Data.ToShortDateString( ) );
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Numero );
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Divisa );
+
+            if ( GeneralDocumentData.ImportoTotaleDocumento.HasValue )
+            {
+                _GeneralDocumentDataTable.AddCell( GeneralDocumentData.ImportoTotaleDocumento.Value.ToString( ) );
+            }
+            else
+            {
+                _GeneralDocumentDataTable.AddCell( "" );
+            }
+
+            if ( GeneralDocumentData.Arrotondamento.HasValue )
+            {
+                _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Arrotondamento.Value.ToString( ) );
+            }
+            else
+            {
+                _GeneralDocumentDataTable.AddCell( "" );
+            }
+            
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.DatiBollo.BolloVirtuale );
+
+
+            if ( GeneralDocumentData.DatiBollo.ImportoBollo.HasValue )
+            {
+                _GeneralDocumentDataTable.AddCell( GeneralDocumentData.DatiBollo.ImportoBollo.Value.ToString( ) );
+            }
+            else
+            {
+                _GeneralDocumentDataTable.AddCell( "" );
+            }
+
+            PdfPTable _GeneralDocumentCauseTable = new PdfPTable( 1 );
+
+            _GeneralDocumentCauseTable.AddCell( LocalisedString.Cause ); //header
+
+            foreach( String Cause in GeneralDocumentData.Causale )
+            {
+                _GeneralDocumentCauseTable.AddCell( Cause );
+            }
+
+
+            PdfPTable _MainTable = new PdfPTable( 1 );
+
+            _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            _MainTable.WidthPercentage = 100;
+
+            _MainTable.AddCell( new Phrase( " " ) ); // Padding
+            _MainTable.AddCell( LocalisedString.GeneralData ); // header
+            _MainTable.AddCell( new PdfPCell( _GeneralDocumentDataTable ) );
+            _MainTable.AddCell( new PdfPCell( _GeneralDocumentCauseTable ) );
+
+            return _MainTable;
         }
 
         private PdfPTable GeneratePDFHeader( FatturaElettronicaHeader _FatturaElettronicaHeader )
@@ -76,7 +152,7 @@ namespace XPDF.Model
             {
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 VerticalAlignment = Element.ALIGN_CENTER,
-                BackgroundColor = new Color( 200, 200, 200 ),
+                BackgroundColor = _HeaderColour,
                 Border = Rectangle.NO_BORDER,
                 FixedHeight = 30.0f
             };
@@ -85,7 +161,7 @@ namespace XPDF.Model
             {
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 VerticalAlignment = Element.ALIGN_CENTER,
-                BackgroundColor = new Color( 200, 200, 200 ),
+                BackgroundColor = _HeaderColour,
                 Border = Rectangle.NO_BORDER,
                 FixedHeight = 30.0f
             };
@@ -108,14 +184,14 @@ namespace XPDF.Model
 
             PdfPCell _PDFHeaderSenderCell = new PdfPCell( _PDFSenderTable )
             {
-                BorderWidth = 1.5f,
-                BorderColor = new Color( 200, 200, 200 )
+                BorderWidth = 1.2f,
+                BorderColor = _BorderColour
             };
 
             PdfPCell _PDFHeaderReciverCell = new PdfPCell( _PDFRecieverTable )
             {
-                BorderWidth = 1.5f,
-                BorderColor = new Color( 200, 200, 200 )
+                BorderWidth = 1.2f,
+                BorderColor = _BorderColour
             };
 
             PdfPTable _PDFHeaderContainer = new PdfPTable( 3 );

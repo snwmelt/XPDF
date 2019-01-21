@@ -61,11 +61,47 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cause.
+        /// </summary>
+        internal static string Cause {
+            get {
+                return ResourceManager.GetString("Cause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contacts {
             get {
                 return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uniform.
+        /// </summary>
+        internal static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Type.
+        /// </summary>
+        internal static string DocumentType {
+            get {
+                return ResourceManager.GetString("DocumentType", resourceCulture);
             }
         }
         
@@ -88,11 +124,47 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General Data.
+        /// </summary>
+        internal static string GeneralData {
+            get {
+                return ResourceManager.GetString("GeneralData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice.
+        /// </summary>
+        internal static string Invoice {
+            get {
+                return ResourceManager.GetString("Invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number.
+        /// </summary>
+        internal static string Number {
+            get {
+                return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recipient.
         /// </summary>
         internal static string Reciever {
             get {
                 return ResourceManager.GetString("Reciever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rounding.
+        /// </summary>
+        internal static string Rounding {
+            get {
+                return ResourceManager.GetString("Rounding", resourceCulture);
             }
         }
         
@@ -106,11 +178,38 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stamp amount.
+        /// </summary>
+        internal static string StampAmount {
+            get {
+                return ResourceManager.GetString("StampAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telephone.
         /// </summary>
         internal static string Telephone {
             get {
                 return ResourceManager.GetString("Telephone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Amount.
+        /// </summary>
+        internal static string TotalAmount {
+            get {
+                return ResourceManager.GetString("TotalAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Stamp.
+        /// </summary>
+        internal static string VirtualStamp {
+            get {
+                return ResourceManager.GetString("VirtualStamp", resourceCulture);
             }
         }
     }
