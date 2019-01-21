@@ -169,7 +169,7 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Emitter.
+        ///   Looks up a localized string similar to Sender.
         /// </summary>
         internal static string Sender {
             get {

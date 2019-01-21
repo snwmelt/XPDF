@@ -154,7 +154,7 @@
     <value>Rounding</value>
   </data>
   <data name="Sender" xml:space="preserve">
-    <value>Emitter</value>
+    <value>Sender</value>
   </data>
   <data name="StampAmount" xml:space="preserve">
     <value>Stamp amount</value>

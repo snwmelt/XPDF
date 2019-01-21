@@ -21,11 +21,12 @@ namespace XPDF.Model
     {
         #region Private Variables
 
-        Fattura           _FatturaDocument   = null;
-        FatturaValidator  _Validator         = new FatturaValidator( );
-        XmlReaderSettings _XmlReaderSettings = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
-        Color             _HeaderColour      = Color.LIGHT_GRAY;
-        Color             _BorderColour      = Color.LIGHT_GRAY;
+        Fattura                    _FatturaDocument   = null;
+        readonly FatturaValidator  _Validator         = new FatturaValidator( );
+        readonly XmlReaderSettings _XmlReaderSettings = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
+        Color                      _HeaderColour      = Color.LIGHT_GRAY;
+        Color                      _BorderColour      = Color.LIGHT_GRAY;
+        readonly float             _BorderWidth       = 1.8f;
 
         #endregion
 
@@ -44,7 +45,7 @@ namespace XPDF.Model
                 _FatturaDocument.ReadXml( r );
             }
 
-            Document _PDFDocument = new Document( PageSize.LETTER, 0.0f, 0.0f, 36.0f, 36.0f );
+            Document _PDFDocument = new Document( PageSize.LETTER, 25.0f, 25.0f, 25.0f, 25.0f );
 
 
             PdfWriter.GetInstance( _PDFDocument, new FileStream( OutputPDFPath, FileMode.OpenOrCreate ) );
@@ -69,17 +70,22 @@ namespace XPDF.Model
         private IElement AddGeneralDocumentData( DatiGeneraliDocumento GeneralDocumentData )
         {
             PdfPTable _GeneralDocumentDataTable  = new PdfPTable( 8 );
-        
+
+            _GeneralDocumentDataTable.DefaultCell.BorderColor = _BorderColour;
+            _GeneralDocumentDataTable.DefaultCell.BorderWidth = _BorderWidth;
+            _GeneralDocumentDataTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            _GeneralDocumentDataTable.DefaultCell.VerticalAlignment   = Element.ALIGN_CENTER;
+
             // creating header
-            
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.DocumentType ) ) { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Date ) )         { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Number ) )       { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Currency ) )     { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.TotalAmount ) )  { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Rounding ) )     { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.VirtualStamp ) ) { BackgroundColor = _HeaderColour } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.StampAmount ) )  { BackgroundColor = _HeaderColour } );
+
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.DocumentType ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Date ) )         { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Number ) )       { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Currency ) )     { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.TotalAmount ) )  { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Rounding ) )     { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.VirtualStamp ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.StampAmount ) )  { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
 
             // filling rows
 
@@ -120,9 +126,12 @@ namespace XPDF.Model
 
             PdfPTable _GeneralDocumentCauseTable = new PdfPTable( 1 );
 
-            _GeneralDocumentCauseTable.AddCell( LocalisedString.Cause ); //header
+            _GeneralDocumentCauseTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Cause ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, HorizontalAlignment = Element.ALIGN_CENTER, BorderWidth = _BorderWidth } ); //header
+            _GeneralDocumentCauseTable.DefaultCell.BorderColor = _BorderColour;
+            _GeneralDocumentCauseTable.DefaultCell.BorderWidth = _BorderWidth;
+            _GeneralDocumentCauseTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
 
-            foreach( String Cause in GeneralDocumentData.Causale )
+            foreach ( String Cause in GeneralDocumentData.Causale )
             {
                 _GeneralDocumentCauseTable.AddCell( Cause );
             }
@@ -157,7 +166,7 @@ namespace XPDF.Model
                 FixedHeight = 30.0f
             };
 
-            PdfPCell _Reciever = new PdfPCell( new Phrase( LocalisedString.Reciever ) )
+            PdfPCell _Reciever = new PdfPCell( new Paragraph( LocalisedString.Reciever ) )
             {
                 HorizontalAlignment = Element.ALIGN_CENTER,
                 VerticalAlignment = Element.ALIGN_CENTER,
@@ -184,17 +193,20 @@ namespace XPDF.Model
 
             PdfPCell _PDFHeaderSenderCell = new PdfPCell( _PDFSenderTable )
             {
-                BorderWidth = 1.2f,
+                BorderWidth = 1.5f,
                 BorderColor = _BorderColour
             };
 
             PdfPCell _PDFHeaderReciverCell = new PdfPCell( _PDFRecieverTable )
             {
-                BorderWidth = 1.2f,
+                BorderWidth = 1.5f,
                 BorderColor = _BorderColour
             };
 
             PdfPTable _PDFHeaderContainer = new PdfPTable( 3 );
+
+            _PDFHeaderContainer.WidthPercentage = 100;
+            _PDFHeaderContainer.HorizontalAlignment = Element.ALIGN_LEFT;
             _PDFHeaderContainer.DefaultCell.Border = Rectangle.NO_BORDER;
 
 
