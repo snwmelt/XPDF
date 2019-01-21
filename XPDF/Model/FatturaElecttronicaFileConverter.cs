@@ -65,7 +65,7 @@ namespace XPDF.Model
             _PDFDocument.Close( );
         }
 
-        private PdfPTable GeneratePDFHeader( FatturaElettronicaHeader fatturaElettronicaHeader )
+        private PdfPTable GeneratePDFHeader( FatturaElettronicaHeader _FatturaElettronicaHeader )
         {
             PdfPTable _PDFSenderTable = new PdfPTable( 1 );
             PdfPTable _PDFRecieverTable = new PdfPTable( 1 );
@@ -74,41 +74,53 @@ namespace XPDF.Model
 
             PdfPCell _Sender = new PdfPCell( new Phrase( LocalisedString.Sender ) )
             {
-                HorizontalAlignment = 1,
-                VerticalAlignment = 1,
-                BackgroundColor = new Color( 200, 200, 200 )
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                VerticalAlignment = Element.ALIGN_CENTER,
+                BackgroundColor = new Color( 200, 200, 200 ),
+                Border = Rectangle.NO_BORDER,
+                FixedHeight = 30.0f
             };
 
             PdfPCell _Reciever = new PdfPCell( new Phrase( LocalisedString.Reciever ) )
             {
-                HorizontalAlignment = 1,
-                VerticalAlignment = 1,
-                BackgroundColor = new Color( 200, 200, 200 )
+                HorizontalAlignment = Element.ALIGN_CENTER,
+                VerticalAlignment = Element.ALIGN_CENTER,
+                BackgroundColor = new Color( 200, 200, 200 ),
+                Border = Rectangle.NO_BORDER,
+                FixedHeight = 30.0f
             };
 
 
 
+            _PDFSenderTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            _PDFRecieverTable.DefaultCell.Border = Rectangle.NO_BORDER;
 
             _PDFSenderTable.AddCell( _Sender );
             _PDFRecieverTable.AddCell( _Reciever );
 
-            InsertSenderHeaderData( _PDFSenderTable, fatturaElettronicaHeader.CedentePrestatore );
-            InsertRecieverHeaderData( _PDFRecieverTable, fatturaElettronicaHeader.CessionarioCommittente );
+            InsertSenderHeaderData( _PDFSenderTable, _FatturaElettronicaHeader.CedentePrestatore );
 
+            InsertRecieverHeaderData( _PDFRecieverTable, 
+                                      _FatturaElettronicaHeader.CessionarioCommittente, 
+                                      _FatturaElettronicaHeader.DatiTrasmissione.CodiceDestinatario, 
+                                      _FatturaElettronicaHeader.DatiTrasmissione.PECDestinatario );
+            
 
+            PdfPCell _PDFHeaderSenderCell = new PdfPCell( _PDFSenderTable )
+            {
+                BorderWidth = 1.5f,
+                BorderColor = new Color( 200, 200, 200 )
+            };
 
-
-
-
-            PdfPCell _PDFHeaderSenderCell = new PdfPCell( _PDFSenderTable );
-            PdfPCell _PDFHeaderReciverCell = new PdfPCell( _PDFRecieverTable );
-
-
-            _PDFHeaderSenderCell.Border = Rectangle.NO_BORDER;
-            _PDFHeaderReciverCell.Border = Rectangle.NO_BORDER;
-
+            PdfPCell _PDFHeaderReciverCell = new PdfPCell( _PDFRecieverTable )
+            {
+                BorderWidth = 1.5f,
+                BorderColor = new Color( 200, 200, 200 )
+            };
 
             PdfPTable _PDFHeaderContainer = new PdfPTable( 3 );
+            _PDFHeaderContainer.DefaultCell.Border = Rectangle.NO_BORDER;
+
 
             _PDFHeaderContainer.SetWidths( new float[] { 12f, 1f, 12f } );
 
@@ -120,26 +132,65 @@ namespace XPDF.Model
             return _PDFHeaderContainer;
         }
 
-        private void InsertRecieverHeaderData( PdfPTable _PDFRecieverTable, CessionarioCommittente _FatturaRecieverHeader )
+        private void InsertRecieverHeaderData( PdfPTable _PDFRecieverTable, CessionarioCommittente _FatturaRecieverHeader, String RecipientCode, String PECRecipient )
         {
-            _PDFRecieverTable.AddCell( new PdfPCell( new Phrase( _FatturaRecieverHeader.DatiAnagrafici.Anagrafica.Denominazione ) ) { Border = Rectangle.NO_BORDER } ); // First address line
-            _PDFRecieverTable.AddCell( new PdfPCell( new Phrase( _FatturaRecieverHeader.Sede.Indirizzo + " " + _FatturaRecieverHeader.Sede?.NumeroCivico ) ) { Border = Rectangle.NO_BORDER } ); // Second address line
-            _PDFRecieverTable.AddCell( new PdfPCell( new Phrase( _FatturaRecieverHeader.Sede.CAP + " " + _FatturaRecieverHeader.Sede.Comune + " (" + _FatturaRecieverHeader.Sede.Provincia + ") - " + _FatturaRecieverHeader.Sede.Nazione ) ) { Border = Rectangle.NO_BORDER } ); // Third address line
-            _PDFRecieverTable.AddCell( new PdfPCell( new Phrase( "P.IVA: " + _FatturaRecieverHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaRecieverHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice ) ) { Border = Rectangle.NO_BORDER } ); // Fiscal ID Code + Fiscal ID
-            _PDFRecieverTable.AddCell( new PdfPCell( new Phrase( "C.F.: " + _FatturaRecieverHeader.DatiAnagrafici.CodiceFiscale ) ) { Border = Rectangle.NO_BORDER } ); // Fiscal Code
+            _PDFRecieverTable.AddCell( new Phrase( _FatturaRecieverHeader.DatiAnagrafici.Anagrafica.Denominazione ) ); // First address line
+            _PDFRecieverTable.AddCell( new Phrase( _FatturaRecieverHeader.Sede.Indirizzo + " " + _FatturaRecieverHeader.Sede?.NumeroCivico )  ); // Second address line
+            _PDFRecieverTable.AddCell( new Phrase( _FatturaRecieverHeader.Sede.CAP + " " + _FatturaRecieverHeader.Sede.Comune + " (" + _FatturaRecieverHeader.Sede.Provincia + ") - " + _FatturaRecieverHeader.Sede.Nazione ) ); // Third address line
+            _PDFRecieverTable.AddCell( new Phrase( "P.IVA: " + _FatturaRecieverHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaRecieverHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice ) ); // Fiscal ID Code + Fiscal ID
+            _PDFRecieverTable.AddCell( new Phrase( "C.F.: " + _FatturaRecieverHeader.DatiAnagrafici.CodiceFiscale ) ); // Fiscal Code
+            _PDFRecieverTable.AddCell( new Phrase( " " ) );
 
-            
+            if ( !String.IsNullOrEmpty( RecipientCode ) )
+                _PDFRecieverTable.AddCell( new Phrase( "Codice IPA: " + RecipientCode ) ); // IPA Recipient Code
 
-               
+            if ( !String.IsNullOrEmpty( PECRecipient ) )
+                _PDFRecieverTable.AddCell( new Phrase( "PEC: " + PECRecipient ) ); // PEC Recipient Code
         }
 
         private void InsertSenderHeaderData( PdfPTable _PDFSenderTable, CedentePrestatore _FatturaSenderHeader )
         {
-            _PDFSenderTable.AddCell( new PdfPCell( new Phrase( _FatturaSenderHeader.DatiAnagrafici.Anagrafica?.Denominazione ) ) { Border = Rectangle.NO_BORDER } ); // First address line
-            _PDFSenderTable.AddCell( new PdfPCell( new Phrase( _FatturaSenderHeader.Sede.Indirizzo + " " + _FatturaSenderHeader.Sede.NumeroCivico ) ) { Border = Rectangle.NO_BORDER } ); // Second address line
-            _PDFSenderTable.AddCell( new PdfPCell( new Phrase( _FatturaSenderHeader.Sede.CAP + " " + _FatturaSenderHeader.Sede.Comune + " (" + _FatturaSenderHeader.Sede.Provincia + ") - " + _FatturaSenderHeader.Sede.Nazione ) ) { Border = Rectangle.NO_BORDER } ); // Third address line
-            _PDFSenderTable.AddCell( new PdfPCell( new Phrase( "P.IVA: " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice ) ) { Border = Rectangle.NO_BORDER } ); // Fiscal ID Code + Fiscal ID
-            _PDFSenderTable.AddCell( new PdfPCell( new Phrase( "C.F.: " + _FatturaSenderHeader.DatiAnagrafici.CodiceFiscale ) ) { Border = Rectangle.NO_BORDER } ); // Fiscal Code
+            _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.DatiAnagrafici.Anagrafica?.Denominazione ) ); // First address line
+            _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.Sede.Indirizzo + " " + _FatturaSenderHeader.Sede.NumeroCivico ) ); // Second address line
+            _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.Sede.CAP + " " + _FatturaSenderHeader.Sede.Comune + " (" + _FatturaSenderHeader.Sede.Provincia + ") - " + _FatturaSenderHeader.Sede.Nazione ) ); // Third address line
+            _PDFSenderTable.AddCell( new Phrase( "P.IVA: " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice ) ); // Fiscal ID Code + Fiscal ID
+            _PDFSenderTable.AddCell( new Phrase( "C.F.: " + _FatturaSenderHeader.DatiAnagrafici.CodiceFiscale ) ); // Fiscal Code
+            _PDFSenderTable.AddCell( new Phrase( " " ) ); 
+
+            Boolean HasContactHeader = false;
+
+            if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Telefono ) )
+            {
+                if ( !HasContactHeader )
+                {
+                    _PDFSenderTable.AddCell( new Phrase( LocalisedString.Contacts ) );
+                    HasContactHeader = true;
+                }
+
+                _PDFSenderTable.AddCell( new Phrase( LocalisedString.Telephone + " " + _FatturaSenderHeader.Contatti.Telefono ) );
+            }
+
+            if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Fax ) )
+            {
+                if ( !HasContactHeader )
+                {
+                    _PDFSenderTable.AddCell( new Phrase( LocalisedString.Contacts ) );
+                    HasContactHeader = true;
+                }
+
+                _PDFSenderTable.AddCell( new Phrase( LocalisedString.Fax + " " + _FatturaSenderHeader.Contatti.Fax ) );
+            }
+
+            if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Email ) )
+            {
+                if ( !HasContactHeader )
+                {
+                    _PDFSenderTable.AddCell( new Phrase( LocalisedString.Contacts ) );
+                    HasContactHeader = true;
+                }
+
+                _PDFSenderTable.AddCell( new Phrase( LocalisedString.Email + " " + _FatturaSenderHeader.Contatti.Email ) );
+            } 
         }
 
         public void Dispose( )

@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
   <data name="Reciever" xml:space="preserve">
     <value>Recipient</value>
   </data>
   <data name="Sender" xml:space="preserve">
     <value>Emitter</value>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>Telephone</value>
   </data>
 </root>
