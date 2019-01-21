@@ -65,71 +65,94 @@ namespace XPDF.Model
         private void AddInvoiceBodyToPDFPage( FatturaElettronicaBody _FatturaElettronicaBody, Document _Document, int _PageNumber )
         {
             _Document.Add( AddGeneralDocumentData( _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento ) );
+            _Document.Add( AddExternalDocumentReferences( _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento ) );
+        }
+
+        private PdfPTable AddExternalDocumentReferences( DatiGeneraliDocumento datiGeneraliDocumento )
+        {
+            PdfPTable _ExternalDocumentReferenceTable = CreateBodyPdfPTable( new String[]
+            {
+                LocalisedString.ReferenceType,
+                LocalisedString.Row,
+                LocalisedString.ReferenceNumber,
+                LocalisedString.DateOfReference,
+                LocalisedString.CUPCode,
+                LocalisedString.CIGCode,
+            } );
+
+
+            PdfPTable _MainTable = new PdfPTable( 1 );
+
+            _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            _MainTable.WidthPercentage = 100;
+
+            _MainTable.AddCell( new Phrase( " " ) ); // Padding
+            _MainTable.AddCell( LocalisedString.ExternalDocumentReferences ); // header
+            _MainTable.AddCell( new PdfPCell( _ExternalDocumentReferenceTable ) );
+
+            return _MainTable;
+        }
+
+        private PdfPTable CreateBodyPdfPTable( String[] _Headers )
+        {
+            PdfPTable _PdfPTable = new PdfPTable( _Headers.Length );
+
+            _PdfPTable.DefaultCell.BorderColor = _BorderColour;
+            _PdfPTable.DefaultCell.BorderWidth = _BorderWidth;
+            _PdfPTable.DefaultCell.VerticalAlignment = Element.ALIGN_CENTER;
+
+            foreach ( String _Header in _Headers )
+            {
+                _PdfPTable.AddCell( new PdfPCell( new Phrase( _Header ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
+            }
+
+            return _PdfPTable;
+        }
+
+        private String GetNullableString ( Nullable<Decimal> _NullableDecimal )
+        {
+            if ( _NullableDecimal.HasValue )
+            {
+                return _NullableDecimal.Value.ToString( );
+            }
+            else
+            {
+                return "";
+            }
         }
 
         private IElement AddGeneralDocumentData( DatiGeneraliDocumento GeneralDocumentData )
         {
-            PdfPTable _GeneralDocumentDataTable  = new PdfPTable( 8 );
+            PdfPTable _GeneralDocumentDataTable = CreateBodyPdfPTable( new String[]
+            {
+                LocalisedString.DocumentType,
+                LocalisedString.Date,
+                LocalisedString.Number,
+                LocalisedString.Currency,
+                LocalisedString.TotalAmount,
+                LocalisedString.Rounding,
+                LocalisedString.VirtualStamp,
+                LocalisedString.StampAmount
+            } );
 
-            _GeneralDocumentDataTable.DefaultCell.BorderColor = _BorderColour;
-            _GeneralDocumentDataTable.DefaultCell.BorderWidth = _BorderWidth;
             _GeneralDocumentDataTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-            _GeneralDocumentDataTable.DefaultCell.VerticalAlignment   = Element.ALIGN_CENTER;
-
-            // creating header
-
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.DocumentType ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Date ) )         { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Number ) )       { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Currency ) )     { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.TotalAmount ) )  { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Rounding ) )     { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.VirtualStamp ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
-            _GeneralDocumentDataTable.AddCell( new PdfPCell( new Phrase( LocalisedString.StampAmount ) )  { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, BorderWidth = _BorderWidth } );
 
             // filling rows
 
-            _GeneralDocumentDataTable.AddCell( LocalisedString.Invoice );
-            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Data.ToShortDateString( ) );
-            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Numero );
-            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Divisa );
-
-            if ( GeneralDocumentData.ImportoTotaleDocumento.HasValue )
-            {
-                _GeneralDocumentDataTable.AddCell( GeneralDocumentData.ImportoTotaleDocumento.Value.ToString( ) );
-            }
-            else
-            {
-                _GeneralDocumentDataTable.AddCell( "" );
-            }
-
-            if ( GeneralDocumentData.Arrotondamento.HasValue )
-            {
-                _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Arrotondamento.Value.ToString( ) );
-            }
-            else
-            {
-                _GeneralDocumentDataTable.AddCell( "" );
-            }
-            
-            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.DatiBollo.BolloVirtuale );
+            _GeneralDocumentDataTable.AddCell( LocalisedString.Invoice ); // Document Type
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Data.ToShortDateString( ) ); // Date
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Numero ); // Number
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.Divisa ); // Document Currency
+            _GeneralDocumentDataTable.AddCell( GetNullableString( GeneralDocumentData.ImportoTotaleDocumento ) ); // Total Amount
+            _GeneralDocumentDataTable.AddCell( GetNullableString( GeneralDocumentData.Arrotondamento ) ); // Rounding
+            _GeneralDocumentDataTable.AddCell( GeneralDocumentData.DatiBollo.BolloVirtuale ); // Virtual Stamp 
+            _GeneralDocumentDataTable.AddCell( GetNullableString( GeneralDocumentData.DatiBollo.ImportoBollo ) ); // Stamp Amount
 
 
-            if ( GeneralDocumentData.DatiBollo.ImportoBollo.HasValue )
+            PdfPTable _GeneralDocumentCauseTable = CreateBodyPdfPTable( new String[] 
             {
-                _GeneralDocumentDataTable.AddCell( GeneralDocumentData.DatiBollo.ImportoBollo.Value.ToString( ) );
-            }
-            else
-            {
-                _GeneralDocumentDataTable.AddCell( "" );
-            }
-
-            PdfPTable _GeneralDocumentCauseTable = new PdfPTable( 1 );
-
-            _GeneralDocumentCauseTable.AddCell( new PdfPCell( new Phrase( LocalisedString.Cause ) ) { BackgroundColor = _HeaderColour, BorderColor = _BorderColour, HorizontalAlignment = Element.ALIGN_CENTER, BorderWidth = _BorderWidth } ); //header
-            _GeneralDocumentCauseTable.DefaultCell.BorderColor = _BorderColour;
-            _GeneralDocumentCauseTable.DefaultCell.BorderWidth = _BorderWidth;
-            _GeneralDocumentCauseTable.DefaultCell.HorizontalAlignment = Element.ALIGN_LEFT;
+                LocalisedString.Cause
+            } );
 
             foreach ( String Cause in GeneralDocumentData.Causale )
             {

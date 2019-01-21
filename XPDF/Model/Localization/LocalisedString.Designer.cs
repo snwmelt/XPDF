@@ -70,11 +70,29 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CIG Code.
+        /// </summary>
+        internal static string CIGCode {
+            get {
+                return ResourceManager.GetString("CIGCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contacts {
             get {
                 return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CUP Code.
+        /// </summary>
+        internal static string CUPCode {
+            get {
+                return ResourceManager.GetString("CUPCode", resourceCulture);
             }
         }
         
@@ -97,6 +115,15 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference Date.
+        /// </summary>
+        internal static string DateOfReference {
+            get {
+                return ResourceManager.GetString("DateOfReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document Type.
         /// </summary>
         internal static string DocumentType {
@@ -111,6 +138,15 @@ namespace XPDF.Model.Localization {
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External Document References.
+        /// </summary>
+        internal static string ExternalDocumentReferences {
+            get {
+                return ResourceManager.GetString("ExternalDocumentReferences", resourceCulture);
             }
         }
         
@@ -160,11 +196,38 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference Number.
+        /// </summary>
+        internal static string ReferenceNumber {
+            get {
+                return ResourceManager.GetString("ReferenceNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference Type.
+        /// </summary>
+        internal static string ReferenceType {
+            get {
+                return ResourceManager.GetString("ReferenceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rounding.
         /// </summary>
         internal static string Rounding {
             get {
                 return ResourceManager.GetString("Rounding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ROW.
+        /// </summary>
+        internal static string Row {
+            get {
+                return ResourceManager.GetString("Row", resourceCulture);
             }
         }
         

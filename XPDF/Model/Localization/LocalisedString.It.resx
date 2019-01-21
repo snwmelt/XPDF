@@ -120,8 +120,14 @@
   <data name="Cause" xml:space="preserve">
     <value>Causale</value>
   </data>
+  <data name="CIGCode" xml:space="preserve">
+    <value>Codice CIG</value>
+  </data>
   <data name="Contacts" xml:space="preserve">
     <value>Contatti</value>
+  </data>
+  <data name="CUPCode" xml:space="preserve">
+    <value>Codice CUP</value>
   </data>
   <data name="Currency" xml:space="preserve">
     <value>Divisa</value>
@@ -129,11 +135,17 @@
   <data name="Date" xml:space="preserve">
     <value>Data</value>
   </data>
+  <data name="DateOfReference" xml:space="preserve">
+    <value>Data Riferimento</value>
+  </data>
   <data name="DocumentType" xml:space="preserve">
     <value>Tipo Documento</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="ExternalDocumentReferences" xml:space="preserve">
+    <value>Riferimenti ad altri documenti</value>
   </data>
   <data name="Fax" xml:space="preserve">
     <value>Fax</value>
@@ -150,8 +162,17 @@
   <data name="Reciever" xml:space="preserve">
     <value>Destinatario</value>
   </data>
+  <data name="ReferenceNumber" xml:space="preserve">
+    <value>Numero Riferimento</value>
+  </data>
+  <data name="ReferenceType" xml:space="preserve">
+    <value>Tipo Riferimento</value>
+  </data>
   <data name="Rounding" xml:space="preserve">
     <value>Arrotondamento</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Rif.Riga</value>
   </data>
   <data name="Sender" xml:space="preserve">
     <value>Emettitore</value>
