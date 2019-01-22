@@ -189,4 +189,79 @@
   <data name="VirtualStamp" xml:space="preserve">
     <value>Bollo Virtuale</value>
   </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Importo</value>
+  </data>
+  <data name="Beneficiary" xml:space="preserve">
+    <value>Beneficiario</value>
+  </data>
+  <data name="Cod" xml:space="preserve">
+    <value>Cod</value>
+  </data>
+  <data name="Collectable" xml:space="preserve">
+    <value>Esigibilità</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Data Termine</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Data Scadenza</value>
+  </data>
+  <data name="GeneralSummery" xml:space="preserve">
+    <value>Riepilogo generale</value>
+  </data>
+  <data name="InvoiceDetails" xml:space="preserve">
+    <value>Dettaglio per Riga Fattura</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Riga</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Modalità</value>
+  </data>
+  <data name="Natural" xml:space="preserve">
+    <value>Natura</value>
+  </data>
+  <data name="NormativeReference" xml:space="preserve">
+    <value>Riferimento Normativo</value>
+  </data>
+  <data name="PaymentDates" xml:space="preserve">
+    <value>Giorni Pagamento</value>
+  </data>
+  <data name="PaymentInformation" xml:space="preserve">
+    <value>Dati pagamento</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Prezzo</value>
+  </data>
+  <data name="QTA" xml:space="preserve">
+    <value>Q.ta</value>
+  </data>
+  <data name="scmg" xml:space="preserve">
+    <value>sc/mg</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Imposta</value>
+  </data>
+  <data name="Taxable" xml:space="preserve">
+    <value>Imponibile</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="UM" xml:space="preserve">
+    <value>UM</value>
+  </data>
+  <data name="Val" xml:space="preserve">
+    <value>Val</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valore</value>
+  </data>
+  <data name="VAT" xml:space="preserve">
+    <value>IVA</value>
+  </data>
 </root>

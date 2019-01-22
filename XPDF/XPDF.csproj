@@ -178,8 +178,12 @@
       <LastGenOutput>LocalisedUI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Libraries\FatturaElettronica.Core.deps.json" />
-    <None Include="Libraries\FatturaElettronica.deps.json" />
+    <None Include="Libraries\FatturaElettronica.Core.deps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Libraries\FatturaElettronica.deps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Libraries\Licenses\FatturaElettronica.NET" />
     <None Include="Libraries\Licenses\FatturaElettronica.Core" />
     <None Include="Libraries\Licenses\Walkways">
@@ -199,12 +203,24 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Libraries\FatturaElettronica.Core.dll" />
-    <Content Include="Libraries\FatturaElettronica.Core.pdb" />
-    <Content Include="Libraries\FatturaElettronica.dll" />
-    <Content Include="Libraries\FatturaElettronica.pdb" />
-    <Content Include="Libraries\itextsharp.dll" />
-    <Resource Include="Libraries\iTextSharp.xml" />
+    <Content Include="Libraries\FatturaElettronica.Core.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\FatturaElettronica.Core.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\FatturaElettronica.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\FatturaElettronica.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\itextsharp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Libraries\iTextSharp.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="Libraries\DirectoryScanner.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

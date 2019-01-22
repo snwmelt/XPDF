@@ -80,7 +80,7 @@ namespace XPDF.Model
                     if ( String.IsNullOrEmpty( OutputPDFPath ) )
                         OutputPDFPath = e.DirectoryName;
 
-                    Convert( e.FullName, e.FullName + ".pdf" );
+                    Convert( e.FullName, OutputPDFPath + "\\" + e.Name + ".pdf" );
                 }
             };
 

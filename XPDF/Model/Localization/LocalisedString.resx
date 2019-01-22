@@ -189,4 +189,79 @@
   <data name="VirtualStamp" xml:space="preserve">
     <value>Virtual Stamp</value>
   </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Beneficiary" xml:space="preserve">
+    <value>Beneficiary</value>
+  </data>
+  <data name="Cod" xml:space="preserve">
+    <value>Cod</value>
+  </data>
+  <data name="Collectable" xml:space="preserve">
+    <value>Collectable</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>ExpiryDate</value>
+  </data>
+  <data name="GeneralSummery" xml:space="preserve">
+    <value>General Summery</value>
+  </data>
+  <data name="InvoiceDetails" xml:space="preserve">
+    <value>Invoice Details</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Mode Of Payment</value>
+  </data>
+  <data name="Natural" xml:space="preserve">
+    <value>Natural</value>
+  </data>
+  <data name="NormativeReference" xml:space="preserve">
+    <value>Normative Reference</value>
+  </data>
+  <data name="PaymentDates" xml:space="preserve">
+    <value>Payment Dates</value>
+  </data>
+  <data name="PaymentInformation" xml:space="preserve">
+    <value>Payment Information</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="QTA" xml:space="preserve">
+    <value>Q.ta</value>
+  </data>
+  <data name="scmg" xml:space="preserve">
+    <value>sc/mg</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Tax</value>
+  </data>
+  <data name="Taxable" xml:space="preserve">
+    <value>Taxable</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UM" xml:space="preserve">
+    <value>UM</value>
+  </data>
+  <data name="Val" xml:space="preserve">
+    <value>Val</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="VAT" xml:space="preserve">
+    <value>VAT</value>
+  </data>
 </root>

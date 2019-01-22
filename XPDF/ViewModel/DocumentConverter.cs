@@ -37,16 +37,20 @@ namespace XPDF.ViewModel
             InvokeENGLocalizationCommand = new CommandRelay<Object>( InvokeENGLocalization, CanLocaliseToENG );
             SelectDestinationCommand     = new CommandRelay<Object>( SelectDestination, ConversionInProgress );
             SelectSourceCommand          = new CommandRelay<Object>( SelectSource, ConversionInProgress );
-            XPDFConvertCommand           = new CommandRelay<Object>( XPDFConvert );
+            XPDFConvertCommand           = new CommandRelay<Object>( XPDFConvert, ConversionInteractionAllowed );
 
             UpdateUILables( );
             _XPDFConverter.ProgressUpdateEvent += UpdateProgress;
-            XPDFConvert( null ); // remove later
         }
 
         private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate> e )
         {
             //throw new NotImplementedException( );
+        }
+
+        private bool ConversionInteractionAllowed( object obj )
+        {
+            return !String.IsNullOrEmpty( SelectedSourceText );
         }
 
         private bool ConversionInProgress( object obj )
@@ -221,7 +225,7 @@ namespace XPDF.ViewModel
             }
             else
             {
-                _XPDFConverter.ConvertAll( @"C:\Users\Fitzgerald\Desktop\XPDF\XML FILES", SelectedDestinationText );
+                _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
 
                 ToggleConversionState( );
             }
