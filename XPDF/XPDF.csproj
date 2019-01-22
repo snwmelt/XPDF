@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Model\Enums\EFileExtension.cs" />
     <Compile Include="Model\Enums\EFormat.cs" />
+    <Compile Include="Model\Event\ProgressUpdate.cs" />
     <Compile Include="Model\Event\Enums\EXPDFConverterState.cs" />
     <Compile Include="Model\Event\Interface\IProgressUpdate`1.cs" />
     <Compile Include="Model\Event\StateChangeEventArgs.cs" />
@@ -131,7 +132,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalisedString.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\XPDFConverter.cs" />
     <Compile Include="ViewModel\DocumentConverter.cs" />
     <Compile Include="View\Controls\PathwaySelector.xaml.cs">
       <DependentUpon>PathwaySelector.xaml</DependentUpon>

@@ -45,7 +45,13 @@ namespace XPDF.ViewModel
 
         private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate> e )
         {
-            //throw new NotImplementedException( );
+            if (e.CurrentState.Completed == true)
+            {
+                if ( _ConversionInProgress )
+                {
+                    ToggleConversionState( );
+                }
+            }
         }
 
         private bool ConversionInteractionAllowed( object obj )
@@ -225,9 +231,9 @@ namespace XPDF.ViewModel
             }
             else
             {
-                _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
-
                 ToggleConversionState( );
+
+                _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
             }
         }
 

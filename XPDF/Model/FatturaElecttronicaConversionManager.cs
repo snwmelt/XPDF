@@ -45,16 +45,12 @@ namespace XPDF.Model
                 {
                     _FEFileConverter.Convert( InputXMLFilePath, OutputPDFPath );
 
-                    ProgressUpdateEvent?.Invoke( null, null ); // fix?
-                }
-                else
-                {
-                    ProgressUpdateEvent?.Invoke( null, null ); // fix?
+                    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( false ) ) );
                 }
             }
             catch ( Exception Ex )
             {
-                _Abort( Ex );
+                ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( false ), null, Ex ) );
             }
         }
 
@@ -85,6 +81,9 @@ namespace XPDF.Model
             };
 
             _DirectoryScanner.Scan( );
+
+            ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( true ) ) );
+            SetState( EXPDFConverterState.Available );
         }
 
         public IEnumerable<EFormat> InputFormats
