@@ -1,4 +1,5 @@
 ﻿using FatturaElettronica;
+using FatturaElettronica.Common;
 using FatturaElettronica.FatturaElettronicaBody;
 using FatturaElettronica.FatturaElettronicaBody.DatiBeniServizi;
 using FatturaElettronica.FatturaElettronicaBody.DatiGenerali;
@@ -14,7 +15,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Walkways.Extensions.Attributes;
 using XPDF.Model.Enums;
+using XPDF.Model.FatturaElettronica12;
+using XPDF.Model.FatturaElettronica12.Enums;
 using XPDF.Model.Interface;
 using XPDF.Model.Localization;
 
@@ -299,27 +303,32 @@ namespace XPDF.Model
 
             return _MainTable;
         }
+        private IEnumerable<DocumentDataContainer> CollectionToContainerCollection<T>( List<T> _DocumentDataList, EDocumentDataReferenceType _ReferenceType )
+        {
+            foreach ( T _Document in _DocumentDataList )
+                yield return new DocumentDataContainer( ( _Document as DatiDocumento ), _ReferenceType );
+        }
 
         private void AddExternalDocumentReferences( DatiGenerali GeneralData, Document _Document )
         {
-            List<FatturaElettronica.Common.DatiDocumento> ExDocs = new List<FatturaElettronica.Common.DatiDocumento>( );
+            List<DocumentDataContainer> ExDocs = new List<DocumentDataContainer>( );
 
-            if ( GeneralData.DatiContratto != null  )
-                ExDocs.AddRange( GeneralData.DatiContratto );
+            if ( GeneralData.DatiContratto != null )
+                ExDocs.AddRange( CollectionToContainerCollection( GeneralData.DatiContratto, EDocumentDataReferenceType.DatiContratto ) );
 
             if ( GeneralData.DatiConvenzione != null )
-                ExDocs.AddRange( GeneralData.DatiConvenzione );
+                ExDocs.AddRange( CollectionToContainerCollection( GeneralData.DatiConvenzione, EDocumentDataReferenceType.DatiConvenzione ) );
 
             if ( GeneralData.DatiFattureCollegate != null )
-                ExDocs.AddRange( GeneralData.DatiFattureCollegate );
+                ExDocs.AddRange( CollectionToContainerCollection( GeneralData.DatiFattureCollegate, EDocumentDataReferenceType.DatiFattureCollegate ) );
 
             if ( GeneralData.DatiOrdineAcquisto != null )
-                ExDocs.AddRange( GeneralData.DatiOrdineAcquisto );
+                ExDocs.AddRange( CollectionToContainerCollection( GeneralData.DatiOrdineAcquisto, EDocumentDataReferenceType.DatiOrdineAcquisto ) );
 
             if ( GeneralData.DatiRicezione != null )
-                ExDocs.AddRange( GeneralData.DatiRicezione );
+                ExDocs.AddRange( CollectionToContainerCollection( GeneralData.DatiRicezione, EDocumentDataReferenceType.DatiRicezione ) );
 
-            
+
             if ( ExDocs.Count > 0 || GeneralData.DatiDDT != null )
             {
                 PdfPTable _ExternalDocumentReferenceTable = CreateBodyPdfPTable( new String[]
@@ -334,12 +343,12 @@ namespace XPDF.Model
 
                 for ( int i = 0; i < ExDocs.Count; i++ )
                 {
-                    _ExternalDocumentReferenceTable.AddCell( "" );
-                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].CodiceCommessaConvenzione ), _BodyHelvetica ) );
-                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].IdDocumento ), _BodyHelvetica ) );
-                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].Data ), _BodyHelvetica ) );
-                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].CodiceCUP ), _BodyHelvetica ) );
-                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].CodiceCIG ), _BodyHelvetica ) );
+                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].ReferenceType.GetDescription( ) ), _BodyHelvetica ) );
+                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( IntListToString( ExDocs[ i ].Document.RiferimentoNumeroLinea ), _BodyHelvetica ) );
+                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].Document.IdDocumento ), _BodyHelvetica ) );
+                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].Document.Data ), _BodyHelvetica ) );
+                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].Document.CodiceCUP ), _BodyHelvetica ) );
+                    _ExternalDocumentReferenceTable.AddCell( new Paragraph( GetNullableString( ExDocs[ i ].Document.CodiceCIG ), _BodyHelvetica ) );
                 }
 
                 if ( GeneralData.DatiDDT != null && GeneralData.DatiDDT.Count > 0 )

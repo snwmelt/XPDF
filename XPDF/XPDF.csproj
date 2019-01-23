@@ -119,6 +119,8 @@
     <Compile Include="Model\Event\StateChangeEventArgs.cs" />
     <Compile Include="Model\FatturaElecttronicaConversionManager.cs" />
     <Compile Include="Model\FatturaElecttronicaFileConverter.cs" />
+    <Compile Include="Model\FatturaElettronica12\DocumentDataContainer.cs" />
+    <Compile Include="Model\FatturaElettronica12\Enums\EDocumentDataReferenceType.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\Interface\IFileConverter.cs" />
     <Compile Include="Model\Interface\IFileFormat.cs" />
