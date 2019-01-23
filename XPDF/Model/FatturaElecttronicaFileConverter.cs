@@ -28,17 +28,21 @@ namespace XPDF.Model
     {
         #region Private Variables
 
-        Fattura                    _FatturaDocument   = null;
-        readonly FatturaValidator  _Validator         = new FatturaValidator( );
-        readonly XmlReaderSettings _XmlReaderSettings = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
-        Color                      _HeaderColour      = Color.LIGHT_GRAY;
-        Color                      _BorderColour      = Color.LIGHT_GRAY;
-        readonly float             _BorderWidth       = 1.4f;
-        BaseFont                   _BaseFontHelvetica = BaseFont.CreateFont( BaseFont.HELVETICA, BaseFont.CP1252, true );
+        Fattura                    _FatturaDocument      = null;
+        readonly FatturaValidator  _Validator            = new FatturaValidator( );
+        readonly XmlReaderSettings _XmlReaderSettings    = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
+        Color                      _HeaderColour         = Color.LIGHT_GRAY;
+        Color                      _BorderColour         = Color.LIGHT_GRAY;
+        readonly float             _BorderWidth          = 1.4f;
+        BaseFont                   _BaseFontHelvetica    = BaseFont.CreateFont( BaseFont.HELVETICA, BaseFont.CP1252, true );
         Font                       _HeaderHelvetica;
         Font                       _HeaderHelveticaDark;
         Font                       _BodyHelvetica;
         Font                       _TitleHelvetica;
+        Boolean                    _CellUseAscender      = true;
+        float                      _CellPaddingTop       = 4f;
+        String                     _OutputFileName;
+
         #endregion
 
         public FatturaElecttronicaFileConverter( )
@@ -63,10 +67,14 @@ namespace XPDF.Model
                 _FatturaDocument.ReadXml( r );
             }
 
+            FileInfo _FileInfo = new FileInfo( InputXMLFilePath );
+
+            String _ExtensionlessFileName = _FileInfo.Name.Substring( 0, _FileInfo.Name.Length - _FileInfo.Extension.Length );
+            _OutputFileName = _FileInfo.Name.Substring( 0, _FileInfo.Name.Length - _FileInfo.Extension.Length ) + ".pdf";
+
             Document _PDFDocument = new Document( PageSize.LETTER, 25.0f, 25.0f, 25.0f, 25.0f );
-
-
-            PdfWriter.GetInstance( _PDFDocument, new FileStream( OutputPDFPath, FileMode.OpenOrCreate ) );
+            
+            PdfWriter.GetInstance( _PDFDocument, new FileStream( OutputPDFPath + "\\" + _OutputFileName, FileMode.OpenOrCreate ) );
 
             _PDFDocument.Open( );
 
@@ -76,6 +84,9 @@ namespace XPDF.Model
             {
                 AddInvoiceBodyToPDFPage( _FatturaDocument.FatturaElettronicaBody[i], _PDFDocument, i );
             }
+
+
+            _PDFDocument.Add( new Paragraph( "\n" + _OutputFileName, _HeaderHelvetica ) );
 
             _PDFDocument.Close( );
         }
@@ -138,12 +149,22 @@ namespace XPDF.Model
                         _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
                         _PaymentInformationTable.AddCell( new Paragraph( GetNullableString( PaymentDetails[ j ].DataScadenzaPagamento ), _BodyHelvetica ) );
                         _PaymentInformationTable.AddCell( new Paragraph( GetNullableString( PaymentDetails[ j ].ImportoPagamento ), _BodyHelvetica ) );
+
+                        if ( !String.IsNullOrEmpty( PaymentDetails[ i ].IstitutoFinanziario ) )
+                        {
+                            _PaymentInformationTable.AddCell( GetInstitutionSpanCell( PaymentDetails[ i ] ) );
+                        }
                     }
                 }
                 else
                 {
                     _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
-                    _PaymentInformationTable.AddCell( PaymentConditionsCodeToString( PaymentInformationList[ i ].CondizioniPagamento ) );
+                    _PaymentInformationTable.AddCell( new Paragraph( PaymentConditionsCodeToString( PaymentInformationList[ i ].CondizioniPagamento ), _BodyHelvetica ) );
+                    _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                    _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                    _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                    _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                    _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
                 }
             }
 
@@ -158,6 +179,50 @@ namespace XPDF.Model
             _MainTable.AddCell( new PdfPCell( _PaymentInformationTable ) );
 
             return _MainTable;
+        }
+
+        private PdfPCell GetInstitutionSpanCell( DettaglioPagamento _PaymentDetails )
+        {
+            PdfPCell InstitutionSpanCell = new PdfPCell();
+
+            InstitutionSpanCell.UseAscender         = _CellUseAscender;
+            InstitutionSpanCell.PaddingTop          = _CellPaddingTop;
+            InstitutionSpanCell.Colspan             = 7;
+            InstitutionSpanCell.BorderColor         = _BorderColour;
+            InstitutionSpanCell.BorderWidth         = _BorderWidth;
+            InstitutionSpanCell.VerticalAlignment   = Element.ALIGN_TOP;
+            InstitutionSpanCell.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            Paragraph Content = new Paragraph( );
+
+            String _Spacer = "\t";
+
+            Content.Add( new Phrase( LocalisedString.Institution + ": " + _PaymentDetails.IstitutoFinanziario, _BodyHelvetica ) );
+            Content.Add( _Spacer );
+
+            if ( _PaymentDetails.IBAN != null )
+            {
+                Content.Add( new Phrase( LocalisedString.IBAN + ": " + _PaymentDetails.IBAN, _BodyHelvetica ) );
+                Content.Add( _Spacer );
+            }
+
+
+            if ( _PaymentDetails.ABI != null )
+            {
+                Content.Add( new Phrase( LocalisedString.ABI + ": " + _PaymentDetails.ABI, _BodyHelvetica ) );
+                Content.Add( _Spacer );
+            }
+
+
+            if ( _PaymentDetails.CAB != null )
+            {
+                Content.Add( new Phrase( LocalisedString.CAB + ": " +  _PaymentDetails.CAB, _BodyHelvetica ) );
+                Content.Add( _Spacer );
+            }
+
+            InstitutionSpanCell.AddElement( Content );
+
+            return InstitutionSpanCell;
         }
 
         private String PaymentModeCodeToString( String Code )
@@ -266,6 +331,22 @@ namespace XPDF.Model
                 LocalisedString.VAT + "%"
             } );
 
+            _LineDetailsTable.SetWidths( new float[] 
+            {
+                0.5f, // Line
+                1f, // Cod
+                1f, // Value
+                4f, // Description
+                0.75f, // QTA
+                0.5f, // UM
+                1f, // Price
+                0.5f, // "%"
+                0.5f, // scmg
+                1f, // Val
+                1f, // Amount
+                0.5f  // VAT + "%"
+            } );
+
             for ( int i = 0; i < LineDetails.Count; i++ )
             {
                 _LineDetailsTable.AddCell( new Paragraph( LineDetails[ i ].NumeroLinea.ToString( ), _BodyHelvetica ) );
@@ -281,14 +362,14 @@ namespace XPDF.Model
                     _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
                 }
 
-                _LineDetailsTable.AddCell(new Paragraph( new Paragraph( LineDetails[ 0 ].Descrizione, _BodyHelvetica) ) );
-                _LineDetailsTable.AddCell(new Paragraph( GetNullableString( LineDetails[ i ].Quantita ), _BodyHelvetica) );
-                _LineDetailsTable.AddCell(new Paragraph( LineDetails[ i ].UnitaMisura, _BodyHelvetica) );
-                _LineDetailsTable.AddCell(new Paragraph( GetNullableString( LineDetails[ i ].PrezzoUnitario ), _BodyHelvetica) );
-                _LineDetailsTable.AddCell(new Paragraph( " ", _BodyHelvetica) );
-                _LineDetailsTable.AddCell(new Paragraph( " ", _BodyHelvetica) );
-                _LineDetailsTable.AddCell(new Paragraph( " ", _BodyHelvetica) );
-                _LineDetailsTable.AddCell(new Paragraph( GetNullableString( LineDetails[ i ].PrezzoTotale ), _BodyHelvetica) );
+                _LineDetailsTable.AddCell( GenerateLineItemDescription( LineDetails[ i ] ) );
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].Quantita ), _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( LineDetails[ i ].UnitaMisura, _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].PrezzoUnitario ), _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].PrezzoTotale ), _BodyHelvetica ) );
                 _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].AliquotaIVA ), _BodyHelvetica ) );
             }
 
@@ -303,6 +384,48 @@ namespace XPDF.Model
 
             return _MainTable;
         }
+
+        private PdfPCell GenerateLineItemDescription( DettaglioLinee _LineItem )
+        {
+            PdfPCell DescriptionCell = new PdfPCell( );
+
+            DescriptionCell.UseAscender         = _CellUseAscender;
+            DescriptionCell.PaddingTop          = _CellPaddingTop;
+            DescriptionCell.BorderColor         = _BorderColour;
+            DescriptionCell.BorderWidth         = _BorderWidth;
+            DescriptionCell.VerticalAlignment   = Element.ALIGN_TOP;
+            DescriptionCell.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            Paragraph Content = new Paragraph( );
+            String _Spacer = "\n";
+
+            Content.Add( new Phrase( GetNullableString( _LineItem.Descrizione ), _BodyHelvetica ) );
+            Content.Add( _Spacer );
+            
+            if ( _LineItem.DataInizioPeriodo != null )
+            {
+                Content.Add( new Phrase( LocalisedString.StartOfService + ": ", _HeaderHelvetica ) );
+                Content.Add( new Phrase( GetNullableString( _LineItem.DataInizioPeriodo ), _BodyHelvetica ) );
+                Content.Add( _Spacer );
+            }
+
+            if ( _LineItem.DataFinePeriodo != null )
+            {
+                Content.Add( new Phrase( LocalisedString.EndDate + ": ", _HeaderHelvetica ) );
+                Content.Add( new Phrase( GetNullableString( _LineItem.DataFinePeriodo ), _BodyHelvetica ) );
+                Content.Add( _Spacer );
+            }
+
+            if ( _LineItem.Natura != null )
+            {
+                Content.Add( new Phrase( NaturaCodeToString( _LineItem.Natura ), _HeaderHelvetica ) );
+            }
+
+            DescriptionCell.AddElement( Content );
+
+            return DescriptionCell;
+        }
+
         private IEnumerable<DocumentDataContainer> CollectionToContainerCollection<T>( List<T> _DocumentDataList, EDocumentDataReferenceType _ReferenceType )
         {
             foreach ( T _Document in _DocumentDataList )
@@ -329,7 +452,7 @@ namespace XPDF.Model
                 ExDocs.AddRange( CollectionToContainerCollection( GeneralData.DatiRicezione, EDocumentDataReferenceType.DatiRicezione ) );
 
 
-            if ( ExDocs.Count > 0 || GeneralData.DatiDDT != null )
+            if ( ExDocs.Count > 0 || ( GeneralData.DatiDDT != null && GeneralData.DatiDDT.Count > 0 ) )
             {
                 PdfPTable _ExternalDocumentReferenceTable = CreateBodyPdfPTable( new String[]
                 {

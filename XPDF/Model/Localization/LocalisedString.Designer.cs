@@ -61,6 +61,15 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABI.
+        /// </summary>
+        internal static string ABI {
+            get {
+                return ResourceManager.GetString("ABI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
         internal static string Amount {
@@ -75,6 +84,15 @@ namespace XPDF.Model.Localization {
         internal static string Beneficiary {
             get {
                 return ResourceManager.GetString("Beneficiary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CAB.
+        /// </summary>
+        internal static string CAB {
+            get {
+                return ResourceManager.GetString("CAB", resourceCulture);
             }
         }
         
@@ -196,6 +214,15 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EndOfService.
+        /// </summary>
+        internal static string EndOfService {
+            get {
+                return ResourceManager.GetString("EndOfService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ExpiryDate.
         /// </summary>
         internal static string ExpiryDate {
@@ -237,6 +264,24 @@ namespace XPDF.Model.Localization {
         internal static string GeneralSummery {
             get {
                 return ResourceManager.GetString("GeneralSummery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBAN.
+        /// </summary>
+        internal static string IBAN {
+            get {
+                return ResourceManager.GetString("IBAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Institution.
+        /// </summary>
+        internal static string Institution {
+            get {
+                return ResourceManager.GetString("Institution", resourceCulture);
             }
         }
         
@@ -408,6 +453,15 @@ namespace XPDF.Model.Localization {
         internal static string StampAmount {
             get {
                 return ResourceManager.GetString("StampAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Of Service.
+        /// </summary>
+        internal static string StartOfService {
+            get {
+                return ResourceManager.GetString("StartOfService", resourceCulture);
             }
         }
         

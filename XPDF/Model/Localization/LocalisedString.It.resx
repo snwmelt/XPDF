@@ -189,11 +189,17 @@
   <data name="VirtualStamp" xml:space="preserve">
     <value>Bollo Virtuale</value>
   </data>
+  <data name="ABI" xml:space="preserve">
+    <value>ABI</value>
+  </data>
   <data name="Amount" xml:space="preserve">
     <value>Importo</value>
   </data>
   <data name="Beneficiary" xml:space="preserve">
     <value>Beneficiario</value>
+  </data>
+  <data name="CAB" xml:space="preserve">
+    <value>CAB</value>
   </data>
   <data name="Cod" xml:space="preserve">
     <value>Cod</value>
@@ -207,11 +213,20 @@
   <data name="EndDate" xml:space="preserve">
     <value>Data Termine</value>
   </data>
+  <data name="EndOfService" xml:space="preserve">
+    <value>Fine Servizio</value>
+  </data>
   <data name="ExpiryDate" xml:space="preserve">
     <value>Data Scadenza</value>
   </data>
   <data name="GeneralSummery" xml:space="preserve">
     <value>Riepilogo generale</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Istituto</value>
   </data>
   <data name="InvoiceDetails" xml:space="preserve">
     <value>Dettaglio per Riga Fattura</value>
@@ -242,6 +257,9 @@
   </data>
   <data name="scmg" xml:space="preserve">
     <value>sc/mg</value>
+  </data>
+  <data name="StartOfService" xml:space="preserve">
+    <value>Inizio Servizio</value>
   </data>
   <data name="Tax" xml:space="preserve">
     <value>Imposta</value>

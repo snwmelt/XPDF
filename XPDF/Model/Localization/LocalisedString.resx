@@ -189,11 +189,17 @@
   <data name="VirtualStamp" xml:space="preserve">
     <value>Virtual Stamp</value>
   </data>
+  <data name="ABI" xml:space="preserve">
+    <value>ABI</value>
+  </data>
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
   </data>
   <data name="Beneficiary" xml:space="preserve">
     <value>Beneficiary</value>
+  </data>
+  <data name="CAB" xml:space="preserve">
+    <value>CAB</value>
   </data>
   <data name="Cod" xml:space="preserve">
     <value>Cod</value>
@@ -207,11 +213,20 @@
   <data name="EndDate" xml:space="preserve">
     <value>End Date</value>
   </data>
+  <data name="EndOfService" xml:space="preserve">
+    <value>EndOfService</value>
+  </data>
   <data name="ExpiryDate" xml:space="preserve">
     <value>ExpiryDate</value>
   </data>
   <data name="GeneralSummery" xml:space="preserve">
     <value>General Summery</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Institution</value>
   </data>
   <data name="InvoiceDetails" xml:space="preserve">
     <value>Invoice Details</value>
@@ -242,6 +257,9 @@
   </data>
   <data name="scmg" xml:space="preserve">
     <value>sc/mg</value>
+  </data>
+  <data name="StartOfService" xml:space="preserve">
+    <value>Start Of Service</value>
   </data>
   <data name="Tax" xml:space="preserve">
     <value>Tax</value>

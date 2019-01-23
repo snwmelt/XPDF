@@ -37,13 +37,13 @@ namespace XPDF.Model
             _Abort( );
         }
 
-        private void Convert( String InputXMLFilePath, String OutputPDFPath )
+        private void Convert( String InputXMLFilePath, String OutputPDFDirectory )
         {
             try
             {
                 if (_FEFileConverter.IsValidXML( InputXMLFilePath ))
                 {
-                    _FEFileConverter.Convert( InputXMLFilePath, OutputPDFPath );
+                    _FEFileConverter.Convert( InputXMLFilePath, OutputPDFDirectory );
 
                     ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( false ) ) );
                 }
@@ -71,12 +71,12 @@ namespace XPDF.Model
             {
                 if ( State == EXPDFConverterState.Working )
                 {
-                    String OutputPDFPath = PathToDestinationDirectory;
+                    String OutputPDFDirectory = PathToDestinationDirectory;
 
-                    if ( String.IsNullOrEmpty( OutputPDFPath ) )
-                        OutputPDFPath = e.DirectoryName;
+                    if ( String.IsNullOrEmpty( OutputPDFDirectory ) )
+                        OutputPDFDirectory = e.DirectoryName;
 
-                    Convert( e.FullName, OutputPDFPath + "\\" + e.Name + ".pdf" );
+                    Convert( e.FullName, OutputPDFDirectory );
                 }
             };
 
