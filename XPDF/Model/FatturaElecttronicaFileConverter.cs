@@ -28,29 +28,28 @@ namespace XPDF.Model
     {
         #region Private Variables
 
-        Fattura                    _FatturaDocument      = null;
-        readonly FatturaValidator  _Validator            = new FatturaValidator( );
-        readonly XmlReaderSettings _XmlReaderSettings    = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
-        Color                      _HeaderColour         = Color.LIGHT_GRAY;
-        Color                      _BorderColour         = Color.LIGHT_GRAY;
-        readonly float             _BorderWidth          = 1.4f;
-        BaseFont                   _BaseFontHelvetica    = BaseFont.CreateFont( BaseFont.HELVETICA, BaseFont.CP1252, true );
-        Font                       _HeaderHelvetica;
-        Font                       _HeaderHelveticaDark;
-        Font                       _BodyHelvetica;
-        Font                       _TitleHelvetica;
-        Boolean                    _CellUseAscender      = true;
-        float                      _CellPaddingTop       = 4f;
-        String                     _OutputFileName;
+        Fattura                    _FatturaDocument     = null;
+        readonly BaseFont          _BaseFontHelvetica   = BaseFont.CreateFont( BaseFont.HELVETICA, BaseFont.CP1252, true );
+        readonly Font              _BodyHelvetica       = null;
+        Color                      _BorderColour        = Color.LIGHT_GRAY;
+        readonly float             _BorderWidth         = 1.4f;
+        readonly float             _CellPaddingTop      = 4f;
+        readonly Boolean           _CellUseAscender     = true;
+        readonly XmlReaderSettings _XmlReaderSettings   = new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true };
+        Color                      _HeaderColour        = Color.LIGHT_GRAY;
+        readonly Font              _HeaderHelvetica     = null;
+        readonly Font              _HeaderHelveticaDark = null;
+        readonly Font              _TitleHelvetica      = null;
+        readonly FatturaValidator  _Validator           = new FatturaValidator( );
 
         #endregion
 
         public FatturaElecttronicaFileConverter( )
         {
-            _HeaderHelvetica = new Font( _BaseFontHelvetica, 8, Font.NORMAL, Color.LIGHT_GRAY );
-            _HeaderHelveticaDark = new Font( _BaseFontHelvetica, 8, Font.NORMAL, Color.DARK_GRAY );
-            _BodyHelvetica = new Font( _BaseFontHelvetica, 8, Font.NORMAL, Color.BLACK );
-            _TitleHelvetica = new Font( _BaseFontHelvetica, 10, Font.NORMAL, Color.BLACK );
+            _HeaderHelvetica     = new Font( _BaseFontHelvetica, 8,  Font.NORMAL, Color.LIGHT_GRAY );
+            _HeaderHelveticaDark = new Font( _BaseFontHelvetica, 8,  Font.NORMAL, Color.DARK_GRAY );
+            _BodyHelvetica       = new Font( _BaseFontHelvetica, 8,  Font.NORMAL, Color.BLACK );
+            _TitleHelvetica      = new Font( _BaseFontHelvetica, 10, Font.NORMAL, Color.BLACK );
         }
 
         public void Abort( )
@@ -58,37 +57,62 @@ namespace XPDF.Model
             //throw new System.NotImplementedException( );
         }
 
-        public void Convert( string InputXMLFilePath, string OutputPDFPath )
+
+        public IFileInformation Convert( IFileInformation Input )
         {
-            using ( var r = XmlReader.Create( new StringReader( File.ReadAllText( InputXMLFilePath ) ), _XmlReaderSettings ) )
+            using ( XmlReader _XmlReader = XmlReader.Create( new StringReader( File.ReadAllText( Input.Path.LocalPath ) ), _XmlReaderSettings ) )
             {
                 _FatturaDocument = new Fattura( );
 
-                _FatturaDocument.ReadXml( r );
+                _FatturaDocument.ReadXml( _XmlReader );
             }
 
-            FileInfo _FileInfo = new FileInfo( InputXMLFilePath );
 
-            String _ExtensionlessFileName = _FileInfo.Name.Substring( 0, _FileInfo.Name.Length - _FileInfo.Extension.Length );
-            _OutputFileName = _FileInfo.Name.Substring( 0, _FileInfo.Name.Length - _FileInfo.Extension.Length ) + ".pdf";
-
-            Document _PDFDocument = new Document( PageSize.LETTER, 25.0f, 25.0f, 25.0f, 25.0f );
+            Document _PDFDocument = OpenPDFDoc( 25.0f, 25.0f, Input ); 
             
-            PdfWriter.GetInstance( _PDFDocument, new FileStream( OutputPDFPath + "\\" + _OutputFileName, FileMode.OpenOrCreate ) );
-
-            _PDFDocument.Open( );
 
             _PDFDocument.Add( GeneratePDFHeader( _FatturaDocument.FatturaElettronicaHeader ) );
 
             for ( int i = 0; i < _FatturaDocument.FatturaElettronicaBody.Count; i++ )
             {
-                AddInvoiceBodyToPDFPage( _FatturaDocument.FatturaElettronicaBody[i], _PDFDocument, i );
+                AddInvoiceBodyToPDFPage( _FatturaDocument.FatturaElettronicaBody[ i ], _PDFDocument, i );
             }
 
+            String _FileName = _XMLPAPDFFileName( );
 
-            _PDFDocument.Add( new Paragraph( "\n" + _OutputFileName, _HeaderHelvetica ) );
+            _PDFDocument.Add( new Paragraph( "\n" + _FileName, _HeaderHelvetica ) );
+
 
             _PDFDocument.Close( );
+
+            return new FileInformation( new FileFormat( EFileExtension.PDF, EFormat.PDF, "1.4" ), new Uri( Input.Path.LocalPath + ".pdf" ), _FileName + ".pdf" );
+        }
+
+        private string _XMLPAPDFFileName( )
+        {
+            return @"FATT;" +
+                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Numero + // Number
+                   ";AZIENDA;" +
+                   FiscalCodeID.ToString( _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.IdFiscaleIVA.IdCodice ) + // fiscal id code ! Convert
+                   ";DEL;" +
+                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Year + // date
+                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Month + // date
+                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Day + // date
+                   ";CLIENTE;" +
+                   _FatturaDocument.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.Anagrafica.Denominazione.Replace( " ", "_032" ) + // AddressName ! _O32 for spaces
+                   ";PIVA;" +
+                   _FatturaDocument.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.IdFiscaleIVA.IdCodice; // sender fiscal id code
+        }
+
+        private Document OpenPDFDoc( float BottomTopMargin, float LeftRightMargin, IFileInformation Input )
+        {
+            Document _PDFDocument = new Document( PageSize.LETTER, LeftRightMargin, LeftRightMargin, BottomTopMargin, BottomTopMargin );
+
+            PdfWriter.GetInstance( _PDFDocument, new FileStream( Input.Path.LocalPath + ".pdf", FileMode.OpenOrCreate ) );
+
+            _PDFDocument.Open( );
+
+            return _PDFDocument;
         }
 
         private void AddInvoiceBodyToPDFPage( FatturaElettronicaBody _FatturaElettronicaBody, Document _Document, int _PageNumber )
@@ -574,7 +598,7 @@ namespace XPDF.Model
 
             _GeneralDocumentDataTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
 
-            // filling rows
+            // filling rows 
 
             _GeneralDocumentDataTable.AddCell( new Paragraph ( LocalisedString.Invoice, _BodyHelvetica ) ); // Document Type
             _GeneralDocumentDataTable.AddCell( new Paragraph ( GeneralDocumentData.Data.ToShortDateString( ), _BodyHelvetica ) ); // Date
@@ -635,7 +659,7 @@ namespace XPDF.Model
 
 
 
-            _PDFSenderTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            _PDFSenderTable.DefaultCell.Border   = Rectangle.NO_BORDER;
             _PDFRecieverTable.DefaultCell.Border = Rectangle.NO_BORDER;
 
             _PDFSenderTable.AddCell( _Sender );
@@ -701,8 +725,8 @@ namespace XPDF.Model
             _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.Sede.CAP + " " + _FatturaSenderHeader.Sede.Comune + " (" + _FatturaSenderHeader.Sede.Provincia + ") - " + _FatturaSenderHeader.Sede.Nazione, _BodyHelvetica ) ); // Third address line
             _PDFSenderTable.AddCell( new Phrase( "P.IVA: " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice, _BodyHelvetica ) ); // Fiscal ID Code + Fiscal ID
             _PDFSenderTable.AddCell( new Phrase( "C.F.: " + _FatturaSenderHeader.DatiAnagrafici.CodiceFiscale, _BodyHelvetica ) ); // Fiscal Code
-            _PDFSenderTable.AddCell( new Paragraph( " ", _BodyHelvetica ) ); 
-
+            _PDFSenderTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+            
             Boolean HasContactHeader = false;
 
             if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Telefono ) )
@@ -755,9 +779,9 @@ namespace XPDF.Model
             }
         }
 
-        public bool IsValidXML( string InputXMLFilePath )
+        public bool IsValidXML( String InputXML )
         {
-            using ( var r = XmlReader.Create( new StringReader( File.ReadAllText( InputXMLFilePath ) ), _XmlReaderSettings ) )
+            using ( var r = XmlReader.Create( new StringReader( InputXML ), _XmlReaderSettings ) )
             {
                 _FatturaDocument = new Fattura( );
 
@@ -788,5 +812,7 @@ namespace XPDF.Model
                 };
             }
         }
+
+        public IFormatInformation[] SupportedFormats => throw new NotImplementedException( );
     }
 }

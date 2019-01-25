@@ -12,7 +12,7 @@ namespace XPDF.Model.Event
             this.Completed = Completed;
         }
 
-        public IEnumerable<IFormatInformation> Items => throw new System.NotImplementedException( );
+        public IList<IFormatInformation> Items => throw new System.NotImplementedException( );
 
         public IFormatInformation LastItem => throw new System.NotImplementedException( );
 

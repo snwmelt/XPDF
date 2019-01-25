@@ -15,6 +15,22 @@
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -39,6 +55,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>699D4E6916D01081197445B1CC701536E2AE0D14</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>XPDF_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectoryScanner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -112,7 +140,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Enums\EFileExtension.cs" />
+    <Compile Include="Model\FiscalCodeID.cs" />
     <Compile Include="Model\Enums\EFormat.cs" />
+    <Compile Include="Model\Event\FileConversionUpdate.cs" />
     <Compile Include="Model\Event\ProgressUpdate.cs" />
     <Compile Include="Model\Event\Enums\EXPDFConverterState.cs" />
     <Compile Include="Model\Event\Interface\IProgressUpdate`1.cs" />
@@ -122,10 +152,13 @@
     <Compile Include="Model\FatturaElettronica12\DocumentDataContainer.cs" />
     <Compile Include="Model\FatturaElettronica12\Enums\EDocumentDataReferenceType.cs" />
     <Compile Include="Model\FileFormat.cs" />
+    <Compile Include="Model\FileInformation.cs" />
+    <Compile Include="Model\Interface\IFileInformation.cs" />
     <Compile Include="Model\Interface\IFileConverter.cs" />
     <Compile Include="Model\Interface\IFileFormat.cs" />
     <Compile Include="Model\Interface\IFormatInformation.cs" />
-    <Compile Include="Model\Interface\IFormatConverter.cs" />
+    <Compile Include="Model\Interface\IFormatConverter`2.cs" />
+    <Compile Include="Model\Interface\IXMLConverter.cs" />
     <Compile Include="Model\Interface\IXPDFConversionManager.cs" />
     <Compile Include="Model\Event\Interface\IProgressUpdate.cs" />
     <Compile Include="Model\Interface\IXPDFFIleConverter.cs" />
@@ -186,14 +219,18 @@
     <None Include="Libraries\FatturaElettronica.deps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Libraries\Licenses\FatturaElettronica.NET" />
-    <None Include="Libraries\Licenses\FatturaElettronica.Core" />
-    <None Include="Libraries\Licenses\Walkways">
+    <Content Include="Libraries\Licenses\FatturaElettronica.NET">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Libraries\Licenses\OokiiDialogs">
+    </Content>
+    <Content Include="Libraries\Licenses\FatturaElettronica.Core">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Libraries\Licenses\Walkways">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\Licenses\OokiiDialogs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Libraries\Ookii.Dialogs.Wpf.dll.lastcodeanalysissucceeded">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -202,24 +239,31 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="XPDF_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Libraries\FatturaElettronica.Core.dll">
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Libraries\FatturaElettronica.Core.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="Libraries\FatturaElettronica.Core.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\FatturaElettronica.dll">
+    <EmbeddedResource Include="Libraries\FatturaElettronica.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="Libraries\FatturaElettronica.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\itextsharp.dll">
+    <EmbeddedResource Include="Libraries\itextsharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Resource Include="Libraries\iTextSharp.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -229,12 +273,12 @@
     <Content Include="Libraries\DirectoryScanner.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Libraries\Ookii.Dialogs.Wpf.dll">
+    <EmbeddedResource Include="Libraries\Ookii.Dialogs.Wpf.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Libraries\Walkways.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Libraries\Walkways.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="Libraries\Walkways.pdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

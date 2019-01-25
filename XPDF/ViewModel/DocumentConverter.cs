@@ -16,8 +16,8 @@ namespace XPDF.ViewModel
     {
         #region Private Properties
 
+        private Boolean                 _ConversionInProgress;
         private INPCInvoker             _INPCInvoke;
-        private bool                    _ConversionInProgress      = false;
         private String                  _PathwaySelectorPathPrompt;
         private String                  _SearchLocationText;
         private String                  _SelectDestinationText;
@@ -35,33 +35,48 @@ namespace XPDF.ViewModel
 
             InvokeITALocalizationCommand = new CommandRelay<Object>( InvokeITALocalization, CanLocalizeToITA );
             InvokeENGLocalizationCommand = new CommandRelay<Object>( InvokeENGLocalization, CanLocaliseToENG );
-            SelectDestinationCommand     = new CommandRelay<Object>( SelectDestination, ConversionInProgress );
-            SelectSourceCommand          = new CommandRelay<Object>( SelectSource, ConversionInProgress );
+            SelectDestinationCommand     = new CommandRelay<Object>( SelectDestination, ConversionInProgressPredicate );
+            SelectSourceCommand          = new CommandRelay<Object>( SelectSource, ConversionInProgressPredicate );
             XPDFConvertCommand           = new CommandRelay<Object>( XPDFConvert, ConversionInteractionAllowed );
+            ConversionInProgress         = false;
 
             UpdateUILables( );
             _XPDFConverter.ProgressUpdateEvent += UpdateProgress;
         }
 
-        private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate> e )
+        private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate<IFileInformation>> e )
         {
-            if (e.CurrentState.Completed == true)
+            if ( e.CurrentState.Completed )
             {
-                if ( _ConversionInProgress )
+                if ( ConversionInProgress )
                 {
                     ToggleConversionState( );
                 }
             }
         }
 
+        public bool ConversionInProgress
+        {
+            get
+            {
+                return _ConversionInProgress;
+            }
+
+            set
+            {
+                _INPCInvoke.AssignPropertyValue<Boolean>( ref PropertyChanged, ref _ConversionInProgress, value );
+            }
+        }
+
+
         private bool ConversionInteractionAllowed( object obj )
         {
             return !String.IsNullOrEmpty( SelectedSourceText );
         }
 
-        private bool ConversionInProgress( object obj )
+        private bool ConversionInProgressPredicate( object obj )
         {
-            return !_ConversionInProgress;
+            return !ConversionInProgress;
         }
 
         private bool CanLocalizeToITA( object obj )
@@ -208,22 +223,22 @@ namespace XPDF.ViewModel
 
         private void ToggleConversionState()
         {
-            _ConversionInProgress = !_ConversionInProgress;
-            XPDFConvertText       = _ConversionInProgress ? LocalisedUI.Cancel : LocalisedUI.Convert;
+            ConversionInProgress = !ConversionInProgress;
+            XPDFConvertText       = ConversionInProgress ? LocalisedUI.Cancel : LocalisedUI.Convert;
         }
 
         private void UpdateUILables( )
         {
             SelectDestinationText     = LocalisedUI.Destination;
             SelectSourceText          = LocalisedUI.Source;
-            XPDFConvertText           = _ConversionInProgress ? LocalisedUI.Cancel : LocalisedUI.Convert;
+            XPDFConvertText           = ConversionInProgress ? LocalisedUI.Cancel : LocalisedUI.Convert;
             SearchLocationText        = LocalisedUI.Search;
             PathwaySelectorPathPrompt = LocalisedUI.TypePathHere;
         }
 
         private void XPDFConvert( Object obj )
         {
-            if ( _ConversionInProgress )
+            if ( ConversionInProgress )
             {
                 _XPDFConverter.Abort( );
 

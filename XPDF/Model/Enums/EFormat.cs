@@ -7,6 +7,8 @@ namespace XPDF.Model.Enums
         [Description( "PDF" )]
         PDF,
         [Description( "XMLPA" )]
-        XMLPA
+        XMLPA,
+        [Description( "UNKNOWN" )]
+        Uknown
     }
 }

@@ -1,6 +1,10 @@
 ﻿using DirectoryScanner.Synchronous;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Walkways.Extensions.Attributes;
 using XPDF.Model.Enums;
 using XPDF.Model.Event;
@@ -14,16 +18,19 @@ namespace XPDF.Model
     {
         #region Private Variables
 
+        Boolean                 _Aborting         = false;
         Scanner                 _DirectoryScanner = null;
+        IXPDFFIleConverter      _FEFileConverter  = new FatturaElecttronicaFileConverter( );
         private readonly Object _ThreadLockObject = new Object( );
         EXPDFConverterState     _State            = EXPDFConverterState.Unavailable;
-        IXPDFFIleConverter      _FEFileConverter  = new FatturaElecttronicaFileConverter( );
+        FileConversionUpdate    _UpdateContainer  = new FileConversionUpdate( null );
+
+        #endregion
 
         public FatturaElecttronicaConversionManager( )
         {
             SetState( EXPDFConverterState.Available );
         }
-        #endregion
 
         private void _Abort( Exception Exception = null )
         {
@@ -36,22 +43,15 @@ namespace XPDF.Model
 
             _Abort( );
         }
-
-        private void Convert( String InputXMLFilePath, String OutputPDFDirectory )
+        
+        private string[] GetExtensionStrings( )
         {
-            try
-            {
-                if (_FEFileConverter.IsValidXML( InputXMLFilePath ))
-                {
-                    _FEFileConverter.Convert( InputXMLFilePath, OutputPDFDirectory );
+            List<String> resutlt = new List<String>( );
 
-                    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( false ) ) );
-                }
-            }
-            catch ( Exception Ex )
-            {
-                ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( false ), null, Ex ) );
-            }
+            foreach ( EFileExtension FileExtension in SupportedFileExtensions )
+                resutlt.Add( FileExtension.GetDescription( ).ToLowerInvariant( ) );
+
+            return resutlt.ToArray( );
         }
 
         public void ConvertAll( String PathToSourceDirectory, String PathToDestinationDirectory )
@@ -61,29 +61,88 @@ namespace XPDF.Model
 
             SetState( EXPDFConverterState.Working );
 
+            if ( String.IsNullOrEmpty( PathToDestinationDirectory ) )
+                PathToDestinationDirectory = PathToSourceDirectory;
+
+            _UpdateContainer.Reset( );
+            _UpdateContainer.Items.Clear( );
+
             _DirectoryScanner = new Scanner( PathToSourceDirectory )
             {
                 ScanMode  = DirectoryScanner.Common.ScanMode.MatchExtension,
-                SearchFor = new String[] { EFileExtension.XML.GetDescription( ).ToLowerInvariant( ) }
+                SearchFor = GetExtensionStrings( )
             };
 
             _DirectoryScanner.FileFoundEvent += ( s, e ) => 
             {
-                if ( State == EXPDFConverterState.Working )
+                if ( State == EXPDFConverterState.Working && !_Aborting )
                 {
-                    String OutputPDFDirectory = PathToDestinationDirectory;
-
-                    if ( String.IsNullOrEmpty( OutputPDFDirectory ) )
-                        OutputPDFDirectory = e.DirectoryName;
-
-                    Convert( e.FullName, OutputPDFDirectory );
+                    _UpdateContainer.Items.Add( new FileInformation( new FileFormat( EFileExtension.XML, EFormat.Uknown, null ), new Uri( e.FullName ) ) );
                 }
             };
 
-            _DirectoryScanner.Scan( );
+            new Thread( new ThreadStart( () => 
+            {
+                _DirectoryScanner.Scan( );
 
-            ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate>( new ProgressUpdate( true ) ) );
-            SetState( EXPDFConverterState.Available );
+                ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
+
+                if ( !_UpdateContainer.Completed )
+                    ProcessFiles( PathToDestinationDirectory );
+
+                SetState( EXPDFConverterState.Available );
+
+            } ) ).Start( );
+        }
+
+        private void ProcessFiles( String Destination )
+        {
+            //Parallel.ForEach<IFileInformation>( _UpdateContainer.Items.AsEnumerable( ),
+            //new Action<IFileInformation, ParallelLoopState>( ( IFileInformation Element, ParallelLoopState state ) =>
+            //{
+            //    if ( State != EXPDFConverterState.Working || _Aborting )
+            //    {
+            //        state.Break( );
+            //    }
+            //
+            //    _UpdateContainer.IncrementProgress( );
+            //
+            //    try
+            //    {
+            //        Convert( _UpdateContainer.LastItem );
+            //    }
+            //    catch ( Exception Ex )
+            //    {
+            //        ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
+            //    }
+            //
+            //    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
+            //
+            //    if ( _UpdateContainer.Completed )
+            //        SetState( EXPDFConverterState.Available );
+            //
+            //} ) );
+
+            while ( State == EXPDFConverterState.Working && !_Aborting )
+            {
+                _UpdateContainer.IncrementProgress( );
+
+                try
+                {
+                    IFileInformation ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
+
+                    File.Move( ConvertedFileInfo.Path.LocalPath, Destination + "\\" + ConvertedFileInfo.FallbackPath );
+                }
+                catch ( Exception Ex )
+                {
+                    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
+                }
+
+                ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
+
+                if ( _UpdateContainer.Completed )
+                    SetState( EXPDFConverterState.Available );
+            }
         }
 
         public IEnumerable<EFormat> InputFormats
@@ -102,12 +161,25 @@ namespace XPDF.Model
             }
         }
 
-        public event EventHandler<StateChangeEventArgs<IProgressUpdate>> ProgressUpdateEvent;
-
+        public event EventHandler<StateChangeEventArgs<IProgressUpdate<IFileInformation>>> ProgressUpdateEvent;
+        
         private void SetState( EXPDFConverterState _EXPDFConverterState, Exception _Exception = null )
         {
             State = _EXPDFConverterState;
             StateChangedEvent?.Invoke( this, new StateChangeEventArgs<EXPDFConverterState>( _EXPDFConverterState, State, _Exception ) );
+        }
+
+        public IFileInformation Convert( IFileInformation Input )
+        {
+            if ( IsValidXML( File.ReadAllText( Input.Path.LocalPath ) ) )
+                return _FEFileConverter.Convert( Input );
+                    
+            return null;
+        }
+
+        public bool IsValidXML( string InputXML )
+        {
+            return _FEFileConverter.IsValidXML( InputXML );
         }
 
         public EXPDFConverterState State
@@ -128,7 +200,23 @@ namespace XPDF.Model
                 }
             }
         }
-        
+
+        public IEnumerable<EFileExtension> SupportedFileExtensions
+        {
+            get
+            {
+                return _FEFileConverter.SupportedFileExtensions;
+            }
+        }
+
+        public IFormatInformation[] SupportedFormats
+        {
+            get
+            {
+                return _FEFileConverter.SupportedFormats;
+            }
+        }
+
         public event EventHandler<StateChangeEventArgs<EXPDFConverterState>> StateChangedEvent;
     }
 }

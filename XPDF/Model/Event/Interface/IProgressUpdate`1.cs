@@ -4,7 +4,7 @@ namespace XPDF.Model.Event.Interface
 {
     interface IProgressUpdate<T> : IProgressUpdate
     {
-        IEnumerable<T> Items { get; }
+        IList<T> Items { get; }
 
         T LastItem { get; }
 

@@ -5,13 +5,13 @@ using XPDF.Model.Event.Interface;
 
 namespace XPDF.Model.Interface
 {
-    internal interface IXPDFConversionManager : IFormatConverter
+    internal interface IXPDFConversionManager : IFileConverter, IXMLConverter
     {
         void Abort( );
 
         void ConvertAll( string PathToSourceDirectory, string PathToDestinationDirectory );
 
-        event EventHandler<StateChangeEventArgs<IProgressUpdate>>     ProgressUpdateEvent;
+        event EventHandler<StateChangeEventArgs<IProgressUpdate<IFileInformation>>> ProgressUpdateEvent;
 
         EXPDFConverterState State { get; }
 
