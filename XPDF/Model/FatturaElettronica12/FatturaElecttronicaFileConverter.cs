@@ -80,7 +80,7 @@ namespace XPDF.Model.FatturaElettronica12
 
             _PDFDocument.Close( );
 
-            return new FileInformation( new FileFormat( EFileExtension.PDF, EFormat.PDF, "1.4" ), new Uri( Input.Path.LocalPath + ".pdf" ), _FileName + ".pdf" );
+            return new FileInformation( new FileFormat( EFileExtension.PDF, EFormat.PDF, "1.4" ), new Uri( Input.Path.LocalPath + ".pdf" ), _FileName.Replace( @"/", "" ) + ".pdf" );
         }
 
         private string _XMLPAPDFFileName( )
@@ -283,15 +283,16 @@ namespace XPDF.Model.FatturaElettronica12
 
         private PdfPCell GetInstitutionSpanCell( DettaglioPagamento _PaymentDetails )
         {
-            PdfPCell InstitutionSpanCell = new PdfPCell();
-
-            InstitutionSpanCell.UseAscender         = _CellUseAscender;
-            InstitutionSpanCell.PaddingTop          = _CellPaddingTop;
-            InstitutionSpanCell.Colspan             = 7;
-            InstitutionSpanCell.BorderColor         = _BorderColour;
-            InstitutionSpanCell.BorderWidth         = _BorderWidth;
-            InstitutionSpanCell.VerticalAlignment   = Element.ALIGN_TOP;
-            InstitutionSpanCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            PdfPCell InstitutionSpanCell = new PdfPCell
+            {
+                UseAscender         = _CellUseAscender,
+                PaddingTop          = _CellPaddingTop,
+                Colspan             = 7,
+                BorderColor         = _BorderColour,
+                BorderWidth         = _BorderWidth,
+                VerticalAlignment   = Element.ALIGN_TOP,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
 
             Paragraph Content = new Paragraph( );
 
@@ -446,10 +447,10 @@ namespace XPDF.Model.FatturaElettronica12
                 0.4f,  // UM
                 1f,    // Price
                 0.4f,  // scmg
-                0.55f,  // "%"
-                0.55f,    // Val
+                0.55f, // "%"
+                0.55f, // Val
                 1f,    // Amount
-                0.55f   // VAT + "%"
+                0.55f  // VAT + "%"
             } );
 
             for ( int i = 0; i < InvoiceDetails.Count; i++ )
@@ -484,10 +485,6 @@ namespace XPDF.Model.FatturaElettronica12
 
         private void TryInsertBonusDiscountsValues( List<FatturaElettronica.Common.ScontoMaggiorazione> _BonusDiscounsList, PdfPTable _LineDetailsTable )
         {
-            //_LineDetailsTable.AddCell( new Paragraph( GetNullableString( ), _BodyHelvetica ) );
-            //_LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ]?.ScontoMaggiorazione?[ 0 ].Percentuale ), _BodyHelvetica ) );
-            //_LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ]?.ScontoMaggiorazione?[ 0 ].Importo ), _BodyHelvetica ) );
-
             Paragraph Scmg    = new Paragraph( );
             Paragraph Percent = new Paragraph( );
             Paragraph Val     = new Paragraph( );
@@ -625,14 +622,14 @@ namespace XPDF.Model.FatturaElettronica12
             return result;
         }
 
-        private PdfPTable CreateBodyPdfPTable( String[] _Headers )
+        private PdfPTable CreateBodyPdfPTable( String[] _Headers, int _HorizontalAlignment = Element.ALIGN_RIGHT, int _VerticalAlignment = Element.ALIGN_CENTER )
         {
             PdfPTable _PdfPTable = new PdfPTable( _Headers.Length );
 
             _PdfPTable.DefaultCell.BorderColor         = _BorderColour;
             _PdfPTable.DefaultCell.BorderWidth         = _BorderWidth;
-            _PdfPTable.DefaultCell.VerticalAlignment   = Element.ALIGN_CENTER;
-            _PdfPTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            _PdfPTable.DefaultCell.VerticalAlignment   = _VerticalAlignment;
+            _PdfPTable.DefaultCell.HorizontalAlignment = _HorizontalAlignment;
 
             foreach ( String _Header in _Headers )
             {
@@ -702,7 +699,7 @@ namespace XPDF.Model.FatturaElettronica12
             PdfPTable _GeneralDocumentCauseTable = CreateBodyPdfPTable( new String[] 
             {
                 LocalisedString.Cause
-            } );
+            }, Element.ALIGN_LEFT );
 
             foreach ( String Cause in GeneralDocumentData.Causale )
             {
@@ -885,8 +882,7 @@ namespace XPDF.Model.FatturaElettronica12
             {
                 return new EFileExtension[]
                 {
-                    EFileExtension.XML,
-                    EFileExtension.PDF
+                    EFileExtension.XML
                 };
             }
         }

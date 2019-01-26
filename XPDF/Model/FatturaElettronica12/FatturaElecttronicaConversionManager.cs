@@ -122,10 +122,14 @@ namespace XPDF.Model.FatturaElettronica12
             while ( State == EXPDFConverterState.Working && !_Aborting )
             {
                 _UpdateContainer.IncrementProgress( );
+                
 
                 try
                 {
                     IFileInformation ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
+
+                    if ( File.Exists( Destination + "\\" + ConvertedFileInfo.FallbackPath ) )
+                        File.Delete( Destination + "\\" + ConvertedFileInfo.FallbackPath );
 
                     File.Move( ConvertedFileInfo.Path.LocalPath, Destination + "\\" + ConvertedFileInfo.FallbackPath );
                 }
@@ -134,7 +138,9 @@ namespace XPDF.Model.FatturaElettronica12
                     ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
                 }
 
+
                 ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
+
 
                 if ( _UpdateContainer.Completed )
                     SetState( EXPDFConverterState.Available );
