@@ -108,7 +108,8 @@ namespace XPDF.ViewModel
 
         private void InvokeITALocalization( object obj )
         {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture( "It" );
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CreateSpecificCulture( "It" );
+
 
             UpdateUILables( );
         }
@@ -120,7 +121,7 @@ namespace XPDF.ViewModel
 
         private void InvokeENGLocalization( object obj )
         {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture( "En" );
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CreateSpecificCulture( "En" );
 
             UpdateUILables( );
         }
