@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Walkways.Extensions.Attributes;
 using XPDF.Model.Enums;
 using XPDF.Model.Event;
@@ -12,7 +10,7 @@ using XPDF.Model.Event.Enums;
 using XPDF.Model.Event.Interface;
 using XPDF.Model.Interface;
 
-namespace XPDF.Model
+namespace XPDF.Model.FatturaElettronica12
 {
     internal class FatturaElecttronicaConversionManager : IXPDFConversionManager
     {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
 using Walkways.MVVM.ViewModel;
-using XPDF.Model;
+using XPDF.Model.FatturaElettronica12;
 using XPDF.Model.Event;
 using XPDF.Model.Event.Interface;
 using XPDF.Model.Interface;

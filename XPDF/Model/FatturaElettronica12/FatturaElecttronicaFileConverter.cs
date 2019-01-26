@@ -22,7 +22,7 @@ using XPDF.Model.FatturaElettronica12.Enums;
 using XPDF.Model.Interface;
 using XPDF.Model.Localization;
 
-namespace XPDF.Model
+namespace XPDF.Model.FatturaElettronica12
 {
     internal class FatturaElecttronicaFileConverter : IXPDFFIleConverter
     {
@@ -192,17 +192,8 @@ namespace XPDF.Model
                 }
             }
 
-
-            PdfPTable _MainTable = new PdfPTable( 1 );
-
-            _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            _MainTable.WidthPercentage = 100;
-
-            _MainTable.AddCell( new Paragraph( " ", _BodyHelvetica ) ); // Padding
-            _MainTable.AddCell( new Paragraph( LocalisedString.PaymentInformation, _HeaderHelvetica ) ); // header
-            _MainTable.AddCell( new PdfPCell( _PaymentInformationTable ) );
-
-            return _MainTable;
+            return GenerateBodyTable( new Paragraph( LocalisedString.PaymentInformation, _HeaderHelvetica ),
+                                      new PdfPCell( _PaymentInformationTable ) );
         }
 
         private PdfPCell GetInstitutionSpanCell( DettaglioPagamento _PaymentDetails )
@@ -297,17 +288,8 @@ namespace XPDF.Model
                 _GeneralSummeryTable.AddCell( new Paragraph( VatExCodeToString( GeneralSummeriesList[ i ].EsigibilitaIVA ), _BodyHelvetica ) );
             }
 
-
-            PdfPTable _MainTable = new PdfPTable( 1 );
-
-            _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            _MainTable.WidthPercentage = 100;
-
-            _MainTable.AddCell( new Paragraph( " ", _BodyHelvetica ) ); // Padding
-            _MainTable.AddCell( new Paragraph( LocalisedString.GeneralSummery, _HeaderHelvetica ) ); // header
-            _MainTable.AddCell( new PdfPCell( _GeneralSummeryTable ) );
-
-            return _MainTable;
+            return GenerateBodyTable( new Paragraph( LocalisedString.GeneralSummery, _HeaderHelvetica ),
+                                      new PdfPCell( _GeneralSummeryTable ) );
         }
 
         private String VatExCodeToString( String Code )
@@ -397,16 +379,8 @@ namespace XPDF.Model
                 _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].AliquotaIVA ), _BodyHelvetica ) );
             }
 
-            PdfPTable _MainTable = new PdfPTable( 1 );
-
-            _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            _MainTable.WidthPercentage = 100;
-            
-            _MainTable.AddCell( new Paragraph( " ", _BodyHelvetica ) ); // Padding
-            _MainTable.AddCell(  new Paragraph( LocalisedString.InvoiceDetails, _HeaderHelvetica ) ); // header
-            _MainTable.AddCell( new PdfPCell( _LineDetailsTable ) );
-
-            return _MainTable;
+            return GenerateBodyTable( new Paragraph( LocalisedString.InvoiceDetails, _HeaderHelvetica ),
+                                      new PdfPCell( _LineDetailsTable ) );
         }
 
         private PdfPCell GenerateLineItemDescription( DettaglioLinee _LineItem )
@@ -511,16 +485,7 @@ namespace XPDF.Model
                     }
                 }
 
-                PdfPTable _MainTable = new PdfPTable( 1 );
-
-                _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
-                _MainTable.WidthPercentage = 100;
-
-                _MainTable.AddCell( new Paragraph( " ", _BodyHelvetica ) ); // Padding
-                _MainTable.AddCell( new Paragraph( LocalisedString.ExternalDocumentReferences, _HeaderHelvetica ) ); // header
-                _MainTable.AddCell( new PdfPCell( _ExternalDocumentReferenceTable ) );
-
-                _Document.Add( _MainTable );
+                _Document.Add( GenerateBodyTable( new Paragraph( LocalisedString.ExternalDocumentReferences, _HeaderHelvetica ), new PdfPCell( _ExternalDocumentReferenceTable ) ) );
             }
         }
 
@@ -540,9 +505,9 @@ namespace XPDF.Model
         {
             PdfPTable _PdfPTable = new PdfPTable( _Headers.Length );
 
-            _PdfPTable.DefaultCell.BorderColor = _BorderColour;
-            _PdfPTable.DefaultCell.BorderWidth = _BorderWidth;
-            _PdfPTable.DefaultCell.VerticalAlignment = Element.ALIGN_CENTER;
+            _PdfPTable.DefaultCell.BorderColor         = _BorderColour;
+            _PdfPTable.DefaultCell.BorderWidth         = _BorderWidth;
+            _PdfPTable.DefaultCell.VerticalAlignment   = Element.ALIGN_CENTER;
             _PdfPTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
 
             foreach ( String _Header in _Headers )
@@ -620,18 +585,26 @@ namespace XPDF.Model
                 _GeneralDocumentCauseTable.AddCell( new Paragraph( Cause, _BodyHelvetica ) );
             }
 
+            return GenerateBodyTable( new Paragraph( LocalisedString.GeneralData, _HeaderHelvetica ),
+                                      new PdfPCell( _GeneralDocumentDataTable ),
+                                      new PdfPCell( _GeneralDocumentCauseTable ) );
+        }
 
-            PdfPTable _MainTable = new PdfPTable( 1 );
+        private PdfPTable GenerateBodyTable( Phrase _Header, params PdfPCell[] _PDFPCells )
+        {
+            PdfPTable _Container = new PdfPTable( 1 );
 
-            _MainTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            _MainTable.WidthPercentage = 100;
+            _Container.DefaultCell.Border = Rectangle.NO_BORDER;
+            _Container.WidthPercentage    = 100;
+
+            _Container.AddCell( _Header );
             
-            _MainTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
-            _MainTable.AddCell( new Paragraph( LocalisedString.GeneralData, _HeaderHelvetica ) ); // header
-            _MainTable.AddCell( new PdfPCell( _GeneralDocumentDataTable ) );
-            _MainTable.AddCell( new PdfPCell( _GeneralDocumentCauseTable ) );
+            for ( int i = 0; i < _PDFPCells.Length; i++ )
+            {
+                _Container.AddCell( _PDFPCells[ i ] );
+            }
 
-            return _MainTable;
+            return _Container;
         }
 
         private PdfPTable GeneratePDFHeader( FatturaElettronicaHeader _FatturaElettronicaHeader )
@@ -729,38 +702,23 @@ namespace XPDF.Model
             
             Boolean HasContactHeader = false;
 
-            if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Telefono ) )
+            TryInsertSenderContactData( _PDFSenderTable, LocalisedString.Telephone, _FatturaSenderHeader.Contatti.Telefono, ref HasContactHeader );
+            TryInsertSenderContactData( _PDFSenderTable, LocalisedString.Fax,       _FatturaSenderHeader.Contatti.Fax,      ref HasContactHeader );
+            TryInsertSenderContactData( _PDFSenderTable, LocalisedString.Email,     _FatturaSenderHeader.Contatti.Email,    ref HasContactHeader );
+        }
+
+        private void TryInsertSenderContactData( PdfPTable _PDFSenderTable, String _Prefix, String _Content, ref Boolean _HasContactHeader )
+        {
+            if ( !String.IsNullOrEmpty( _Content ) )
             {
-                if ( !HasContactHeader )
+                if ( !_HasContactHeader )
                 {
                     _PDFSenderTable.AddCell( new Phrase( LocalisedString.Contacts, _BodyHelvetica ) );
-                    HasContactHeader = true;
+                    _HasContactHeader = true;
                 }
 
-                _PDFSenderTable.AddCell( new Phrase( LocalisedString.Telephone + " " + _FatturaSenderHeader.Contatti.Telefono, _BodyHelvetica ) );
+                _PDFSenderTable.AddCell( new Phrase( _Prefix + " " + _Content, _BodyHelvetica ) );
             }
-
-            if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Fax ) )
-            {
-                if ( !HasContactHeader )
-                {
-                    _PDFSenderTable.AddCell( new Phrase( LocalisedString.Contacts, _BodyHelvetica ) );
-                    HasContactHeader = true;
-                }
-
-                _PDFSenderTable.AddCell( new Phrase( LocalisedString.Fax + " " + _FatturaSenderHeader.Contatti.Fax, _BodyHelvetica ) );
-            }
-
-            if ( !String.IsNullOrEmpty( _FatturaSenderHeader.Contatti.Email ) )
-            {
-                if ( !HasContactHeader )
-                {
-                    _PDFSenderTable.AddCell( new Phrase( LocalisedString.Contacts, _BodyHelvetica ) );
-                    HasContactHeader = true;
-                }
-
-                _PDFSenderTable.AddCell( new Phrase( LocalisedString.Email + " " + _FatturaSenderHeader.Contatti.Email, _BodyHelvetica ) );
-            } 
         }
 
         public void Dispose( )

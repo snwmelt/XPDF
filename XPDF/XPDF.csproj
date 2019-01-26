@@ -147,8 +147,8 @@
     <Compile Include="Model\Event\Enums\EXPDFConverterState.cs" />
     <Compile Include="Model\Event\Interface\IProgressUpdate`1.cs" />
     <Compile Include="Model\Event\StateChangeEventArgs.cs" />
-    <Compile Include="Model\FatturaElecttronicaConversionManager.cs" />
-    <Compile Include="Model\FatturaElecttronicaFileConverter.cs" />
+    <Compile Include="Model\FatturaElettronica12\FatturaElecttronicaConversionManager.cs" />
+    <Compile Include="Model\FatturaElettronica12\FatturaElecttronicaFileConverter.cs" />
     <Compile Include="Model\FatturaElettronica12\DocumentDataContainer.cs" />
     <Compile Include="Model\FatturaElettronica12\Enums\EDocumentDataReferenceType.cs" />
     <Compile Include="Model\FileFormat.cs" />
