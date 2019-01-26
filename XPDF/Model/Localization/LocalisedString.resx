@@ -282,4 +282,13 @@
   <data name="VAT" xml:space="preserve">
     <value>VAT</value>
   </data>
+  <data name="AmountDue" xml:space="preserve">
+    <value>Amount Due</value>
+  </data>
+  <data name="Exempt" xml:space="preserve">
+    <value>Exempt</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
 </root>

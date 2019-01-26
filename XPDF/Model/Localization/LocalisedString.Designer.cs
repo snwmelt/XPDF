@@ -79,6 +79,15 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount Due.
+        /// </summary>
+        internal static string AmountDue {
+            get {
+                return ResourceManager.GetString("AmountDue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Beneficiary.
         /// </summary>
         internal static string Beneficiary {
@@ -219,6 +228,15 @@ namespace XPDF.Model.Localization {
         internal static string EndOfService {
             get {
                 return ResourceManager.GetString("EndOfService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exempt.
+        /// </summary>
+        internal static string Exempt {
+            get {
+                return ResourceManager.GetString("Exempt", resourceCulture);
             }
         }
         
@@ -489,6 +507,15 @@ namespace XPDF.Model.Localization {
         internal static string Telephone {
             get {
                 return ResourceManager.GetString("Telephone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
             }
         }
         

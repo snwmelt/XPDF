@@ -13,18 +13,19 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using Walkways.Extensions.Attributes;
 using XPDF.Model.Enums;
-using XPDF.Model.FatturaElettronica12;
 using XPDF.Model.FatturaElettronica12.Enums;
 using XPDF.Model.Interface;
 using XPDF.Model.Localization;
 
 namespace XPDF.Model.FatturaElettronica12
 {
-    internal class FatturaElecttronicaFileConverter : IXPDFFIleConverter
+    internal class FatturaElecttronicaFileConverter : IFileConverter, IXMLConverter
     {
         #region Private Variables
 
@@ -51,12 +52,6 @@ namespace XPDF.Model.FatturaElettronica12
             _BodyHelvetica       = new Font( _BaseFontHelvetica, 8,  Font.NORMAL, Color.BLACK );
             _TitleHelvetica      = new Font( _BaseFontHelvetica, 10, Font.NORMAL, Color.BLACK );
         }
-
-        public void Abort( )
-        {
-            //throw new System.NotImplementedException( );
-        }
-
 
         public IFileInformation Convert( IFileInformation Input )
         {
@@ -118,34 +113,124 @@ namespace XPDF.Model.FatturaElettronica12
         private void AddInvoiceBodyToPDFPage( FatturaElettronicaBody _FatturaElettronicaBody, Document _Document, int _PageNumber )
         {
             _Document.Add( AddGeneralDocumentData( _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento ) );
-
+            
             AddExternalDocumentReferences( _FatturaElettronicaBody.DatiGenerali, _Document );
+            
+            List<DettaglioLinee> _InvoiceDetails         = _FatturaElettronicaBody.DatiBeniServizi.DettaglioLinee;
+            List<DatiRiepilogo>  _Summeries              = _FatturaElettronicaBody.DatiBeniServizi.DatiRiepilogo;
+            List<DatiPagamento>  _PaymentInformationList = _FatturaElettronicaBody.DatiPagamento;
 
-
-            List<DettaglioLinee> LineDetails = _FatturaElettronicaBody.DatiBeniServizi.DettaglioLinee;
-
-            if ( LineDetails != null && LineDetails.Count > 0 )
-            {
-                _Document.Add( AddLineDetails( LineDetails ) );
-            }
-
-            List<DatiRiepilogo> Summeries = _FatturaElettronicaBody.DatiBeniServizi.DatiRiepilogo;
-
-            if ( LineDetails != null && LineDetails.Count > 0 )
-            {
-                _Document.Add( AddGeneralSummery( Summeries ) );
-            }
-
-            List<DatiPagamento> PaymentInformationList = _FatturaElettronicaBody.DatiPagamento;
-
-            if ( LineDetails != null && LineDetails.Count > 0 )
-            {
-                _Document.Add( AddPaymentInformation( PaymentInformationList ) );
-            }
+            TryAddInvoiceDetails( _InvoiceDetails, _Document );
+            TryAddGeneralSummery( _Summeries, _Document );
+            TryAddPaymentInformation( _PaymentInformationList, _Document );
+            TryAddCostSummery( _Summeries, _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento.Divisa, _Document );
         }
 
-        private PdfPTable AddPaymentInformation( List<DatiPagamento> PaymentInformationList )
+        private void TryAddCostSummery( List<DatiRiepilogo> _Summeries, String _Divisa, Document _Document )
         {
+            if ( _Summeries == null || _Summeries.Count < 1 )
+                return;
+
+
+            PdfPTable _Container              = new PdfPTable( 1 );
+            PdfPTable _CostSummeryTable       = new PdfPTable( 2 );
+            PdfPTable _CostSummeryHeaderTable = new PdfPTable( 1 );
+            PdfPTable _CostSummeryValuesTable = new PdfPTable( 1 );
+
+
+            _Container.DefaultCell.Border  = Rectangle.NO_BORDER;
+            _Container.WidthPercentage     = 33;
+            _Container.HorizontalAlignment = Element.ALIGN_RIGHT;
+
+
+            _CostSummeryTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            _CostSummeryTable.DefaultCell.BorderWidth = 0;
+
+            _CostSummeryHeaderTable.DefaultCell.BorderColor         = _BorderColour;
+            _CostSummeryHeaderTable.DefaultCell.BorderWidth         = _BorderWidth;
+            _CostSummeryHeaderTable.DefaultCell.BackgroundColor     = _BorderColour;
+            _CostSummeryHeaderTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+
+            _CostSummeryValuesTable.DefaultCell.BorderColor         = _BorderColour;
+            _CostSummeryValuesTable.DefaultCell.BorderWidth         = _BorderWidth;
+            _CostSummeryValuesTable.DefaultCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+
+
+            _CostSummeryTable.AddCell( _CostSummeryHeaderTable );
+            _CostSummeryTable.AddCell( _CostSummeryValuesTable );
+
+            _Container.AddCell( new Phrase( ) );
+            _Container.AddCell( new Phrase( ) );
+            _Container.AddCell( new Phrase( ) );
+            _Container.AddCell( _CostSummeryTable );
+
+
+            String _CurrencySymbol = TryGetCurrencySymbol( _Divisa );
+
+            _CostSummeryHeaderTable.AddCell( new Phrase( LocalisedString.Total + " " + LocalisedString.Taxable, _BodyHelvetica ) );
+            _CostSummeryHeaderTable.AddCell( new Phrase( LocalisedString.Total + " " + LocalisedString.Tax, _BodyHelvetica ) );
+            _CostSummeryHeaderTable.AddCell( new Phrase( LocalisedString.Total + " " + LocalisedString.Exempt, _BodyHelvetica ) );
+            _CostSummeryHeaderTable.AddCell( new Phrase( LocalisedString.Total + " " + LocalisedString.AmountDue, _BodyHelvetica ) );
+            
+            Decimal _Tax       = 0.0M;
+            Decimal _Taxable   = 0.0M;
+            Decimal _TaxExempt = 0.0M;
+
+            for ( int i = 0; i < _Summeries.Count; i++ )
+            {
+                if ( _Summeries[i].AliquotaIVA.Equals(0M) )
+                {
+                    _TaxExempt += _Summeries[ i ].ImponibileImporto;
+                }
+                else
+                {
+                    _Taxable += _Summeries[ i ].ImponibileImporto;
+                    _Tax     += _Summeries[ i ].Imposta;
+                }
+            }
+
+            Decimal _TotalDue = _Taxable + _TaxExempt + _Tax;
+
+            _CostSummeryValuesTable.AddCell( new Phrase( _CurrencySymbol + GetNullableString( _Taxable ), _BodyHelvetica ) );
+            _CostSummeryValuesTable.AddCell( new Phrase( _CurrencySymbol + GetNullableString( _Tax ), _BodyHelvetica ) );
+            _CostSummeryValuesTable.AddCell( new Phrase( _CurrencySymbol + GetNullableString( _TaxExempt ), _BodyHelvetica ) );
+            _CostSummeryValuesTable.AddCell( new Phrase( _CurrencySymbol + GetNullableString( _TotalDue ), _BodyHelvetica ) );
+
+
+            _Document.Add( _Container );
+        }
+
+        private String TryGetCurrencySymbol( String _Divisa )
+        {
+            String Symbol = null;
+            Symbol = CultureInfo
+                     .GetCultures( CultureTypes.AllCultures )
+                     .Where( c => !c.IsNeutralCulture )
+                     .Select( culture => {
+                         try
+                         {
+                             return new RegionInfo( culture.LCID );
+                         }
+                         catch
+                         {
+                             return null;
+                         }
+                     } )
+                     .Where( ri => ri != null && ri.ISOCurrencySymbol.ToLowerInvariant( ) == _Divisa.ToLowerInvariant( ) )
+                     .Select( ri => ri.CurrencySymbol )
+                     .FirstOrDefault( );
+
+            if ( Symbol != null )
+                return Symbol + " ";
+
+            return "";
+        }
+
+        private void TryAddPaymentInformation( List<DatiPagamento> PaymentInformationList, Document _Document )
+        {
+            if ( PaymentInformationList == null || PaymentInformationList.Count < 1 )
+                return;
+
             PdfPTable _PaymentInformationTable = CreateBodyPdfPTable( new String[]
             {
                 LocalisedString.Beneficiary,
@@ -192,8 +277,8 @@ namespace XPDF.Model.FatturaElettronica12
                 }
             }
 
-            return GenerateBodyTable( new Paragraph( LocalisedString.PaymentInformation, _HeaderHelvetica ),
-                                      new PdfPCell( _PaymentInformationTable ) );
+            _Document.Add( GenerateBodyTable( new Paragraph( LocalisedString.PaymentInformation, _HeaderHelvetica ),
+                                              new PdfPCell( _PaymentInformationTable ) ) );
         }
 
         private PdfPCell GetInstitutionSpanCell( DettaglioPagamento _PaymentDetails )
@@ -256,8 +341,19 @@ namespace XPDF.Model.FatturaElettronica12
             return CodiceToNome( new CondizioniPagamento( ), Code );
         }
 
-        private PdfPTable AddGeneralSummery( List<DatiRiepilogo> GeneralSummeriesList )
+        private String DocumentTypeCodeToString( String Code )
         {
+            if ( String.IsNullOrEmpty( Code ) )
+                return " ";
+
+            return CodiceToNome( new TipoDocumento( ), Code );
+        }
+
+        private void TryAddGeneralSummery( List<DatiRiepilogo> GeneralSummeriesList, Document _Document )
+        {
+            if ( GeneralSummeriesList == null || GeneralSummeriesList.Count < 1 )
+                return;
+
             PdfPTable _GeneralSummeryTable = CreateBodyPdfPTable( new String[]
             {
                 LocalisedString.Taxable,
@@ -288,8 +384,8 @@ namespace XPDF.Model.FatturaElettronica12
                 _GeneralSummeryTable.AddCell( new Paragraph( VatExCodeToString( GeneralSummeriesList[ i ].EsigibilitaIVA ), _BodyHelvetica ) );
             }
 
-            return GenerateBodyTable( new Paragraph( LocalisedString.GeneralSummery, _HeaderHelvetica ),
-                                      new PdfPCell( _GeneralSummeryTable ) );
+            _Document.Add( GenerateBodyTable( new Paragraph( LocalisedString.GeneralSummery, _HeaderHelvetica ),
+                                              new PdfPCell( _GeneralSummeryTable ) ) );
         }
 
         private String VatExCodeToString( String Code )
@@ -319,8 +415,11 @@ namespace XPDF.Model.FatturaElettronica12
             return CodiceToNome( new Natura( ), Code );
         }
 
-        private PdfPTable AddLineDetails( List<DettaglioLinee> LineDetails )
+        private void TryAddInvoiceDetails( List<DettaglioLinee> InvoiceDetails, Document _Document )
         {
+            if ( InvoiceDetails == null || InvoiceDetails.Count < 1 )
+                return;
+
             PdfPTable _LineDetailsTable = CreateBodyPdfPTable( new String[]
             {
                 LocalisedString.Line,
@@ -330,8 +429,8 @@ namespace XPDF.Model.FatturaElettronica12
                 LocalisedString.QTA,
                 LocalisedString.UM,
                 LocalisedString.Price,
-                "%",
                 LocalisedString.scmg,
+                "%",
                 LocalisedString.Val,
                 LocalisedString.Amount,
                 LocalisedString.VAT + "%"
@@ -339,28 +438,28 @@ namespace XPDF.Model.FatturaElettronica12
 
             _LineDetailsTable.SetWidths( new float[] 
             {
-                0.5f, // Line
-                1f, // Cod
-                1f, // Value
-                4f, // Description
+                0.4f,  // Line
+                1f,    // Cod
+                1f,    // Value
+                4f,    // Description
                 0.75f, // QTA
-                0.5f, // UM
-                1f, // Price
-                0.5f, // "%"
-                0.5f, // scmg
-                1f, // Val
-                1f, // Amount
-                0.5f  // VAT + "%"
+                0.4f,  // UM
+                1f,    // Price
+                0.4f,  // scmg
+                0.55f,  // "%"
+                0.55f,    // Val
+                1f,    // Amount
+                0.55f   // VAT + "%"
             } );
 
-            for ( int i = 0; i < LineDetails.Count; i++ )
+            for ( int i = 0; i < InvoiceDetails.Count; i++ )
             {
-                _LineDetailsTable.AddCell( new Paragraph( LineDetails[ i ].NumeroLinea.ToString( ), _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( InvoiceDetails[ i ].NumeroLinea.ToString( ), _BodyHelvetica ) );
 
-                if ( LineDetails[i].CodiceArticolo != null && LineDetails[i].CodiceArticolo.Count > 0 )
+                if ( InvoiceDetails[i].CodiceArticolo != null && InvoiceDetails[i].CodiceArticolo.Count > 0 )
                 {
-                    _LineDetailsTable.AddCell( new Paragraph( LineDetails[ i ].CodiceArticolo[ 0 ].CodiceTipo, _BodyHelvetica ) );
-                    _LineDetailsTable.AddCell( new Paragraph( LineDetails[ i ].CodiceArticolo[ 0 ].CodiceValore, _BodyHelvetica ) );
+                    _LineDetailsTable.AddCell( new Paragraph( InvoiceDetails[ i ].CodiceArticolo[ 0 ].CodiceTipo, _BodyHelvetica ) );
+                    _LineDetailsTable.AddCell( new Paragraph( InvoiceDetails[ i ].CodiceArticolo[ 0 ].CodiceValore, _BodyHelvetica ) );
                 }
                 else
                 {
@@ -368,19 +467,44 @@ namespace XPDF.Model.FatturaElettronica12
                     _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
                 }
 
-                _LineDetailsTable.AddCell( GenerateLineItemDescription( LineDetails[ i ] ) );
-                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].Quantita ), _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( LineDetails[ i ].UnitaMisura, _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].PrezzoUnitario ), _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].PrezzoTotale ), _BodyHelvetica ) );
-                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ].AliquotaIVA ), _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( GenerateLineItemDescription( InvoiceDetails[ i ] ) );
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( InvoiceDetails[ i ].Quantita ), _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( InvoiceDetails[ i ].UnitaMisura, _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( InvoiceDetails[ i ].PrezzoUnitario ), _BodyHelvetica ) );
+
+                TryInsertBonusDiscountsValues( InvoiceDetails[ i ].ScontoMaggiorazione, _LineDetailsTable );
+                
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( InvoiceDetails[ i ].PrezzoTotale ), _BodyHelvetica ) );
+                _LineDetailsTable.AddCell( new Paragraph( GetNullableString( InvoiceDetails[ i ].AliquotaIVA ), _BodyHelvetica ) );
             }
 
-            return GenerateBodyTable( new Paragraph( LocalisedString.InvoiceDetails, _HeaderHelvetica ),
-                                      new PdfPCell( _LineDetailsTable ) );
+            _Document.Add( GenerateBodyTable( new Paragraph( LocalisedString.InvoiceDetails, _HeaderHelvetica ),
+                                              new PdfPCell( _LineDetailsTable ) ) );
+        }
+
+        private void TryInsertBonusDiscountsValues( List<FatturaElettronica.Common.ScontoMaggiorazione> _BonusDiscounsList, PdfPTable _LineDetailsTable )
+        {
+            //_LineDetailsTable.AddCell( new Paragraph( GetNullableString( ), _BodyHelvetica ) );
+            //_LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ]?.ScontoMaggiorazione?[ 0 ].Percentuale ), _BodyHelvetica ) );
+            //_LineDetailsTable.AddCell( new Paragraph( GetNullableString( LineDetails[ i ]?.ScontoMaggiorazione?[ 0 ].Importo ), _BodyHelvetica ) );
+
+            Paragraph Scmg    = new Paragraph( );
+            Paragraph Percent = new Paragraph( );
+            Paragraph Val     = new Paragraph( );
+
+            if ( _BonusDiscounsList != null && _BonusDiscounsList.Count > 0 )
+            {
+                for ( int i = 0; i < _BonusDiscounsList.Count; i++ )
+                {
+                    Scmg.Add( new Phrase( GetNullableString( _BonusDiscounsList[ i ].Tipo ) + " ", _BodyHelvetica ) );
+                    Percent.Add( new Phrase( GetNullableString( _BonusDiscounsList[ i ].Percentuale ) + " ", _BodyHelvetica ) );
+                    Val.Add( new Phrase( GetNullableString( _BonusDiscounsList[ i ].Importo ) + " ", _BodyHelvetica ) );
+                }
+            }
+
+            _LineDetailsTable.AddCell( Scmg );
+            _LineDetailsTable.AddCell( Percent );
+            _LineDetailsTable.AddCell( Val );
         }
 
         private PdfPCell GenerateLineItemDescription( DettaglioLinee _LineItem )
@@ -565,7 +689,7 @@ namespace XPDF.Model.FatturaElettronica12
 
             // filling rows 
 
-            _GeneralDocumentDataTable.AddCell( new Paragraph ( LocalisedString.Invoice, _BodyHelvetica ) ); // Document Type
+            _GeneralDocumentDataTable.AddCell( new Paragraph ( DocumentTypeCodeToString( GeneralDocumentData.TipoDocumento ), _BodyHelvetica ) ); // Document Type
             _GeneralDocumentDataTable.AddCell( new Paragraph ( GeneralDocumentData.Data.ToShortDateString( ), _BodyHelvetica ) ); // Date
             _GeneralDocumentDataTable.AddCell( new Paragraph ( GeneralDocumentData.Numero, _BodyHelvetica ) ); // Number
             _GeneralDocumentDataTable.AddCell( new Paragraph ( GeneralDocumentData.Divisa, _BodyHelvetica ) ); // Document Currency
@@ -597,6 +721,7 @@ namespace XPDF.Model.FatturaElettronica12
             _Container.DefaultCell.Border = Rectangle.NO_BORDER;
             _Container.WidthPercentage    = 100;
 
+            _Container.AddCell( new Phrase( ) );
             _Container.AddCell( _Header );
             
             for ( int i = 0; i < _PDFPCells.Length; i++ )
@@ -629,7 +754,6 @@ namespace XPDF.Model.FatturaElettronica12
                 Border = Rectangle.NO_BORDER,
                 FixedHeight = 20.0f
             };
-
 
 
             _PDFSenderTable.DefaultCell.Border   = Rectangle.NO_BORDER;
@@ -721,11 +845,6 @@ namespace XPDF.Model.FatturaElettronica12
             }
         }
 
-        public void Dispose( )
-        {
-            Abort( );
-        }
-
         public IEnumerable<EFormat> InputFormats
         {
             get
@@ -766,11 +885,22 @@ namespace XPDF.Model.FatturaElettronica12
             {
                 return new EFileExtension[]
                 {
-                    EFileExtension.XML
+                    EFileExtension.XML,
+                    EFileExtension.PDF
                 };
             }
         }
 
-        public IFormatInformation[] SupportedFormats => throw new NotImplementedException( );
+        public IFormatInformation[] SupportedFormats
+        {
+            get
+            {
+                return new IFormatInformation[]
+                {
+                    new FileFormat( EFileExtension.XML, EFormat.XMLPA, "1.2" ),
+                    new FileFormat( EFileExtension.PDF, EFormat.PDF, "1.4" )
+                };
+            }
+        }
     }
 }

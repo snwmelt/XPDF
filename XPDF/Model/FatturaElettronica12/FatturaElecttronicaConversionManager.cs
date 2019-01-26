@@ -18,7 +18,7 @@ namespace XPDF.Model.FatturaElettronica12
 
         Boolean                 _Aborting         = false;
         Scanner                 _DirectoryScanner = null;
-        IXPDFFIleConverter      _FEFileConverter  = new FatturaElecttronicaFileConverter( );
+        IFileConverter          _FEFileConverter  = new FatturaElecttronicaFileConverter( );
         private readonly Object _ThreadLockObject = new Object( );
         EXPDFConverterState     _State            = EXPDFConverterState.Unavailable;
         FileConversionUpdate    _UpdateContainer  = new FileConversionUpdate( null );
@@ -37,8 +37,6 @@ namespace XPDF.Model.FatturaElettronica12
 
         public void Abort( )
         {
-            _FEFileConverter.Abort( );
-
             _Abort( );
         }
         
@@ -177,7 +175,7 @@ namespace XPDF.Model.FatturaElettronica12
 
         public bool IsValidXML( string InputXML )
         {
-            return _FEFileConverter.IsValidXML( InputXML );
+            return ( _FEFileConverter as IXMLConverter ).IsValidXML( InputXML );
         }
 
         public EXPDFConverterState State
@@ -211,7 +209,7 @@ namespace XPDF.Model.FatturaElettronica12
         {
             get
             {
-                return _FEFileConverter.SupportedFormats;
+                return ( _FEFileConverter as IXMLConverter ).SupportedFormats;
             }
         }
 
