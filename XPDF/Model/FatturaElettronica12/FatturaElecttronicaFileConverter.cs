@@ -85,18 +85,25 @@ namespace XPDF.Model.FatturaElettronica12
 
         private string _XMLPAPDFFileName( )
         {
+            int Year  = _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Year;
+            int Month = _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Month;
+            int Day   = _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Day;
+            
+            String FiscalCodeIDString = FiscalCodeID.ToString( _FatturaDocument.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.IdFiscaleIVA.IdCodice );
+            String AddressName        = _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.Anagrafica.Denominazione;
+
             return @"FATT;" +
                    _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Numero + // Number
                    ";AZIENDA;" +
-                   FiscalCodeID.ToString( _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.IdFiscaleIVA.IdCodice ) + // fiscal id code ! Convert
+                   FiscalCodeIDString +                                                          // sender fiscal id code ! Convert
                    ";DEL;" +
-                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Year + // date
-                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Month + // date
-                   _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Day + // date
-                   ";CLIENTE;" +
-                   _FatturaDocument.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.Anagrafica.Denominazione.Replace( " ", "_032" ) + // AddressName ! _O32 for spaces
+                   Year +                                                                        // Year
+                   ( ( Month < 10 ) ? "0" + Month.ToString( ) : Month.ToString( ) ) +            // Month
+                   ( ( Day < 10 )   ? "0" + Day.ToString( ) : Day.ToString( ) ) +                // Day
+                   ";CLIENTE;" + 
+                   AddressName.Replace( " ", "_032" ) +                                          // AddressName ! _O32 for spaces
                    ";PIVA;" +
-                   _FatturaDocument.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.IdFiscaleIVA.IdCodice; // sender fiscal id code
+                   _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.IdFiscaleIVA.IdCodice; // client fiscal id code
         }
 
         private Document OpenPDFDoc( float BottomTopMargin, float LeftRightMargin, IFileInformation Input )

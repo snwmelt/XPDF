@@ -93,32 +93,6 @@ namespace XPDF.Model.FatturaElettronica12
 
         private void ProcessFiles( String Destination )
         {
-            //Parallel.ForEach<IFileInformation>( _UpdateContainer.Items.AsEnumerable( ),
-            //new Action<IFileInformation, ParallelLoopState>( ( IFileInformation Element, ParallelLoopState state ) =>
-            //{
-            //    if ( State != EXPDFConverterState.Working || _Aborting )
-            //    {
-            //        state.Break( );
-            //    }
-            //
-            //    _UpdateContainer.IncrementProgress( );
-            //
-            //    try
-            //    {
-            //        Convert( _UpdateContainer.LastItem );
-            //    }
-            //    catch ( Exception Ex )
-            //    {
-            //        ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
-            //    }
-            //
-            //    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
-            //
-            //    if ( _UpdateContainer.Completed )
-            //        SetState( EXPDFConverterState.Available );
-            //
-            //} ) );
-
             while ( State == EXPDFConverterState.Working && !_Aborting )
             {
                 _UpdateContainer.IncrementProgress( );

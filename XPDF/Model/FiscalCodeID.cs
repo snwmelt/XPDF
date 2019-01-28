@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XPDF.Model.Enums
+namespace XPDF.Model
 {
     internal static class FiscalCodeID
     {
