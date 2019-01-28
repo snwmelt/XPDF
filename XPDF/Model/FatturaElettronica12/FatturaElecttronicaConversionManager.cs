@@ -1,9 +1,13 @@
 ﻿using DirectoryScanner.Synchronous;
+using FatturaElettronica;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Xml;
 using Walkways.Extensions.Attributes;
+using Walkways.Extensions.Strings;
 using XPDF.Model.Enums;
 using XPDF.Model.Event;
 using XPDF.Model.Event.Enums;
@@ -45,7 +49,10 @@ namespace XPDF.Model.FatturaElettronica12
             List<String> resutlt = new List<String>( );
 
             foreach ( EFileExtension FileExtension in SupportedFileExtensions )
+            {
                 resutlt.Add( FileExtension.GetDescription( ).ToLowerInvariant( ) );
+                resutlt.Add( FileExtension.GetDescription( ) );
+            }
 
             return resutlt.ToArray( );
         }
@@ -73,7 +80,7 @@ namespace XPDF.Model.FatturaElettronica12
             {
                 if ( State == EXPDFConverterState.Working && !_Aborting )
                 {
-                    _UpdateContainer.Items.Add( new FileInformation( new FileFormat( EFileExtension.XML, EFormat.Uknown, null ), new Uri( e.FullName ) ) );
+                    _UpdateContainer.Items.Add( new FileInformation( new Uri( e.FullName ) ) );
                 }
             };
 
@@ -93,14 +100,48 @@ namespace XPDF.Model.FatturaElettronica12
 
         private void ProcessFiles( String Destination )
         {
+            //Parallel.ForEach<IFileInformation>( _UpdateContainer.Items.AsEnumerable( ),
+            //new Action<IFileInformation, ParallelLoopState>( ( IFileInformation Element, ParallelLoopState state ) =>
+            //{
+            //    if ( State != EXPDFConverterState.Working || _Aborting )
+            //    {
+            //        state.Break( );
+            //    }
+            //
+            //    _UpdateContainer.IncrementProgress( );
+            //
+            //    try
+            //    {
+            //        Convert( _UpdateContainer.LastItem );
+            //    }
+            //    catch ( Exception Ex )
+            //    {
+            //        ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
+            //    }
+            //
+            //    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
+            //
+            //    if ( _UpdateContainer.Completed )
+            //        SetState( EXPDFConverterState.Available );
+            //
+            //} ) );
+
             while ( State == EXPDFConverterState.Working && !_Aborting )
             {
-                _UpdateContainer.IncrementProgress( );
-                
-
                 try
                 {
-                    IFileInformation ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
+                    _UpdateContainer.IncrementProgress( );
+
+                    IFileInformation ConvertedFileInfo;
+
+                    if ( _UpdateContainer.LastItem.FormatInformation.FileExtension != EFileExtension.XML )
+                    {
+                        ConvertedFileInfo = _FEFileConverter.Convert( TryGenerateXMLFile( _UpdateContainer.LastItem ) );
+                    }
+                    else
+                    {
+                        ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
+                    }
 
                     if ( File.Exists( Destination + "\\" + ConvertedFileInfo.FallbackPath ) )
                         File.Delete( Destination + "\\" + ConvertedFileInfo.FallbackPath );
@@ -119,6 +160,49 @@ namespace XPDF.Model.FatturaElettronica12
                 if ( _UpdateContainer.Completed )
                     SetState( EXPDFConverterState.Available );
             }
+        }
+        
+        private IFileInformation TryGenerateXMLFile( IFileInformation _FileInformation )
+        {
+            String FileText = File.ReadAllText( _FileInformation.Path.LocalPath );
+
+            if ( !FileText.Contains( "FatturaElettronicaHeader" ) && !FileText.Contains( "FatturaElettronicaBody" ) )
+                throw new InvalidOperationException( "Unsupported Format" + _FileInformation.Path );
+
+
+            int    _XMLStartIndex   = FileText.IndexOf( "FatturaElettronicaHeader" ) - 1;
+            int    _XMLEndIndex     = FileText.LastIndexOf( "FatturaElettronicaBody" ) - _XMLStartIndex + 23;
+            String _RawBoundedData  = FileText.Substring( _XMLStartIndex, _XMLEndIndex );
+            String _PossibleXMLData = XML.Conventions.Header + Conventions.Header + CleanInvalidXmlChars( _RawBoundedData ) + Conventions.Footer;
+
+            FileInformation _ResultFileInformation = new FileInformation( new FileFormat( EFileExtension.XML, EFormat.Uknown, "" ), _FileInformation.Path.LocalPath + ".xml" );
+
+            using ( XmlReader _XmlReader = XmlReader.Create( new StringReader( _PossibleXMLData ), new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true } ) )
+            {
+                Fattura _Fattura = new Fattura( );
+
+                _Fattura.ReadXml( _XmlReader );
+
+                if ( _Fattura.Validate( ).IsValid )
+                {
+                    using ( XmlWriter _XmlWriter = XmlWriter.Create( _ResultFileInformation.Path.LocalPath, new XmlWriterSettings { Indent = true } ) )
+                    {
+                        _Fattura.WriteXml( _XmlWriter );
+                    }
+                }
+            }
+            
+
+            return File.Exists( _ResultFileInformation.Path.LocalPath ) ? _ResultFileInformation : null;
+        }
+
+        public static string CleanInvalidXmlChars( String _XML )
+        {
+            // From xml spec valid chars: 
+            // #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]     
+            // any Unicode character, excluding the surrogate blocks, FFFE, and FFFF. 
+            string re = @"[^\x09\x0A\x0D\x20-\xD7FF\xE000-\xFFFD\x10000-x10FFFF]";
+            return Regex.Replace( _XML, re, "" );
         }
 
         public IEnumerable<EFormat> InputFormats
@@ -181,7 +265,11 @@ namespace XPDF.Model.FatturaElettronica12
         {
             get
             {
-                return _FEFileConverter.SupportedFileExtensions;
+                List<EFileExtension> ConverterEFileExtension = new List<EFileExtension>( _FEFileConverter.SupportedFileExtensions );
+
+                ConverterEFileExtension.Add( EFileExtension.P7M );
+
+                return ConverterEFileExtension;
             }
         }
 

@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -140,6 +141,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Enums\EFileExtension.cs" />
+    <Compile Include="Model\FatturaElettronica12\Conventions.cs" />
     <Compile Include="Model\FiscalCodeID.cs" />
     <Compile Include="Model\Enums\EFormat.cs" />
     <Compile Include="Model\Event\FileConversionUpdate.cs" />
@@ -167,6 +169,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalisedString.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\XML\Conventions.cs" />
     <Compile Include="ViewModel\DocumentConverter.cs" />
     <Compile Include="View\Controls\PathwaySelector.xaml.cs">
       <DependentUpon>PathwaySelector.xaml</DependentUpon>

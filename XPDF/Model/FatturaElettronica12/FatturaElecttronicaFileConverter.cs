@@ -90,7 +90,7 @@ namespace XPDF.Model.FatturaElettronica12
             int Day   = _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Data.Day;
             
             String FiscalCodeIDString = FiscalCodeID.ToString( _FatturaDocument.FatturaElettronicaHeader.CessionarioCommittente.DatiAnagrafici.IdFiscaleIVA.IdCodice );
-            String AddressName        = _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.Anagrafica.Denominazione;
+            String RecipientName      = TryGetParticipantName( _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.Anagrafica );
 
             return @"FATT;" +
                    _FatturaDocument.FatturaElettronicaBody[ 0 ].DatiGenerali.DatiGeneraliDocumento.Numero + // Number
@@ -100,8 +100,8 @@ namespace XPDF.Model.FatturaElettronica12
                    Year +                                                                        // Year
                    ( ( Month < 10 ) ? "0" + Month.ToString( ) : Month.ToString( ) ) +            // Month
                    ( ( Day < 10 )   ? "0" + Day.ToString( ) : Day.ToString( ) ) +                // Day
-                   ";CLIENTE;" + 
-                   AddressName.Replace( " ", "_032" ) +                                          // AddressName ! _O32 for spaces
+                   ";CLIENTE;" +
+                   RecipientName?.Replace( " ", "_032" ) +                                          // AddressName ! _O32 for spaces
                    ";PIVA;" +
                    _FatturaDocument.FatturaElettronicaHeader.CedentePrestatore.DatiAnagrafici.IdFiscaleIVA.IdCodice; // client fiscal id code
         }
@@ -266,9 +266,9 @@ namespace XPDF.Model.FatturaElettronica12
                         _PaymentInformationTable.AddCell( new Paragraph( GetNullableString( PaymentDetails[ j ].DataScadenzaPagamento ), _BodyHelvetica ) );
                         _PaymentInformationTable.AddCell( new Paragraph( GetNullableString( PaymentDetails[ j ].ImportoPagamento ), _BodyHelvetica ) );
 
-                        if ( !String.IsNullOrEmpty( PaymentDetails[ i ].IstitutoFinanziario ) )
+                        if ( !String.IsNullOrEmpty( PaymentDetails[ j ].IstitutoFinanziario ) )
                         {
-                            _PaymentInformationTable.AddCell( GetInstitutionSpanCell( PaymentDetails[ i ] ) );
+                            _PaymentInformationTable.AddCell( GetInstitutionSpanCell( PaymentDetails[ j ] ) );
                         }
                     }
                 }
@@ -805,7 +805,7 @@ namespace XPDF.Model.FatturaElettronica12
 
         private void InsertRecieverHeaderData( PdfPTable _PDFRecieverTable, CessionarioCommittente _FatturaRecieverHeader, String RecipientCode, String PECRecipient )
         {
-            _PDFRecieverTable.AddCell( new Phrase( _FatturaRecieverHeader.DatiAnagrafici.Anagrafica.Denominazione, _TitleHelvetica ) ); // First address line
+            _PDFRecieverTable.AddCell( new Phrase( TryGetParticipantName( _FatturaRecieverHeader.DatiAnagrafici.Anagrafica ), _TitleHelvetica ) ); // First address line, Reciever Name
             _PDFRecieverTable.AddCell( new Phrase( _FatturaRecieverHeader.Sede.Indirizzo + " " + _FatturaRecieverHeader.Sede?.NumeroCivico, _BodyHelvetica )  ); // Second address line
             _PDFRecieverTable.AddCell( new Phrase( _FatturaRecieverHeader.Sede.CAP + " " + _FatturaRecieverHeader.Sede.Comune + " (" + _FatturaRecieverHeader.Sede.Provincia + ") - " + _FatturaRecieverHeader.Sede.Nazione, _BodyHelvetica ) ); // Third address line
             _PDFRecieverTable.AddCell( new Phrase( "P.IVA: " + _FatturaRecieverHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaRecieverHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice, _BodyHelvetica ) ); // Fiscal ID Code + Fiscal ID
@@ -821,7 +821,7 @@ namespace XPDF.Model.FatturaElettronica12
 
         private void InsertSenderHeaderData( PdfPTable _PDFSenderTable, CedentePrestatore _FatturaSenderHeader )
         {
-            _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.DatiAnagrafici.Anagrafica?.Denominazione, _TitleHelvetica ) ); // First address line
+            _PDFSenderTable.AddCell( new Phrase( TryGetParticipantName( _FatturaSenderHeader.DatiAnagrafici.Anagrafica ), _TitleHelvetica ) ); // First address line, Sender Name
             _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.Sede.Indirizzo + " " + _FatturaSenderHeader.Sede.NumeroCivico, _BodyHelvetica ) ); // Second address line
             _PDFSenderTable.AddCell( new Phrase( _FatturaSenderHeader.Sede.CAP + " " + _FatturaSenderHeader.Sede.Comune + " (" + _FatturaSenderHeader.Sede.Provincia + ") - " + _FatturaSenderHeader.Sede.Nazione, _BodyHelvetica ) ); // Third address line
             _PDFSenderTable.AddCell( new Phrase( "P.IVA: " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdPaese + " " + _FatturaSenderHeader.DatiAnagrafici.IdFiscaleIVA.IdCodice, _BodyHelvetica ) ); // Fiscal ID Code + Fiscal ID
@@ -833,6 +833,20 @@ namespace XPDF.Model.FatturaElettronica12
             TryInsertSenderContactData( _PDFSenderTable, LocalisedString.Telephone, _FatturaSenderHeader.Contatti.Telefono, ref HasContactHeader );
             TryInsertSenderContactData( _PDFSenderTable, LocalisedString.Fax,       _FatturaSenderHeader.Contatti.Fax,      ref HasContactHeader );
             TryInsertSenderContactData( _PDFSenderTable, LocalisedString.Email,     _FatturaSenderHeader.Contatti.Email,    ref HasContactHeader );
+        }
+
+        private String TryGetParticipantName( Anagrafica _PersonalData )
+        {
+            if ( !String.IsNullOrEmpty( _PersonalData.Denominazione ) )
+                return _PersonalData.Denominazione;
+
+            if ( !String.IsNullOrEmpty( _PersonalData.Cognome ) && !String.IsNullOrEmpty( _PersonalData.Nome ) )
+                return _PersonalData.Cognome + " " + _PersonalData.Nome;
+
+            if ( !String.IsNullOrEmpty( _PersonalData.CognomeNome ) )
+                return _PersonalData.CognomeNome;
+
+            return "";
         }
 
         private void TryInsertSenderContactData( PdfPTable _PDFSenderTable, String _Prefix, String _Content, ref Boolean _HasContactHeader )

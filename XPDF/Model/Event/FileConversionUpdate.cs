@@ -37,6 +37,8 @@ namespace XPDF.Model.Event
             lock ( _ThreadLock )
             {
                 _CurrentIndex = 0;
+                LastItem      = null;
+                NextItem      = null;
             }
         }
 
