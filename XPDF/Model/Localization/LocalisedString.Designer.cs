@@ -70,6 +70,15 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Administrater.
+        /// </summary>
+        internal static string Administrater {
+            get {
+                return ResourceManager.GetString("Administrater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
         internal static string Amount {
@@ -147,6 +156,15 @@ namespace XPDF.Model.Localization {
         internal static string Contacts {
             get {
                 return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contributed.
+        /// </summary>
+        internal static string Contributed {
+            get {
+                return ResourceManager.GetString("Contributed", resourceCulture);
             }
         }
         
@@ -340,11 +358,11 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Natural.
+        ///   Looks up a localized string similar to Nature.
         /// </summary>
-        internal static string Natural {
+        internal static string Nature {
             get {
-                return ResourceManager.GetString("Natural", resourceCulture);
+                return ResourceManager.GetString("Nature", resourceCulture);
             }
         }
         
@@ -385,6 +403,24 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pension Fund.
+        /// </summary>
+        internal static string PensionFund {
+            get {
+                return ResourceManager.GetString("PensionFund", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pension Fund Data.
+        /// </summary>
+        internal static string PensionFundData {
+            get {
+                return ResourceManager.GetString("PensionFundData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         internal static string Price {
@@ -403,11 +439,29 @@ namespace XPDF.Model.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rate.
+        /// </summary>
+        internal static string Rate {
+            get {
+                return ResourceManager.GetString("Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recipient.
         /// </summary>
         internal static string Reciever {
             get {
                 return ResourceManager.GetString("Reciever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ref..
+        /// </summary>
+        internal static string Ref {
+            get {
+                return ResourceManager.GetString("Ref", resourceCulture);
             }
         }
         
@@ -426,6 +480,15 @@ namespace XPDF.Model.Localization {
         internal static string ReferenceType {
             get {
                 return ResourceManager.GetString("ReferenceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retained.
+        /// </summary>
+        internal static string Retained {
+            get {
+                return ResourceManager.GetString("Retained", resourceCulture);
             }
         }
         
@@ -498,6 +561,15 @@ namespace XPDF.Model.Localization {
         internal static string Taxable {
             get {
                 return ResourceManager.GetString("Taxable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax Rate.
+        /// </summary>
+        internal static string TaxRate {
+            get {
+                return ResourceManager.GetString("TaxRate", resourceCulture);
             }
         }
         

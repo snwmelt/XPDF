@@ -119,8 +119,8 @@ namespace XPDF.Model.FatturaElettronica12
 
         private void AddInvoiceBodyToPDFPage( FatturaElettronicaBody _FatturaElettronicaBody, Document _Document, int _PageNumber )
         {
-            _Document.Add( AddGeneralDocumentData( _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento ) );
-            
+            AddGeneralDocumentData( _FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento, _Document );
+
             AddExternalDocumentReferences( _FatturaElettronicaBody.DatiGenerali, _Document );
             
             List<DettaglioLinee> _InvoiceDetails         = _FatturaElettronicaBody.DatiBeniServizi.DettaglioLinee;
@@ -258,7 +258,7 @@ namespace XPDF.Model.FatturaElettronica12
                 {
                     for ( int j = 0; j < PaymentDetails.Count; j++ )
                     {
-                        _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
+                        _PaymentInformationTable.AddCell( new Paragraph( GetNullableString( PaymentDetails[ j ].Beneficiario ), _BodyHelvetica ) );
                         _PaymentInformationTable.AddCell( new Paragraph( PaymentConditionsCodeToString( PaymentInformationList[ i ].CondizioniPagamento ), _BodyHelvetica ) );
                         _PaymentInformationTable.AddCell( new Paragraph( PaymentModeCodeToString( PaymentDetails[ j ].ModalitaPagamento ), _BodyHelvetica ) );
                         _PaymentInformationTable.AddCell( new Paragraph( " ", _BodyHelvetica ) );
@@ -367,9 +367,19 @@ namespace XPDF.Model.FatturaElettronica12
                 LocalisedString.Taxable,
                 LocalisedString.VAT + "%",
                 LocalisedString.Tax,
-                LocalisedString.Natural,
+                LocalisedString.Nature,
                 LocalisedString.NormativeReference,
                 LocalisedString.Collectable
+            } );
+
+            _GeneralSummeryTable.SetWidths( new float[]
+            {
+                1f, // Taxable
+                1f, // VAT %
+                1f, // Tax
+                1f, // Nature
+                2f, // NormativeReference
+                1f  // Collectable
             } );
 
 
@@ -414,6 +424,14 @@ namespace XPDF.Model.FatturaElettronica12
 
             return " ";
         }
+        private String TipoCassaCodeToString( String Code )
+        {
+            if ( String.IsNullOrEmpty( Code ) )
+                return " ";
+
+            return CodiceToNome( new TipoCassa( ), Code );
+        }
+
 
         private String NaturaCodeToString( String Code )
         {
@@ -675,7 +693,7 @@ namespace XPDF.Model.FatturaElettronica12
             return "";
         }
 
-        private IElement AddGeneralDocumentData( DatiGeneraliDocumento GeneralDocumentData )
+        private void AddGeneralDocumentData( DatiGeneraliDocumento GeneralDocumentData, Document _Document )
         {
             PdfPTable _GeneralDocumentDataTable = CreateBodyPdfPTable( new String[]
             {
@@ -713,9 +731,58 @@ namespace XPDF.Model.FatturaElettronica12
                 _GeneralDocumentCauseTable.AddCell( new Paragraph( Cause, _BodyHelvetica ) );
             }
 
-            return GenerateBodyTable( new Paragraph( LocalisedString.GeneralData, _HeaderHelvetica ),
-                                      new PdfPCell( _GeneralDocumentDataTable ),
-                                      new PdfPCell( _GeneralDocumentCauseTable ) );
+            if ( !String.IsNullOrEmpty( GeneralDocumentData.Art73 ) )
+            {
+                _GeneralDocumentCauseTable.AddCell( new Paragraph( Conventions.Art73IssueNotice, _BodyHelvetica ) );
+            }
+            
+
+            // Add General Document Data tables
+
+            _Document.Add( GenerateBodyTable( new Paragraph( LocalisedString.GeneralData, _HeaderHelvetica ),
+                                              new PdfPCell( _GeneralDocumentDataTable ),
+                                              new PdfPCell( _GeneralDocumentCauseTable ) ) );
+
+            // Handle Pension Data Subsection
+
+            if ( GeneralDocumentData.DatiCassaPrevidenziale != null && GeneralDocumentData.DatiCassaPrevidenziale.Count > 0 )
+                AddPensionFundDataTable( GeneralDocumentData.DatiCassaPrevidenziale, _Document );
+        }
+
+        private void AddPensionFundDataTable( List<DatiCassaPrevidenziale> PensionFundDataList, Document _Document )
+        {
+            PdfPTable _PensionFundDataTableHeader = CreateBodyPdfPTable( new String[]
+            {
+                LocalisedString.PensionFund
+            }, Element.ALIGN_LEFT );
+
+            PdfPTable _PensionFundDataTable = CreateBodyPdfPTable( new String[] 
+            {
+                LocalisedString.Rate,
+                LocalisedString.Amount + " " + LocalisedString.Contributed,
+                LocalisedString.Taxable + " " + LocalisedString.Amount,
+                LocalisedString.TaxRate,
+                LocalisedString.Retained,
+                LocalisedString.Nature,
+                LocalisedString.Ref + " " + LocalisedString.Administrater
+            } );
+
+            for ( int i = 0; i < PensionFundDataList.Count; i++ )
+            {
+                _PensionFundDataTableHeader.AddCell( new Paragraph( TipoCassaCodeToString( PensionFundDataList[ i ].TipoCassa ), _BodyHelvetica ) );
+
+                _PensionFundDataTable.AddCell( new Paragraph( GetNullableString( PensionFundDataList[ i ].AlCassa ), _BodyHelvetica ) ); // Rate
+                _PensionFundDataTable.AddCell( new Paragraph( GetNullableString( PensionFundDataList[ i ].ImportoContributoCassa ), _BodyHelvetica ) ); // Amount Contributed
+                _PensionFundDataTable.AddCell( new Paragraph( GetNullableString( " " ), _BodyHelvetica ) ); // Taxable Amount -?> PensionFundDataList[ i ].ImponibileCassa
+                _PensionFundDataTable.AddCell( new Paragraph( GetNullableString( PensionFundDataList[ i ].AliquotaIVA ), _BodyHelvetica ) ); // Tax Rate 
+                _PensionFundDataTable.AddCell( new Paragraph( GetNullableString( PensionFundDataList[ i ].Ritenuta ), _BodyHelvetica ) ); // Retained
+                _PensionFundDataTable.AddCell( new Paragraph( NaturaCodeToString( PensionFundDataList[ i ].Natura ), _BodyHelvetica ) ); // Nature
+                _PensionFundDataTable.AddCell( new Paragraph( GetNullableString( PensionFundDataList[ i ].RiferimentoAmministrazione ), _BodyHelvetica ) ); // Ref Administrater
+            }
+
+            _Document.Add( GenerateBodyTable ( new Paragraph( LocalisedString.PensionFundData, _HeaderHelvetica ),
+                                               new PdfPCell( _PensionFundDataTableHeader ),
+                                               new PdfPCell( _PensionFundDataTable ) ) );
         }
 
         private PdfPTable GenerateBodyTable( Phrase _Header, params PdfPCell[] _PDFPCells )
@@ -730,7 +797,8 @@ namespace XPDF.Model.FatturaElettronica12
             
             for ( int i = 0; i < _PDFPCells.Length; i++ )
             {
-                _Container.AddCell( _PDFPCells[ i ] );
+                if ( _PDFPCells[ i ] != null )
+                    _Container.AddCell( _PDFPCells[ i ] );
             }
 
             return _Container;

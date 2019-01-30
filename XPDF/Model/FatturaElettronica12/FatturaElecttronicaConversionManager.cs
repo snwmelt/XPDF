@@ -170,8 +170,8 @@ namespace XPDF.Model.FatturaElettronica12
                 throw new InvalidOperationException( "Unsupported Format" + _FileInformation.Path );
 
 
-            int    _XMLStartIndex   = FileText.IndexOf( "FatturaElettronicaHeader" ) - 1;
-            int    _XMLEndIndex     = FileText.LastIndexOf( "FatturaElettronicaBody" ) - _XMLStartIndex + 23;
+            int    _XMLStartIndex   = FileText.IndexOf( Conventions.HeaderGaurd ) - 1;
+            int    _XMLEndIndex     = FileText.LastIndexOf( Conventions.BodyGaurd ) - _XMLStartIndex + Conventions.BodyGaurd.Length + 1;
             String _RawBoundedData  = FileText.Substring( _XMLStartIndex, _XMLEndIndex );
             String _PossibleXMLData = XML.Conventions.Header + Conventions.Header + CleanInvalidXmlChars( _RawBoundedData ) + Conventions.Footer;
 
@@ -180,15 +180,26 @@ namespace XPDF.Model.FatturaElettronica12
             using ( XmlReader _XmlReader = XmlReader.Create( new StringReader( _PossibleXMLData ), new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true } ) )
             {
                 Fattura _Fattura = new Fattura( );
-
-                _Fattura.ReadXml( _XmlReader );
-
-                if ( _Fattura.Validate( ).IsValid )
+            
+                try
                 {
-                    using ( XmlWriter _XmlWriter = XmlWriter.Create( _ResultFileInformation.Path.LocalPath, new XmlWriterSettings { Indent = true } ) )
+                    _Fattura.ReadXml( _XmlReader );
+
+                    if ( _Fattura.Validate( ).IsValid )
                     {
-                        _Fattura.WriteXml( _XmlWriter );
+                        using ( XmlWriter _XmlWriter = XmlWriter.Create( _ResultFileInformation.Path.LocalPath, new XmlWriterSettings { Indent = true } ) )
+                        {
+                            _Fattura.WriteXml( _XmlWriter );
+                        }
                     }
+                    else
+                    {
+                        throw new ArgumentException( "Invalid XMLPA FileContent " );
+                    }
+                }
+                catch
+                {
+                    File.WriteAllText( _ResultFileInformation.Path.LocalPath, _PossibleXMLData );
                 }
             }
             

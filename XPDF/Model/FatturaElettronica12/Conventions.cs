@@ -4,6 +4,14 @@ namespace XPDF.Model.FatturaElettronica12
 {
     internal static class Conventions
     {
+        public static String BodyGaurd
+        {
+            get
+            {
+                return "FatturaElettronicaBody";
+            }
+        }
+
         public static String Header
         {
             get
@@ -12,11 +20,27 @@ namespace XPDF.Model.FatturaElettronica12
             }
         }
 
+        public static String HeaderGaurd
+        {
+            get
+            {
+                return "FatturaElettronicaHeader";
+            }
+        }
+
         public static String Footer
         {
             get
             {
                 return @"</p:FatturaElettronica>";
+            }
+        }
+
+        public static String Art73IssueNotice
+        {
+            get
+            {
+                return @"Documento emesso secondo modalità e termini stabiliti con DM ai sensi del’’art. 73 del DPR 633/72.";
             }
         }
     }

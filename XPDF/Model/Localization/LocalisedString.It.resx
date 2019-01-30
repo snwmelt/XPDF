@@ -237,7 +237,7 @@
   <data name="Mode" xml:space="preserve">
     <value>Modalità</value>
   </data>
-  <data name="Natural" xml:space="preserve">
+  <data name="Nature" xml:space="preserve">
     <value>Natura</value>
   </data>
   <data name="NormativeReference" xml:space="preserve">
@@ -290,5 +290,29 @@
   </data>
   <data name="Total" xml:space="preserve">
     <value>Totale</value>
+  </data>
+  <data name="Administrater" xml:space="preserve">
+    <value>Amministrazione</value>
+  </data>
+  <data name="Contributed" xml:space="preserve">
+    <value>Contributo</value>
+  </data>
+  <data name="PensionFund" xml:space="preserve">
+    <value>Cassa previdenziale</value>
+  </data>
+  <data name="PensionFundData" xml:space="preserve">
+    <value>Dati cassa previdenziale</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Aliquota</value>
+  </data>
+  <data name="Ref" xml:space="preserve">
+    <value>Rif.</value>
+  </data>
+  <data name="Retained" xml:space="preserve">
+    <value>Ritenuta</value>
+  </data>
+  <data name="TaxRate" xml:space="preserve">
+    <value>Aliquota IVA</value>
   </data>
 </root>
