@@ -13,6 +13,7 @@ using XPDF.Model.Event;
 using XPDF.Model.Event.Enums;
 using XPDF.Model.Event.Interface;
 using XPDF.Model.Interface;
+using XPDF.Properties;
 
 namespace XPDF.Model.FatturaElettronica12
 {
@@ -50,7 +51,9 @@ namespace XPDF.Model.FatturaElettronica12
 
             foreach ( EFileExtension FileExtension in SupportedFileExtensions )
             {
-                resutlt.Add( FileExtension.GetDescription( ).ToLowerInvariant( ) );
+                if ( FileExtension == EFileExtension.P7M && !Settings.Default.EnableP7M )
+                    continue;
+                
                 resutlt.Add( FileExtension.GetDescription( ) );
             }
 
@@ -72,8 +75,10 @@ namespace XPDF.Model.FatturaElettronica12
 
             _DirectoryScanner = new Scanner( PathToSourceDirectory )
             {
-                ScanMode  = DirectoryScanner.Common.ScanMode.MatchExtension,
-                SearchFor = GetExtensionStrings( )
+                ScanMode     = DirectoryScanner.Common.ScanMode.MatchExtension,
+                SearchFor    = GetExtensionStrings( ),
+                IgnoreCase   = true,
+                IgnoreLocale = true
             };
 
             _DirectoryScanner.FileFoundEvent += ( s, e ) => 
@@ -132,21 +137,47 @@ namespace XPDF.Model.FatturaElettronica12
                 {
                     _UpdateContainer.IncrementProgress( );
 
-                    IFileInformation ConvertedFileInfo;
+                    IFileInformation ConvertedFileInfo = null;
 
                     if ( _UpdateContainer.LastItem.FormatInformation.FileExtension != EFileExtension.XML )
                     {
-                        ConvertedFileInfo = _FEFileConverter.Convert( TryGenerateXMLFile( _UpdateContainer.LastItem ) );
+                        IFileInformation _AutoXML = TryGenerateXMLFile( _UpdateContainer.LastItem );
+
+                        ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( 1 );
+
+                        try
+                        {
+                            if ( Settings.Default.EnablePDF )
+                            {
+                                ConvertedFileInfo = _FEFileConverter.Convert( _AutoXML );
+                                ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( 1 );
+                            }
+                        }
+                        finally
+                        {
+                            if ( !Settings.Default.EnableXML )
+                            {
+                                File.Delete( _AutoXML.Path.LocalPath );
+                                ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( -1 );
+                            }
+                        }
                     }
                     else
                     {
-                        ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
+                        if ( Settings.Default.EnablePDF )
+                        {
+                            ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
+                            ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( 1 );
+                        }
                     }
 
-                    if ( File.Exists( Destination + "\\" + ConvertedFileInfo.FallbackPath ) )
-                        File.Delete( Destination + "\\" + ConvertedFileInfo.FallbackPath );
+                    if ( !Settings.Default.InheritFileName && ConvertedFileInfo != null )
+                    {
+                        if ( File.Exists( Destination + "\\" + ConvertedFileInfo.FallbackPath ) )
+                            File.Delete( Destination + "\\" + ConvertedFileInfo.FallbackPath );
 
-                    File.Move( ConvertedFileInfo.Path.LocalPath, Destination + "\\" + ConvertedFileInfo.FallbackPath );
+                        File.Move( ConvertedFileInfo.Path.LocalPath, Destination + "\\" + ConvertedFileInfo.FallbackPath );
+                    }
                 }
                 catch ( Exception Ex )
                 {

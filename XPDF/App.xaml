@@ -10,6 +10,7 @@
         <SolidColorBrush x:Key="TextBoxBorderBrushSolidColorBrush"  Color="Gray"/>
         <SolidColorBrush x:Key="ListBoxBorderBrushSolidColorBrush"  Color="Gray"/>
 
+        
         <Style x:Name="MinimalButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrushSolidColorBrush}"/>
@@ -47,6 +48,18 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" Value="0.375"/>
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="true">
+                    <Setter Property="Opacity" Value="0.75"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Static ToolBar.TextBoxStyleKey}}">

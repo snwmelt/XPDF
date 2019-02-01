@@ -22,7 +22,7 @@ namespace XPDF.View.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class LocalisedUI {
+    public class LocalisedUI {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace XPDF.View.Localization {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("XPDF.View.Localization.LocalisedUI", typeof(LocalisedUI).Assembly);
@@ -51,7 +51,7 @@ namespace XPDF.View.Localization {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,18 @@ namespace XPDF.View.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Cancel {
+        public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
@@ -72,7 +81,7 @@ namespace XPDF.View.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Convert.
         /// </summary>
-        internal static string Convert {
+        public static string Convert {
             get {
                 return ResourceManager.GetString("Convert", resourceCulture);
             }
@@ -81,34 +90,106 @@ namespace XPDF.View.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Destination.
         /// </summary>
-        internal static string Destination {
+        public static string Destination {
             get {
                 return ResourceManager.GetString("Destination", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        public static string Donate {
+            get {
+                return ResourceManager.GetString("Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable.
+        /// </summary>
+        public static string Enable {
+            get {
+                return ResourceManager.GetString("Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Select A Folder.
         /// </summary>
-        internal static string FolderBrowserDescription {
+        public static string FolderBrowserDescription {
             get {
                 return ResourceManager.GetString("FolderBrowserDescription", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Files Converted.
+        /// </summary>
+        public static string PConversionTotal {
+            get {
+                return ResourceManager.GetString("PConversionTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inherit File Name.
+        /// </summary>
+        public static string PInheritFileName {
+            get {
+                return ResourceManager.GetString("PInheritFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember Source and Destination.
+        /// </summary>
+        public static string PRememberDirectories {
+            get {
+                return ResourceManager.GetString("PRememberDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Printing.
+        /// </summary>
+        public static string Printing {
+            get {
+                return ResourceManager.GetString("Printing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Default Source and Destination.
+        /// </summary>
+        public static string PUseDefaultDirectories {
+            get {
+                return ResourceManager.GetString("PUseDefaultDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        internal static string Search {
+        public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
-        internal static string Source {
+        public static string Source {
             get {
                 return ResourceManager.GetString("Source", resourceCulture);
             }
@@ -117,7 +198,7 @@ namespace XPDF.View.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Type Path Here.
         /// </summary>
-        internal static string TypePathHere {
+        public static string TypePathHere {
             get {
                 return ResourceManager.GetString("TypePathHere", resourceCulture);
             }

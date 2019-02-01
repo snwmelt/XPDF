@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>XPDF</RootNamespace>
     <AssemblyName>XPDF</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -26,10 +26,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>12</ApplicationRevision>
-    <ApplicationVersion>2.5.1.%2a</ApplicationVersion>
     <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>2.6.1.%2a</ApplicationVersion>
+    <ApplicationVersion>3.10.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -108,6 +106,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -126,11 +125,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\Controls\PathwaySelector.xaml">
+    <Compile Include="Settings.cs" />
+    <Compile Include="ViewModel\AboutViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\Controls\LabeledCheckboxUserControl.xaml.cs">
+      <DependentUpon>LabeledCheckboxUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsPageView.xaml.cs">
+      <DependentUpon>SettingsPageView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AboutPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DocumentConverter.xaml">
+    <Page Include="View\Controls\LabeledCheckboxUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\PathwaySelectorUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\UXSelectorUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DocumentConverterPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,12 +192,22 @@
       <DependentUpon>LocalisedString.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\XML\Conventions.cs" />
-    <Compile Include="ViewModel\DocumentConverter.cs" />
-    <Compile Include="View\Controls\PathwaySelector.xaml.cs">
-      <DependentUpon>PathwaySelector.xaml</DependentUpon>
+    <Compile Include="ViewModel\DocumentConverterViewModel.cs" />
+    <Compile Include="ViewModel\Enums\EUIContent.cs" />
+    <Compile Include="ViewModel\LocalizationViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Nav.cs" />
+    <Compile Include="View\AboutPageView.xaml.cs">
+      <DependentUpon>AboutPageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DocumentConverter.xaml.cs">
-      <DependentUpon>DocumentConverter.xaml</DependentUpon>
+    <Compile Include="View\Controls\PathwaySelectorUserControl.xaml.cs">
+      <DependentUpon>PathwaySelectorUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\UXSelectorUserControl.xaml.cs">
+      <DependentUpon>UXSelectorUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DocumentConverterPageView.xaml.cs">
+      <DependentUpon>DocumentConverterPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Localization\LocalisedUI.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -188,6 +218,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\SettingsPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -214,7 +248,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Localization\LocalisedUI.It.resx" />
     <EmbeddedResource Include="View\Localization\LocalisedUI.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalisedUI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
@@ -241,7 +275,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="XPDF_TemporaryKey.pfx" />

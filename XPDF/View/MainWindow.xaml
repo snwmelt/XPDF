@@ -3,9 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:XPDF.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:vcs="clr-namespace:XPDF.View.Controls"
+        xmlns:vm="clr-namespace:XPDF.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow"
-        SizeToContent="WidthAndHeight" Height="506.069" Width="853.922">
-    <local:DocumentConverter/>
+        SizeToContent="WidthAndHeight" MinHeight="327" MaxHeight="480.331125" MinWidth="853.922">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <vcs:UXSelector Grid.Row="0" Margin="0,0,0,15" NavAboutPageCommand="{Binding Path=DisplayAboutCommand}"
+                                                       NavHomePageCommand="{Binding Path=DisplayConvertCommand}"
+                                                       NavSettingsCommand="{Binding Path=DisplaySettingsCommand}"
+                                                       SelectEngCommand="{Binding Path=SelectEngCommand}" 
+                                                       SelectItaCommand="{Binding Path=SelectItaCommand}"/>
+
+        <Frame  Grid.Row="1" x:Name="MainWindowContentFrame" Content="{Binding Path=CurrentView, Mode=OneTime}" NavigationUIVisibility="Hidden" IsTabStop="False">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding Path=InitializeUICommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <Frame.Template>
+                <ControlTemplate TargetType="Frame">
+                    <DockPanel Margin="2">
+                        <ContentPresenter />
+                    </DockPanel>
+                </ControlTemplate>
+            </Frame.Template>
+            
+        </Frame>
+        
+    </Grid>
 </Window>

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -126,11 +129,35 @@
   <data name="Destination" xml:space="preserve">
     <value>Destination</value>
   </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
   <data name="FolderBrowserDescription" xml:space="preserve">
     <value>Please Select A Folder</value>
   </data>
+  <data name="PConversionTotal" xml:space="preserve">
+    <value>Total Files Converted</value>
+  </data>
+  <data name="PInheritFileName" xml:space="preserve">
+    <value>Inherit File Name</value>
+  </data>
+  <data name="PRememberDirectories" xml:space="preserve">
+    <value>Remember Source and Destination</value>
+  </data>
+  <data name="Printing" xml:space="preserve">
+    <value>Printing</value>
+  </data>
+  <data name="PUseDefaultDirectories" xml:space="preserve">
+    <value>Use Default Source and Destination</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Source" xml:space="preserve">
     <value>Source</value>

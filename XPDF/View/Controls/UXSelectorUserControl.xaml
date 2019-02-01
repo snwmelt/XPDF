@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="XPDF.View.Controls.UXSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:XPDF.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="ElementParent">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="ENG" Height="35" Width="35" Margin="2,0" Command="{Binding ElementName=ElementParent, Path=SelectEngCommand}"/>
+            <Button Content="ITA" Height="35" Width="35" Command="{Binding ElementName=ElementParent, Path=SelectItaCommand}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="{Binding About,    Source={x:Static vm:LocalizationViewModel.Instance}}" Height="35" Width="120"              Command="{Binding ElementName=ElementParent, Path=NavAboutPageCommand}"/>
+            <Button Content="{Binding Convert,  Source={x:Static vm:LocalizationViewModel.Instance}}" Height="35" Width="120" Margin="2,0" Command="{Binding ElementName=ElementParent, Path=NavHomePageCommand}"/>
+            <Button Content="{Binding Settings, Source={x:Static vm:LocalizationViewModel.Instance}}" Height="35" Width="120"              Command="{Binding ElementName=ElementParent, Path=NavSettingsCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
