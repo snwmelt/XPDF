@@ -1,0 +1,8 @@
+<update>
+
+	<installer product="Acrobat" 
+				URL="http://update.adobe.com/pub/adobe/acrobat/win/5.x/ac500enu.xml" 
+				build="2001112100" date="11-21-2001" version="5.0"
+	/>
+
+</update>

@@ -1,0 +1,202 @@
+%!PS-Adobe-3.0
+%%BeginProlog
+/bd {bind def} bind def
+/fsd {findfont exch scalefont def} bd
+/sms {setfont moveto show} bd
+/ms {moveto show} bd
+systemdict /pdfmark known not
+{userdict /pdfmark systemdict /cleartomark get put } if
+%%EndProlog
+
+%%BeginSetup
+
+% OPEN INFO
+[	/PageMode /UseOutlines 
+	/Page 2 /View [/XYZ null null null] 
+	/DOCVIEW 
+pdfmark
+
+% CATALOG INFO
+ [	/Title (My Test Document) 
+	/Author (John Doe) 
+	/Subject (pdfmark 2.0)
+	/Keywords (pdfmark, example, test) 
+	/Creator (Hand Programmed)
+	/ModificationDate (D:19940912205731)
+	/MyKey (My private information)
+	/DOCINFO 
+pdfmark
+
+% CROP ALL PAGES
+[	/CropBox [54 403 558 720] 
+	/PAGES 
+pdfmark
+
+/DrawBorder 
+	{58 407 moveto 554 407 lineto 554 716 lineto
+	58 716 lineto closepath stroke
+} bd
+
+/F1 10 /Helvetica fsd
+/F2 10 /Helvetica-Oblique fsd
+/F3 10 /Helvetica-Bold fsd
+/F4 12 /Helvetica-Bold fsd
+
+%%EndSetup
+
+%%Page: 1 1
+DrawBorder
+(This is Page 1) 75 690 F4 sms
+(Below is a closed, default note created using pdfmark:) 75 670 F1 sms
+(Below is an open note with a custom color and label:) 75 570 F1 sms
+
+% SIMPLE NOTE
+[
+/Rect [ 75 586 456 663 ]
+/Contents (This is an example of a note. You can type text directly into a note or copy text from the clipboard.)
+/ANN pdfmark
+
+% FANCY NOTE
+[	/Rect [ 75 425 450 563 ]
+	/Open true
+	/Title (John Doe)
+	/Contents (This is an example of a note. \rHere is some text after a forced line 
+break. When there isn't a CR inserted into the text string, the text flows to the size of the note window.)
+	/Color [1 0 0]
+	/Border [0 0 1]
+	/ANN
+pdfmark
+
+showpage
+
+%%Page: 2 2
+DrawBorder
+(This is Page 2) 75 690 F4 sms
+(Click here to go to page 3.) 75 660 F2 sms
+(Click here to go to page 3.) 75 560 F2 sms
+
+% Create text for the article "Now is the Time"
+(Now is the Time \(Article\)) 230 690 F4 sms
+(Now is the time for all good men to come to the aid of their country.) 230 670 F1 sms
+(Now is the time for all good men to come to the aid of their country.) 230 655 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 640 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 625 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 610 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 595 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 580 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 565 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 550 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 535 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 520 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 505 ms 
+
+
+% SIMPLE LINK
+[	/Rect [ 70 650 210 675 ] 
+	/Page 3
+	/View [ /XYZ -5 797 1.5] 
+	/LNK 
+pdfmark
+
+% FANCY LINK
+[	/Rect [ 70 550 210 575 ] 
+	/Border [ 0 0 2 [ 3 ] ] 
+	/Color [0 1 0]
+	/Page /Next 
+	/View [ /XYZ -5 797 1.5] 
+	/LNK 
+pdfmark
+
+showpage
+
+%%Page: 3 3
+
+% CROP THIS PAGE
+[/CropBox [0 0 612 792] /PAGE pdfmark
+
+(This is Page 3) 75 690 F4 sms
+(Click here to go to page 1.) 75 660 F2 sms
+(Click here to open test.doc.) 75 610 F2 sms
+
+% Continue text for the article "Now is the Time"
+(Now is the Time continued...) 230 690 F2 sms
+(Now is the time for all good men to come to the aid of their country.) 230 670 F1 sms
+(Now is the time for all good men to come to the aid of their country.) 230 655 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 640 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 625 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 610 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 595 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 580 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 565 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 550 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 535 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 520 ms 
+(Now is the time for all good men to come to the aid of their country.) 230 505 ms 
+
+
+% LINK
+[	/Rect [ 70 650 210 675 ] 
+	/Border [ 16 16 1 ]  
+	/Color [1 0 0]
+	/Page 1 
+	/View [ /FitH 5] 
+	/LNK 
+pdfmark
+
+% LINK THAT LAUNCHES ANOTHER FILE
+[	/Rect [ 70 600 210 625 ] 
+	/Border [ 16 16 1 ]  
+	/Color [0 0 1]
+	/Action /Launch
+	/File (test.doc)
+	/LNK 
+pdfmark
+
+% ARTICLE THREAD
+ [	/Title (Now is the Time)
+	/Author (John Doe)
+	/Subject (Coming to the aid of your country)
+	/Keywords (Time, Country, Aid)
+	/Rect [ 225 500 535 705 ] 
+	/Page 2
+	/ARTICLE 
+pdfmark
+
+[	/Title (Now is the Time)
+	/Rect [ 225 500 535 705 ] 
+	/Page 3
+	/ARTICLE
+pdfmark
+
+% PASSTHROUGH POSTSCRIPT
+[	/DataSource (0 0 moveto 100 700 lineto stroke) 
+	/PS 
+pdfmark
+showpage
+
+% BOOKMARKS
+[/Count 2 /Page 1 /View [/XYZ 44 730 1.0] /Title (Open Actions) /OUT pdfmark
+	[/Action /Launch /File (test.doc) /Title (Open test.doc) /OUT pdfmark
+	[/Action /GoToR /File (test.pdf) /Page 2 /View [/FitR 30 648 209 761] 
+		/Title (Open test.pdf on page 2) /OUT pdfmark
+
+[/Count 2 /Page 2 /View [/XYZ 44 730 1.0] /Title (Fixed Zoom) /OUT pdfmark
+[/Page 2 /View [/XYZ 44 730 2.0] /Title (200% Magnification) /OUT pdfmark
+	[/Count 1 /Page 2 /View [/XYZ 44 730 4.0] /Title (400% Magnification) /OUT 
+pdfmark
+	[/Page 2 /View [/XYZ 44 730 5.23] /Title (523% Magnification) /OUT pdfmark
+
+[/Count 3 /Page 1 /View [/XYZ 44 730 1.0] /Title (Table of Contents #1) /OUT pdfmark
+	[/Page 1 /View [/XYZ 44 730 1.0] /Title (Page 1 - 100%) /OUT pdfmark
+	[/Page 2 /View [/XYZ 44 730 2.25] /Title (Page 2 - 225%) /OUT pdfmark
+	[/Page 3 /View [/Fit] /Title (Page 3 - Fit Page) /OUT pdfmark
+
+[/Count -3 /Page 1 /View [/XYZ 44 730 1.0] /Title (Table of Contents #2) /OUT pdfmark
+	[/Page 1 /View [/XYZ null null 0] /Title (Page 1 - Inherit) /OUT pdfmark
+	[/Page 2 /View [/XYZ null null 0] /Title (Page 2 - Inherit) /OUT pdfmark
+	[/Page 3 /View [/XYZ null null 0] /Title (Page 3 - Inherit) /OUT pdfmark
+
+[/Count 1 /Page 0 /Title (Articles) /OUT pdfmark
+	[/Action /Article /Dest (Now is the Time) /Title (Now is the Time) /OUT pdfmark
+
+%%EOF

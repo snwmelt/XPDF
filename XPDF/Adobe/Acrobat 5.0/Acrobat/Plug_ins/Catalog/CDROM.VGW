@@ -1,0 +1,6 @@
+# style.vgw -- test of gateway stream interface
+$control: 1
+gateway:
+{
+  dda:			"AdobeStreamGateway"
+}

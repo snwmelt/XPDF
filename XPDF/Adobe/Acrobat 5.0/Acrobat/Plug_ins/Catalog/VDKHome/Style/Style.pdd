@@ -1,0 +1,21 @@
+# style.pdd	1.6 - 4/13/94
+# @(#)Copyright (C) 1987-1994 Verity, Inc.
+#
+$control: 1
+descriptor:
+{
+  data-table: pd1
+  {
+    varwidth: _PDD_PARTNAME	pd2
+      /indexed = yes
+  }
+  data-table: pdf
+  {
+    constant:	_DBVERSION	text "vdk103"
+    varwidth: _PDD_PARTPATH	pdv
+    fixwidth: _PDD_NUMDOCS	2 unsigned-integer
+    varwidth: _PDD_DOCIDX	pdv
+      /_hexdata = yes
+    varwidth: _PDD_VALID	pdv
+  }
+}

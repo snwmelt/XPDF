@@ -1,0 +1,31 @@
+# style.sid	1.4 - 4/13/94
+# @(#)Copyright (C) 1987-1994 Verity, Inc.
+# System Topic Index Descriptor
+#
+$control: 1
+descriptor:
+  /packed = yes
+{
+  data-table:	xif
+    /offset = 0
+    /num-records = 1
+    /max-records = 1
+  {
+    constant:	_DBVERSION	text "vdk103"
+    fixwidth:	TOPSTAMP_MAJ 4 date
+    fixwidth:	TOPSTAMP_MIN 4 date
+    fixwidth:	TOPTYPE      2 signed-integer
+    fixwidth:	_DIDSTAMP    4 date
+    fixwidth:	NUMDOCS      2 signed-integer
+    fixwidth:	PARTNAME    10 text
+    fixwidth:	SPARE	    38 text
+  }
+  data-table:	xif
+    /offset = 64
+  {
+    fixwidth:	STAMP	2 signed-integer
+    fixwidth:	FLAG	2 unsigned-integer
+    varwidth:	TINV	xiv
+  }
+}
+$$

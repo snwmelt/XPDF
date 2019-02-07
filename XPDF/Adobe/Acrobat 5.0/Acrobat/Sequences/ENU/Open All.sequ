@@ -1,0 +1,12 @@
+<</Commands [/c <<>>]
+/Input [/c <<	/FileVariation [/i 2]
+	/SourceFileOptions [/c <<>>]
+>>]
+/Output [/c <<	/AddToBaseName [/b false]
+	/DontOverwrite [/b false]
+	/FileVariation [/i 2]
+	/InsertAfterBaseName [/t ()]
+	/InsertBeforeBaseName [/t ()]
+	/OptimizePDF [/b true]
+>>]
+>>

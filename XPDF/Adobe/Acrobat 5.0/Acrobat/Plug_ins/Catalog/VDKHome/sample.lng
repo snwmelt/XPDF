@@ -1,0 +1,434 @@
+# @(#)Copyright (C) 1987-1993 Verity, Inc.
+# vdk10.lng   1.1 - 6/24/94
+# @(#)
+# Example language definition file for Francais
+#
+$control:       1
+
+language:
+{
+ table: CTYPE
+ {
+  text:   0 "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08\x08\x08\x08\x08\x00\x00"
+  text:  16 "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+  text:  32 "\x08\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+  text:  48 "\x04\x04\x04\x04\x04\x04\x04\x04\x04\x04\x00\x00\x00\x00\x00\x00"
+  text:  64 "\x00\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01"
+  text:  80 "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x00\x00\x00\x00\x01"
+  text:  96 "\x00\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02"
+  text: 112 "\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x00\x00\x00\x00\x00"
+  text: 128 "\x01\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x02\x01\x01"
+  text: 144 "\x01\x02\x01\x02\x02\x02\x02\x02\x02\x01\x01\x02\x00\x01\x00\x00"
+  text: 160 "\x02\x02\x02\x02\x02\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+  text: 176 "\x00\x00\x00\x00\x00\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00"
+  text: 192 "\x00\x00\x00\x00\x00\x00\x02\x01\x00\x00\x00\x00\x00\x00\x00\x00"
+  text: 208 "\x02\x01\x01\x01\x01\x00\x01\x01\x01\x00\x00\x00\x00\x00\x01\x00"
+  text: 224 "\x01\x02\x01\x01\x02\x01\x00\x02\x01\x01\x01\x01\x02\x01\x00\x00"
+  text: 240 "\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+ }
+ table: TOUPPER
+ {
+  text:   0 "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
+  text:  16 "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
+  text:  32 "\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F"
+  text:  48 "\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3A\x3B\x3C\x3D\x3E\x3F"
+  text:  64 "\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F"
+  text:  80 "\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x5B\x5C\x5D\x5E\x5F"
+  text:  96 "\x60\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F"
+  text: 112 "\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x7B\x7C\x7D\x7E\x7F"
+  text: 128 "\x80\x9A\x90\xB6\x8E\xB7\x8F\x80\xD2\xD3\xD4\xD8\xD7\xDE\x8E\x8F"
+  text: 144 "\x90\x92\x92\xE2\x99\xE3\xEA\xEB\x98\x99\x9A\x9D\x9C\x9D\x9E\x9F"
+  text: 160 "\xB5\xD6\xE0\xE9\xA5\xA5\xA6\xA7\xA8\xA9\xAA\xAB\xAC\xAD\xAE\xAF"
+  text: 176 "\xB0\xB1\xB2\xB3\xB4\xB5\xB6\xB7\xB8\xB9\xBA\xBB\xBC\xBD\xBE\xBF"
+  text: 192 "\xC0\xC1\xC2\xC3\xC4\xC5\xC7\xC7\xC8\xC9\xCA\xCB\xCC\xCD\xCE\xCF"
+  text: 208 "\xD1\xD1\xD2\xD3\xD4\xD5\xD6\xD7\xD8\xD9\xDA\xDB\xDC\xDD\xDE\xDF"
+  text: 224 "\xE0\xE1\xE2\xE3\xE5\xE5\xE6\xE8\xE8\xE9\xEA\xEB\xED\xED\xEE\xEF"
+  text: 240 "\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF"
+ }
+ table: TOLOWER
+ {
+  text:   0 "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
+  text:  16 "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
+  text:  32 "\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F"
+  text:  48 "\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3A\x3B\x3C\x3D\x3E\x3F"
+  text:  64 "\x40\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F"
+  text:  80 "\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7A\x5B\x5C\x5D\x5E\x5F"
+  text:  96 "\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F"
+  text: 112 "\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7A\x7B\x7C\x7D\x7E\x7F"
+  text: 128 "\x87\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8A\x8B\x8C\x8D\x84\x86"
+  text: 144 "\x82\x91\x91\x93\x94\x95\x96\x97\x98\x94\x81\x9B\x9C\x9B\x9E\x9F"
+  text: 160 "\xA0\xA1\xA2\xA3\xA4\xA4\xA6\xA7\xA8\xA9\xAA\xAB\xAC\xAD\xAE\xAF"
+  text: 176 "\xB0\xB1\xB2\xB3\xB4\xA0\x83\x85\xB8\xB9\xBA\xBB\xBC\xBD\xBE\xBF"
+  text: 192 "\xC0\xC1\xC2\xC3\xC4\xC5\xC6\xC6\xC8\xC9\xCA\xCB\xCC\xCD\xCE\xCF"
+  text: 208 "\xD0\xD0\x88\x89\x8A\xD5\xA1\x8C\x8B\xD9\xDA\xDB\xDC\xDD\x8D\xDF"
+  text: 224 "\xA2\xE1\x93\x95\xE4\xE4\xE6\xE7\xE7\xA3\x96\x97\xEC\xEC\xEE\xEF"
+  text: 240 "\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF"
+ }
+ table: SORTORDER
+ {
+  text:   0 "\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F"
+  text:  16 "\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3A\x3B\x3C\x3D\x3E\x3F"
+  text:  32 "\x40\x41\x61\xB5\xA0\xB6\x83\xB7\x85\xC7\xC6\x42\x62\x43\x63\x80"
+  text:  48 "\x87\x44\x64\x45\x65\x90\x82\xD3\x89\xD2\x88\xD4\x8A\x46\x66\x47"
+  text:  64 "\x67\x48\x68\x49\x69\xD6\xA1\xD8\x8B\xD7\x8C\xDE\x8D\x4A\x6A\x4B"
+  text:  80 "\x6B\x4C\x6C\x4D\x6D\x4E\x6E\xA5\xA4\x4F\x6F\xE0\xA2\xE2\x93\xE3"
+  text:  96 "\x95\xE5\xE4\x50\x70\x51\x71\x52\x72\x53\x73\xE1\x54\x74\x55\x75"
+  text: 112 "\xE9\xA3\x9A\x81\xEA\x96\xEB\x97\x56\x76\x57\x77\x58\x78\x59\x79"
+  text: 128 "\xED\xEC\x98\x5A\x7A\x8F\x86\x8E\x84\x92\x91\x99\x94\x9D\x9B\xD1"
+  text: 144 "\xD0\xE8\xE7\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D"
+  text: 160 "\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D"
+  text: 176 "\x1E\x1F\x5B\x5C\x5D\x5E\x5F\x60\x7B\x7C\x7D\x7E\x7F\x9C\x9E\x9F"
+  text: 192 "\xA6\xA7\xA8\xA9\xAA\xAB\xAC\xAD\xAE\xAF\xB0\xB1\xB2\xB3\xB4\xB8"
+  text: 208 "\xB9\xBA\xBB\xBC\xBD\xBE\xBF\xC0\xC1\xC2\xC3\xC4\xC5\xC8\xC9\xCA"
+  text: 224 "\xCB\xCC\xCD\xCE\xCF\xD5\xD9\xDA\xDB\xDC\xDD\xDF\xE6\xEE\xEF\xF0"
+  text: 240 "\xF1\xF2\xF3\xF4\xF5\xF6\xF7\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF\x00"
+ }
+stemtable:
+  /minlen = 2
+  {
+	label: L_PRECLITICS
+	  map: "j'"             ""       "L_POSTCLITICS"   3  
+	/position = 1
+	  map: "l'"             ""       "L_POSTCLITICS"   3  
+	/position = 1
+	  map: "m'"             ""       "L_POSTCLITICS"   3  
+	/position = 1 
+	  map: "s'"             ""       "L_POSTCLITICS"   3  
+	/position = 1 
+	  map: "t'"             ""       "L_POSTCLITICS"   3  
+	/position = 1 
+	  map: "d'"             ""       "L_POSTCLITICS"   3  
+	/position = 1 
+	  map: "n'"             ""       "L_POSTCLITICS"   3  
+	/position = 1 
+	  map: "qu'"            ""       "L_POSTCLITICS"   4  
+	/position = 1 
+	  map: "lorsqu'"        ""       "L_POSTCLITICS"   8  
+	/position = 1 
+	  map: "puisqu'"        ""       "L_POSTCLITICS"   8  
+	/position = 1 
+	  map: "quoiqu'"        ""       "L_POSTCLITICS"   8  
+	/position = 1 
+
+	label: L_POSTCLITICS
+	  map: "-t-il"          ""       "L_SUFFIX"        6  
+	  map: "-t-elle"        ""       "L_SUFFIX"        8  
+	  map: "-t-on"          ""       "L_SUFFIX"        6  
+	  map: "-les"           ""       "L_SUFFIX"        5  
+	  map: "-m'en"          ""       "L_SUFFIX"        6  
+	  map: "-t'en"          ""       "L_SUFFIX"        6  
+	  map: "-l'en"          ""       "L_SUFFIX"        6  
+	  map: "-m'y"           ""       "L_SUFFIX"        5  
+	  map: "-t'y"           ""       "L_SUFFIX"        5  
+	  map: "-l'y"           ""       "L_SUFFIX"        5  
+	  map: "-le-moi"        ""       "L_SUFFIX"        8  
+	  map: "-la-moi"        ""       "L_SUFFIX"        8  
+	  map: "-les-moi"       ""       "L_SUFFIX"        9  
+	  map: "-le-toi"        ""       "L_SUFFIX"        8  
+	  map: "-la-toi"        ""       "L_SUFFIX"        8  
+	  map: "-les-toi"       ""       "L_SUFFIX"        9  
+	  map: "-le-lui"        ""       "L_SUFFIX"        8  
+	  map: "-la-lui"        ""       "L_SUFFIX"        8  
+	  map: "-les-lui"       ""       "L_SUFFIX"        9  
+	  map: "-le-vous"       ""       "L_SUFFIX"        9  
+	  map: "-la-vous"       ""       "L_SUFFIX"        9  
+	  map: "-les-vous"      ""       "L_SUFFIX"        10  
+	  map: "-le-nous"       ""       "L_SUFFIX"        9  
+	  map: "-la-nous"       ""       "L_SUFFIX"        9  
+	  map: "-les-nous"      ""       "L_SUFFIX"        10  
+	  map: "-le-leur"       ""       "L_SUFFIX"        9  
+	  map: "-la-leur"       ""       "L_SUFFIX"        9  
+	  map: "-les-leur"      ""       "L_SUFFIX"        10  
+	  map: "-lui-en"        ""       "L_SUFFIX"        8  
+	  map: "-nous-en"       ""       "L_SUFFIX"        9  
+	  map: "-vous-en"       ""       "L_SUFFIX"        9  
+	  map: "-les-en"        ""       "L_SUFFIX"        8  
+	  map: "-leur-en"       ""       "L_SUFFIX"        9  
+	  map: "-y-en"          ""       "L_SUFFIX"        6  
+	  map: "m'y-en"         ""       "L_SUFFIX"        7  
+	  map: "t'y-en"         ""       "L_SUFFIX"        7  
+	  map: "-nous-y-en"     ""       "L_SUFFIX"        11  
+	  map: "-vous-y-en"     ""       "L_SUFFIX"        11  
+	  map: "-nous-y"        ""       "L_SUFFIX"        8  
+	  map: "-vous-y"        ""       "L_SUFFIX"        8  
+	  map: "-y-moi"         ""       "L_SUFFIX"        7  
+	  map: "-y-toi"         ""       "L_SUFFIX"        7  
+	  map: "-ci"            ""       "L_SUFFIX"        4  
+	  map: "-l…"            ""       "L_SUFFIX"        4  
+	  map: "-je"            ""       "L_SUFFIX"        4  
+	  map: "-tu"            ""       "L_SUFFIX"        4  
+	  map: "-il"            ""       "L_SUFFIX"        4  
+	  map: "-elle"          ""       "L_SUFFIX"        6  
+	  map: "-on"            ""       "L_SUFFIX"        4  
+	  map: "-ils"           ""       "L_SUFFIX"        5  
+	  map: "-elles"         ""       "L_SUFFIX"        7  
+	  map: "-nous"          ""       "L_SUFFIX"        6  
+	  map: "-vous"          ""       "L_SUFFIX"        6  
+	  map: "-y"             ""       "L_SUFFIX"        3  
+	  map: "-en"            ""       "L_SUFFIX"        4  
+	  map: "-moi"           ""       "L_SUFFIX"        5  
+	  map: "-toi"           ""       "L_SUFFIX"        5  
+	  map: "-lui"           ""       "L_SUFFIX"        5  
+	  map: "-leur"          ""       "L_SUFFIX"        6  
+	  map: "-le"            ""       "L_SUFFIX"        4  
+	  map: "-la"            ""       "L_SUFFIX"        4  
+
+	label: L_SUFFIX
+	  map: "s"              ""       "L_E"             5  
+	  map: "ablement"       ""       "L_NORMALIZE"     10  
+	  map: "iblement"       ""       "L_NORMALIZE"     10  
+	  map: "ement"          ""       "L_NORMALIZE"     7  
+	  map: "ment"           ""       "L_NORMALIZE"     7  
+	  map: "amment"         ""       "L_NORMALIZE"     9  
+	  map: "emment"         ""       "L_NORMALIZE"     9  
+	  map: "x"              ""       "L_DERIVATION"    5  
+
+	label: L_E
+	  map: "‚e"             ""       "L_DERIVATION"    5  
+	  map: "e"              ""       "L_DERIVATION"    4  
+	  map: "‚"              ""       "L_DERIVATION"    4  
+
+	label: L_DERIVATION 
+	/minlen = 5
+	  map: "eus"            ""       "L_NORMALIZE"     7  
+	  map: "ifierez"        ""       "L_NORMALIZE"     10  
+	  map: "erez"           ""       "L_NORMALIZE"     7  
+	  map: "irez"           ""       "L_NORMALIZE"     7  
+	  map: "isez"           ""       "L_NORMALIZE"     7  
+	  map: "iserez"         ""       "L_NORMALIZE"     9  
+	  map: "ifieriez"       ""       "L_NORMALIZE"     11  
+	  map: "eriez"          ""       "L_NORMALIZE"     8  
+	  map: "iriez"          ""       "L_NORMALIZE"     8  
+	  map: "assiez"         ""       "L_NORMALIZE"     10  
+	  map: "isiez"          ""       "L_NORMALIZE"     8  
+	  map: "isassiez"       ""       "L_NORMALIZE"     11  
+	  map: "ifiassiez"      ""       "L_NORMALIZE"     12  
+	  map: "assiez"         ""       "L_NORMALIZE"     9  
+	  map: "issiez"         ""       "L_NORMALIZE"     9  
+	  map: "riez"           ""       "L_NORMALIZE"     7  
+	  map: "ssiez"          ""       "L_NORMALIZE"     5  
+	  map: "iez"            ""       "L_NORMALIZE"     5  
+	  map: "rez"            ""       "L_NORMALIZE"     5  
+	  map: "ez"             ""       "L_NORMALIZE"     5  
+	  map: "ment"           ""       "L_NORMALIZE"     7  
+	  map: "abilit"         ""       "L_NORMALIZE"     10  
+	  map: "nalit"          ""       "L_NORMALIZE"     9  
+	  map: "ivit"           ""       "L_NORMALIZE"     8  
+	  map: "isabl"          ""       "L_NORMALIZE"     9  
+	  map: "abl"            ""       "L_NORMALIZE"     7  
+	  map: "ad"             ""       "L_NORMALIZE"     6  
+	  map: "ag"             ""       "L_NORMALIZE"     7  
+	  map: "ifierai"        ""       "L_NORMALIZE"     10  
+	  map: "erai"           ""       "L_NORMALIZE"     7  
+	  map: "irai"           ""       "L_NORMALIZE"     7  
+	  map: "isai"           ""       "L_NORMALIZE"     7  
+	  map: "iserai"         ""       "L_NORMALIZE"     9  
+	  map: "issai"          ""       "L_NORMALIZE"     8  
+	  map: "rai"            ""       "L_NORMALIZE"     6  
+	  map: "ai"             ""       "L_NORMALIZE"     6  
+	  map: "aill"           ""       "L_NORMALIZE"     7  
+	  map: "ail"            ""       "L_NORMALIZE"     6  
+	  map: "ain"            ""       "L_NORMALIZE"     6  
+	  map: "air"            ""       "L_NORMALIZE"     6  
+	  map: "aison"          ""       "L_NORMALIZE"     8  
+	  map: "ival"           ""       "L_NORMALIZE"     7  
+	  map: "al"             ""       "L_NORMALIZE"     5  
+	  map: "ann"            ""       "L_NORMALIZE"     7  
+	  map: "an"             ""       "L_NORMALIZE"     5  
+	  map: "anc"            ""       "L_NORMALIZE"     7  
+	  map: "and"            ""       "L_NORMALIZE"     7  
+	  map: "ifiant"         ""       "L_NORMALIZE"     9  
+	  map: "isant"          ""       "L_NORMALIZE"     9  
+	  map: "issant"         ""       "L_NORMALIZE"     9  
+	  map: "ivant"          ""       "L_NORMALIZE"     8  
+	  map: "ant"            ""       "L_NORMALIZE"     6  
+	  map: "ard"            ""       "L_NORMALIZE"     7  
+	  map: "ifiera"         ""       "L_NORMALIZE"     9  
+	  map: "era"            ""       "L_NORMALIZE"     6  
+	  map: "ira"            ""       "L_NORMALIZE"     6  
+	  map: "isa"            ""       "L_NORMALIZE"     6  
+	  map: "isera"          ""       "L_NORMALIZE"     8  
+	  map: "ra"             ""       "L_NORMALIZE"     6  
+	  map: "iss"            ""       "L_NORMALIZE"     8  
+	  map: "isass"          ""       "L_NORMALIZE"     8  
+	  map: "ass"            ""       "L_NORMALIZE"     7  
+	  map: "a"              ""       "L_NORMALIZE"     4  
+	  map: "ast"            ""       "L_NORMALIZE"     7  
+	  map: "anat"           ""       "L_NORMALIZE"     7  
+	  map: "att"            ""       "L_NORMALIZE"     7  
+	  map: "at"             ""       "L_NORMALIZE"     5  
+	  map: "atric"          ""       "L_NORMALIZE"     8  
+	  map: "tric"           ""       "L_NORMALIZE"     8  
+	  map: "ateur"          ""       "L_NORMALIZE"     8  
+	  map: "teur"           ""       "L_NORMALIZE"     7  
+	  map: "eur"            ""       "L_NORMALIZE"     6  
+	  map: "teu"            ""       "L_NORMALIZE"     8  
+	  map: "eress"          ""       "L_NORMALIZE"     8  
+	  map: "ess"            ""       "L_NORMALIZE"     7  
+	  map: "ativ"           ""       "L_NORMALIZE"     8  
+	  map: "atif"           ""       "L_NORMALIZE"     8  
+	  map: "fication"       ""       "L_NORMALIZE"     11  
+	  map: "isation"        ""       "L_NORMALIZE"     10  
+	  map: "ation"          ""       "L_NORMALIZE"     8  
+	  map: "ition"          ""       "L_NORMALIZE"     8  
+	  map: "otion"          ""       "L_NORMALIZE"     8  
+	  map: "ution"          ""       "L_NORMALIZE"     8  
+	  map: "tion"           ""       "L_NORMALIZE"     6  
+	  map: "atoir"          ""       "L_NORMALIZE"     8  
+	  map: "toir"           ""       "L_NORMALIZE"     7  
+	  map: "oir"            ""       "L_NORMALIZE"     6  
+	  map: "eau"            ""       "L_NORMALIZE"     6  
+	  map: "au"             ""       "L_NORMALIZE"     5  
+	  map: "dr"             ""       "L_NORMALIZE"     7  
+	  map: "eill"           ""       "L_NORMALIZE"     8  
+	  map: "eil"            ""       "L_NORMALIZE"     6  
+	  map: "ionnell"        ""       "L_NORMALIZE"     11  
+	  map: "ionnel"         ""       "L_NORMALIZE"     10  
+	  map: "nell"           ""       "L_NORMALIZE"     8  
+	  map: "nel"            ""       "L_NORMALIZE"     6  
+	  map: "ill"            ""       "L_NORMALIZE"     7  
+	  map: "ell"            ""       "L_NORMALIZE"     7  
+	  map: "el"             ""       "L_NORMALIZE"     5  
+	  map: "enc"            ""       "L_NORMALIZE"     7  
+	  map: "urent"          ""       "L_NORMALIZE"     8  
+	  map: "irent"          ""       "L_NORMALIZE"     8  
+	  map: "Šrent"          ""       "L_NORMALIZE"     8  
+	  map: "issaient"       ""       "L_NORMALIZE"     11  
+	  map: "isaient"        ""       "L_NORMALIZE"     10  
+	  map: "iraient"        ""       "L_NORMALIZE"     10  
+	  map: "iseraient"      ""       "L_NORMALIZE"     12  
+	  map: "ifieraient"     ""       "L_NORMALIZE"     13  
+	  map: "eraient"        ""       "L_NORMALIZE"     10  
+	  map: "raient"         ""       "L_NORMALIZE"     9  
+	  map: "aient"          ""       "L_NORMALIZE"     8  
+	  map: "isent"          ""       "L_NORMALIZE"     8  
+	  map: "isŠrent"        ""       "L_NORMALIZE"     10  
+	  map: "isassent"       ""       "L_NORMALIZE"     11  
+	  map: "ifiassent"      ""       "L_NORMALIZE"     12  
+	  map: "assent"         ""       "L_NORMALIZE"     9  
+	  map: "issent"         ""       "L_NORMALIZE"     9  
+	  map: "ssent"          ""       "L_NORMALIZE"     9  
+	  map: "ent"            ""       "L_NORMALIZE"     6  
+	  map: "‚enn"           ""       "L_NORMALIZE"     7  
+	  map: "‚en"            ""       "L_NORMALIZE"     6  
+	  map: "iser"           ""       "L_NORMALIZE"     7  
+	  map: "ifier"          ""       "L_NORMALIZE"     8  
+	  map: "iller"          ""       "L_NORMALIZE"     8  
+	  map: "oter"           ""       "L_NORMALIZE"     7  
+	  map: "yer"            "i"      "L_NORMALIZE"     7  
+	  map: "iŠr"            ""       "L_NORMALIZE"     7  
+	  map: "ier"            ""       "L_NORMALIZE"     7  
+	  map: "Šr"             ""       "L_NORMALIZE"     6  
+	  map: "er"             ""       "L_NORMALIZE"     5  
+	  map: "eri"            ""       "L_NORMALIZE"     7  
+	  map: "eron"           ""       "L_NORMALIZE"     7  
+	  map: "ett"            ""       "L_NORMALIZE"     7  
+	  map: "et"             ""       "L_NORMALIZE"     5  
+	  map: "eu"             ""       "L_NORMALIZE"     6  
+	  map: "gŠn"            ""       "L_NORMALIZE"     7  
+	  map: "ial"            ""       "L_NORMALIZE"     7  
+	  map: "ibilit"         ""       "L_NORMALIZE"     10  
+	  map: "ibl"            ""       "L_NORMALIZE"     7  
+	  map: "iell"           ""       "L_NORMALIZE"     8  
+	  map: "iel"            ""       "L_NORMALIZE"     6  
+	  map: "iŠm"            ""       "L_NORMALIZE"     6  
+	  map: "ienn"           ""       "L_NORMALIZE"     8  
+	  map: "ien"            ""       "L_NORMALIZE"     7  
+	  map: "ivement"        ""       "L_NORMALIZE"     11  
+	  map: "iv"             ""       "L_NORMALIZE"     6  
+	  map: "iferait"        ""       "L_NORMALIZE"     11  
+	  map: "erait"          ""       "L_NORMALIZE"     8  
+	  map: "irait"          ""       "L_NORMALIZE"     8  
+	  map: "isait"          ""       "L_NORMALIZE"     8  
+	  map: "iserait"        ""       "L_NORMALIZE"     10  
+	  map: "issait"         ""       "L_NORMALIZE"     9  
+	  map: "ait"            ""       "L_NORMALIZE"     6  
+	  map: "it"             ""       "L_NORMALIZE"     5  
+	  map: "if"             ""       "L_NORMALIZE"     5  
+	  map: "ifiqu"          ""       "L_NORMALIZE"     9  
+	  map: "il"             ""       "L_NORMALIZE"     6  
+	  map: "in"             ""       "L_NORMALIZE"     6  
+	  map: "iqu"            ""       "L_NORMALIZE"     7  
+	  map: "uir"            ""       "L_NORMALIZE"     7  
+	  map: "frir"           "fr"     "L_NORMALIZE"     7  
+	  map: "vrir"           "vr"     "L_NORMALIZE"     7  
+	  map: "ir"             ""       "L_NORMALIZE"     6  
+	  map: "i"              ""       "L_NORMALIZE"     5  
+	  map: "ism"            ""       "L_NORMALIZE"     7  
+	  map: "ist"            ""       "L_NORMALIZE"     7  
+	  map: "itud"           ""       "L_NORMALIZE"     8  
+	  map: "isƒm"           ""       "L_NORMALIZE"     9  
+	  map: "ifƒm"           ""       "L_NORMALIZE"     9  
+	  map: "ifƒt"           ""       "L_NORMALIZE"     9  
+	  map: "isƒm"           ""       "L_NORMALIZE"     9  
+	  map: "ƒm"             ""       "L_NORMALIZE"     7  
+	  map: "Œm"             ""       "L_NORMALIZE"     7  
+	  map: "–m"             ""       "L_NORMALIZE"     7  
+	  map: "Œnm"            ""       "L_NORMALIZE"     8  
+	  map: "Œt"             ""       "L_NORMALIZE"     7  
+	  map: "ƒt"             ""       "L_NORMALIZE"     7  
+	  map: "–t"             ""       "L_NORMALIZE"     7  
+	  map: "oi"             ""       "L_NORMALIZE"     7  
+	  map: "i"              ""       "L_NORMALIZE"     6  
+	  map: "ol"             ""       "L_NORMALIZE"     6  
+	  map: "ison"           ""       "L_NORMALIZE"     7  
+	  map: "ifierion"       ""       "L_NORMALIZE"     7  
+	  map: "iserion"        ""       "L_NORMALIZE"     7  
+	  map: "eron"           ""       "L_NORMALIZE"     7  
+	  map: "iron"           ""       "L_NORMALIZE"     7  
+	  map: "ison"           ""       "L_NORMALIZE"     7  
+	  map: "ifierion"       ""       "L_NORMALIZE"     11  
+	  map: "erion"          ""       "L_NORMALIZE"     8  
+	  map: "irion"          ""       "L_NORMALIZE"     8  
+	  map: "ision"          ""       "L_NORMALIZE"     8  
+	  map: "iserion"        ""       "L_NORMALIZE"     10  
+	  map: "ifassion"       ""       "L_NORMALIZE"     11  
+	  map: "ifiassion"      ""       "L_NORMALIZE"     12  
+	  map: "assion"         ""       "L_NORMALIZE"     9  
+	  map: "ission"         ""       "L_NORMALIZE"     9  
+	  map: "sion"           ""       "L_NORMALIZE"     7  
+	  map: "onn"            ""       "L_NORMALIZE"     7  
+	  map: "ron"            ""       "L_NORMALIZE"     7  
+	  map: "yon"            ""       "L_NORMALIZE"     7  
+	  map: "rion"           ""       "L_NORMALIZE"     8  
+	  map: "ssion"          ""       "L_NORMALIZE"     9  
+	  map: "ion"            ""       "L_NORMALIZE"     7  
+	  map: "on"             ""       "L_NORMALIZE"     5  
+	  map: "ifieront"       ""       "L_NORMALIZE"     11  
+	  map: "eront"          ""       "L_NORMALIZE"     8  
+	  map: "iront"          ""       "L_NORMALIZE"     8  
+	  map: "iseront"        ""       "L_NORMALIZE"     10  
+	  map: "ront"           ""       "L_NORMALIZE"     8  
+	  map: "ont"            ""       "L_NORMALIZE"     7  
+	  map: "ott"            ""       "L_NORMALIZE"     7  
+	  map: "ot"             ""       "L_NORMALIZE"     5  
+	  map: "o"              ""       "L_NORMALIZE"     6  
+	  map: "ouilli"         ""       "L_NORMALIZE"     10  
+	  map: "ouilli"         ""       "L_NORMALIZE"     10  
+	  map: "uell"           ""       "L_NORMALIZE"     8  
+	  map: "uel"            ""       "L_NORMALIZE"     6  
+	  map: "ul"             ""       "L_NORMALIZE"     6  
+	  map: "tr"             ""       "L_NORMALIZE"     6  
+	  map: "tur"            ""       "L_NORMALIZE"     7  
+	  map: "ur"             ""       "L_NORMALIZE"     6  
+	  map: "u"              ""       "L_NORMALIZE"     5  
+	  map: "um"             ""       "L_NORMALIZE"     5  
+	  map: "ium"            ""       "L_NORMALIZE"     6  
+	  map: "is"             ""       "L_NORMALIZE"     6  
+
+	label: L_NORMALIZE
+	/minlen = 6
+	  map: "ll"             "l"      "L_DONE"          6  
+	  map: "nn"             "n"      "L_DONE"          6  
+	  map: "pp"             "p"      "L_DONE"          6  
+	  map: "ss"             "s"      "L_DONE"          6  
+	  map: "tt"             "t"      "L_DONE"          6  
+	  map: "‡"              "c"      "L_DONE"          6  
+	  map: "ct"             "c"      "L_DONE"          6  
+	  map: "olv"            "olu"    "L_DONE"          7  
+
+	label: L_DONE
+}
+}
+$$
+ 

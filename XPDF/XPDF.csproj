@@ -251,6 +251,1203 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalisedUI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\acrobat.tlb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\ActiveX\pdf.tlb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\PalmPilot\SelfSign.prc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Photoshop\PDFFormat.8bi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\AccCheck.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\acroform.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\adbc.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Annotations\annots.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Annotations\Stamps\ENU\Faces.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Annotations\Stamps\ENU\Pointers.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Annotations\Stamps\ENU\Standard.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Annotations\Stamps\Words.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.DDD">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.DID">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.DMV">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.PDD">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.PLC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.STP">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.VGW">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\CDROM.WLD">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\RDONLY.PLC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.DDD">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.DID">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.DMV">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.PDD">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.PLC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.STP">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.VGW">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\TEMPLATE.WLD">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\acro20.lng">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\Vdk10.lng">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\Vdk10.rsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\Vdk10.rst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\Vdk10.stc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\Vdk10.stp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\ENU\Vdk10.syd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\sample.lng">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Style\Style.ddd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Style\Style.did">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Style\Style.pdd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Style\Style.plc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Style\Style.sid">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Style\Style.wld">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Vdk10.cmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Vdk10.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Vdk10.std">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Vdk10.syx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Catalog\VDKHome\Vdk10.thd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\digsig.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\escript.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\ewh32.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\execmenu.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\exportps.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\hls.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\html2pdf.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\ia32.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\ImageConversion\BMP.8bi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\ImageConversion\ImageConversion.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\ImageConversion\PCX.8bi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\infusium.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Movie\Movie.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\msaa.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\ppklite.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\reflow.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\SaveAsRTF.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Scan\Photoshop.dap">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Scan\scan.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Scan\Twain.dap">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Scrubber.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\search.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\SendMail.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Brazilian\brz.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Brazilian\brz.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Brazilian\Brz32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Brazilian\brzphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\English\can.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\English\can112.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\English\can32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\English\canphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\French\cfr.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\French\cfr.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\French\Cfr32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Canadian\French\cfrphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Catalan\ctl.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Catalan\ctl.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Catalan\Ctl24.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Catalan\ctlphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Danish\dan.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Danish\dan.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Danish\Dan32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Danish\danphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Dutch\dut.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Dutch\Dut102.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Dutch\Dut32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Dutch\dutphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Finnish\fin.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Finnish\fin.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Finnish\Fin32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Finnish\finphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\French\frn.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\French\frn.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\French\Frn32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\French\frnphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\German\Grm32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\German\grmphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\German\Reformed\grm.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\German\Reformed\Grm104.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\German\Traditional\Grm10401.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\German\Traditional\Grmold.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\Swiss\OldSwiss\sgr10501.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\Swiss\sgr.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\Swiss\sgr32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\Swiss\sgrphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\German\Swiss\Swiss\sgr105.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Italian\itl.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Italian\itl.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Italian\Itl32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Italian\itlphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Bokmal\nrw.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Bokmal\nrw.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Bokmal\Nrw32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Bokmal\nrwphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Nynorsk\nyn.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Nynorsk\nyn.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Nynorsk\Nyn16.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Norwegian\Nynorsk\nynphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Portuguese\prt.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Portuguese\prt.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Portuguese\Prt32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Portuguese\prtphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Spanish\spn.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Spanish\spn.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Spanish\Spn32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Spanish\spnphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Swedish\swd.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Swedish\swd.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Swedish\Swd16.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\Swedish\swdphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\UK\brt.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\UK\brt04.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\UK\brt32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\UK\brtphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\UK\Legal\brt0401.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\UK\Medical\brt0402.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\eng32.clx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\engphon.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\GeoBio\usa8604.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\Legal\usa8601.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\Medical\usa8602.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\SciTech\usa8603.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\usa37.hyp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\Dictionaries\US\usa86.lex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Spelling\spelling.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Table\French.ndx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Table\German.ndx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Table\TAPS32.API">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Table\Ukeng.ndx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Table\Useng.ndx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\touchup.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\ENU\Vdk10.lng">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\ENU\Vdk10.rsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\ENU\Vdk10.rst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\ENU\Vdk10.stc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\ENU\Vdk10.stp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\ENU\Vdk10.syd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\Vdk10.cmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\Vdk10.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\Vdk10.std">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\Vdk10.syx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\VDKHome\Vdk10.thd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\webbuy.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\weblink.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\webpdf.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\wha.api">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Create Thumbnails.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Fast Web View.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Open All.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Print 1st Page of All.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Print All.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Remove File Attachments.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Save All as RTF.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Sequences\ENU\Set Security to No Changes.sequ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\SPPlugins\admplugin.apl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\SPPlugins\ExpressViews.apl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Data\distinit.ps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Data\DISTSADB.DOS">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Data\epilogue.ps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Data\prologue.ps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Data\ps.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\messages.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\RTA80781">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Settings\eBook.joboptions">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Settings\Press.joboptions">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Settings\Print.joboptions">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Settings\Screen.joboptions">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Startup\EXAMPLE.PS">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\ad2kuipi.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\DistId~l.ock">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\pscript.hlp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\pscript.ntf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\adist5.ppd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\adist5cs.ppd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\adist5ct.ppd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\adist5j.ppd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\adist5k.ppd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\PDFMRKEX.PS">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\RUNFILEX.PS">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\AcroJS.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Acrohelp.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Distparm.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\index.pdx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\00000000.abt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\00000000.wld">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\00000001.abt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\00000002.abt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\00000003.abt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\00000004.abt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\assists\acrocat.cat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\morgue\acrocat.cat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\parts\00000001.ddd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\parts\00000001.did">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\pdd\00000000.pdd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\style\style.ddd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\style\style.did">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\style\style.pdd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\style\style.plc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\style\style.stp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\style\style.wld">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\temp\acrocat.cat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\topicidx\acrocat.cat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\trans\acrocat.cat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\trans\data.trn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Index\work\acrocat.cat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\PDFMaker.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Help\ENU\Pdfmark.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Patch.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\AdobePDFMakerX.tlb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\Office2000\PDFMakerA.dot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\PDFMaker.dot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\PDFMaker.ppa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\PDFMaker.xla">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\PDFMakerA.ppa">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\PDFMakerA.xla">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\83pv-RKSJ-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90ms-RKSJ-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90ms-RKSJ-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90ms-RKSJ-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90msp-RKSJ-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90msp-RKSJ-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90pv-RKSJ-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90pv-RKSJ-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\90pv-RKSJ-UCS2C">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Add-RKSJ-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Add-RKSJ-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-CNS1-B5pc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-CNS1-ETen-B5">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-CNS1-H-CID">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-CNS1-H-Host">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-CNS1-H-Mac">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-CNS1-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-GB1-GBK-EUC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-GB1-GBpc-EUC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-GB1-H-CID">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-GB1-H-Host">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-GB1-H-Mac">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-GB1-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-90ms-RKSJ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-90pv-RKSJ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-H-CID">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-H-Host">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-H-Mac">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-PS-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-PS-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Japan1-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Korea1-H-CID">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Korea1-H-Host">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Korea1-H-Mac">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Korea1-KSCms-UHC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Korea1-KSCpc-EUC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Adobe-Korea1-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\B5pc-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\B5pc-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\B5pc-UCS2C">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\B5pc-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\CNS-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\CNS-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETen-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETen-B5-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETen-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETenms-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETenms-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETHK-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\ETHK-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Ext-RKSJ-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Ext-RKSJ-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GB-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GB-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBK-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBK-EUC-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBK-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBK2K-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBK2K-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBKp-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBKp-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBpc-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBpc-EUC-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBpc-EUC-UCS2C">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBpc-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBT-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\GBT-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKdla-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKdla-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKdlb-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKdlb-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKgccs-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKgccs-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKm314-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKm314-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKm471-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKm471-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKscs-B5-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\HKscs-B5-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Identity-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\Identity-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSC-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSC-EUC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCms-UHC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCms-UHC-HW-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCms-UHC-HW-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCms-UHC-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCms-UHC-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCpc-EUC-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCpc-EUC-UCS2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\KSCpc-EUC-UCS2C">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-90ms-RKSJ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-90pv-RKSJ">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-B5pc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-ETen-B5">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-GBK-EUC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-GBpc-EUC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-KSCms-UHC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UCS2-KSCpc-EUC">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniCNS-UCS2-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniCNS-UCS2-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniGB-UCS2-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniGB-UCS2-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniJIS-UCS2-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniJIS-UCS2-HW-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniJIS-UCS2-HW-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniJIS-UCS2-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniKS-UCS2-H">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\UniKS-UCS2-V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\V">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\ENUtxt.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\cobo____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\cob_____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\com_____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\coo_____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\COBO____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\COB_____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\COM_____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\COO_____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\SY______.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\ZD______.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\ZX______.MMM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\zx______.pfm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\ZY______.MMM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\zy______.pfm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_ABI____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_AB_____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_AI_____.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_A______.PFM">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_ebi____.pfm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_eb_____.pfm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_ei_____.pfm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\PFM\_er_____.pfm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\SY______.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\ZD______.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\ZX______.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\ZY______.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_ABI____.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_AB_____.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_AI_____.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_A______.PFB">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_ebi____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_eb_____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_ei_____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\_er_____.pfb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\CIERGB.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\NTSC1953.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\PAL_SECAM.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\Photoshop4DefaultCMYK.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\Photoshop5DefaultCMYK.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\SMPTE-C.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\TempICCProfiles\Profiles\Non-Recommended\WideGamutRGB.icc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config" />
     <None Include="Libraries\FatturaElettronica.Core.deps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -258,6 +1455,183 @@
     <None Include="Libraries\FatturaElettronica.deps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Ace.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\acrobat.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\AcroENU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\ACROFX32.DLL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\ActiveX\AcroIEHelper.ocx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\ActiveX\pdf.ocx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\agm.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Bib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Browser\nppdf32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\cooltype.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Javascripts\ADBC.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Javascripts\aform.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Javascripts\annots.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\OPP.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Optional\README.TXT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\plugin.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Movie\QT2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Movie\QT3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Movie\QT4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\Table\Spell32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\btn_submit.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\table_btm.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\template1.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\template2.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\template5.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\title_acrobat.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\title_adobe.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\title_end.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\Plug_ins\WEBBUY\HTML\title_mid.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\vdk150.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Acrobat\wha library.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\ace.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\acrodist.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\acrodistdll.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\AcroTray.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\adist32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\adistres.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\agm.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\AGM3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\BIB.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\cooltype.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Opp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\PDFL50.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\ad2krepi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\ad2kuipi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\dummy.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\ps5ui.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Tmp\pscript5.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\adist5.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Distillr\Xtras\RUNDIREX.TXT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Legal\license.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Legal\USEnglish.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\AdobePDFMakerX.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\Office2000\PDFMExcel.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\Office2000\PDFMPowerPoint.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\PDFMaker\Office2000\PDFMWord.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\ReadMe.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Cmap\AdobeFnt.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Adobe\Acrobat 5.0\Resource\Font\AdobeFnt.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Libraries\Licenses\FatturaElettronica.NET">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

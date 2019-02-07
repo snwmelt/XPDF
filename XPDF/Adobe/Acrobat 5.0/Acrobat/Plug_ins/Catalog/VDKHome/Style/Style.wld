@@ -1,0 +1,21 @@
+# style.wld	1.7 - 4/13/94
+# @(#)Copyright (C) 1987-1994 Verity, Inc.
+#
+# Word List Descriptor
+#
+$control: 1
+descriptor:
+{
+  data-table:	pif
+  {
+    constant:	_DBVERSION	text "vdk103"
+    varwidth:	FWWORD    piw
+    fixwidth:   FWWORD_OF   3 unsigned-integer
+    fixwidth:	FWWORD_SZ   1 unsigned-integer
+
+    constant:	CASEDEX       unsigned-integer "0"
+    fixwidth:	STEMDEX     3 unsigned-integer
+##  fixwidth:	SOUNDEX     3 unsigned-integer
+  }
+}
+$$

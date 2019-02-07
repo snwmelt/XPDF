@@ -1,0 +1,55 @@
+%!
+% PostScript program for distilling and combining an entire folder or
+% directory of PostScript files.
+% When embedding font subsets, it is highly recommended you use this technique
+% to distill multiple PS files so only one font subset is used for each font.
+
+/PathName (Macintosh HD:Test:*.ps) def	  % Edit this to point to the folder
+                                          %   containing the PS files.
+
+/RunDir {                       % Uses PathName variable on the operand stack
+	{ /mysave save def      	% Performs a save before running the PS file
+          dup = flush           % Shows name of PS file being run
+          RunFile               % Calls built in Distiller procedure
+          clear cleardictstack  % Cleans up after PS file
+          mysave restore        % Restores save level
+	}
+	255 string
+	filenameforall
+} def
+
+PathName RunDir
+
+% INSTRUCTIONS
+%
+% 1. Place all PostScript files to be distilled and concatenated in a single 
+%    directory.  For example, here are example names of PS files that might
+%    be used to distill a book:
+%
+%       ac001.ps	Cover
+%       bt001.ps	Table of Contents
+%       ch001.ps	Chapter 1
+%       ch002.ps	Chapter 2
+%       ch003.ps	Chapter 3
+%       in001.ps	Index
+%
+% 2. Make a copy of this file and give it the name you want to have as the prefix
+%    for the resulting file. For example, you could name this file MyBook.txt. 
+%
+% IMPORTANT:  Don't use the .ps suffix if this file is in the same folder as the 
+%   rest of your .ps files. The RunDir command will execute all files that end in 
+%  .ps and this file will be distilled twice!
+%
+% 3. Redefine the variable "PathName" above to point to the folder/directory which
+%    contains your PS files.
+%
+%       Macintosh pathname syntax:  /PathName (Macintosh HD:Folder:*.ps) def
+%       Windows pathname syntax:    /PathName (c:/mydir/*.ps) def
+%		UNIX pathname syntax:    /PathName (.\\/mydir\\/*.ps) def
+%
+%       Note: The syntax for Windows may look strange, but double escaping the
+%             backslash character is required when using filenameforall.
+%
+% 4. Distill the file on the machine running Acrobat Distiller.
+
+

@@ -1,0 +1,41 @@
+%!
+% PostScript program for distilling and combining multiple PostScript files.
+% When embedding font subsets, it is highly recommended you use this technique
+% to distill multiple PS files so only one font subset is used for each font.
+
+/prun { /mysave save def       % Performs a save before running the PS file
+        dup = flush            % Shows name of PS file being run
+        RunFile                % Calls built in Distiller procedure
+        clear cleardictstack   % Cleans up after PS file
+        mysave restore         % Restores save level
+} def
+
+(Macintosh HD:Folder:Cover.ps) prun
+(Macintosh HD:Folder:TOC.ps) prun
+(Macintosh HD:Folder:Chapter1.ps) prun
+(Macintosh HD:Folder:Chapter2.ps) prun
+(Macintosh HD:Folder:Chapter3.ps) prun
+(Macintosh HD:Folder:Index.ps) prun
+
+
+
+% INSTRUCTIONS
+%
+% 1. Locate all PostScript files to be distilled.
+%
+% 2. Make a copy of this file and give it the name you want to have as the prefix
+%    for the resulting file. For example, you could name this file MyBook.ps. 
+%
+% 3. Include a line for each PostScript file to be run using the pathname syntax
+%    appropriate for the platform running Acrobat Distiller. 
+%
+%       Macintosh pathname syntax:  (Macintosh HD:Folder:File.ps) prun
+%       Windows pathname syntax:    (c:/mydir/file.ps) prun
+%		UNIX pathname syntax:    	(./mydir/File.ps) prun
+%
+%       Note: The syntax for Windows may look strange, but double escaping the
+%             backslash character is required when using filenameforall.
+%
+% 4. Distill the file on the machine running Acrobat Distiller.
+
+

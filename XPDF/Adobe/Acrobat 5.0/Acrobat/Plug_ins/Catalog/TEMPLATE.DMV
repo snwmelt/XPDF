@@ -1,0 +1,20 @@
+# pdfidx.dmv	Version 1.0		10/08/92
+# Copyright (c) 1992 Adobe Systems Incorporated. All rights reserved.
+# This file contains the parsing rules for the tagged text file.
+
+$control: 1
+datamap:
+	/docsep = "%%BeginUnitOfRetrieval\n"
+{
+	field:	FileName			PATTERN			"FileName: <.*>"
+	field:	DirIndex			PATTERN			"DirIndex: <.*>"
+	field:	ProjID				PATTERN			"ProjID: <.*>"
+
+## WRITE DATA HERE
+
+	dispatch:	DOC
+		/start-pattern = "%%UORText:\n"
+		/end-pattern   = "%%EndUnitOfRetrieval\n"
+		/required = YES
+}
+$$
