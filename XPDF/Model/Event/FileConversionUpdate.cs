@@ -1,84 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using XPDF.Model.Event.Enums;
 using XPDF.Model.Event.Interface;
 using XPDF.Model.Interface;
 
 namespace XPDF.Model.Event
 {
-    internal class FileConversionUpdate : IProgressUpdate<IFileInformation>
+    internal class FileConversionUpdate : EventArgs, IFileConversionUpdate
     {
-        private int             _CurrentIndex;
-        private readonly object _ThreadLock = new object( );
+        private HashSet<FileTransformation> _Transformations;
 
-        public FileConversionUpdate ( IList<IFileInformation> Items )
+        
+        public Boolean AddTransformation( FileTransformation Transformation )
         {
-            this.Items    = Items ?? new List<IFileInformation>( );
-            _CurrentIndex = 0;
+            return _Transformations.Add( Transformation );
         }
 
-        public void IncrementProgress( )
+        public Boolean AddTransformation( EFileTransformation Transformation, IFileInformation Result, StateEventArgs EventData = default)
         {
-            if ( !Completed )
-            {
-                lock ( _ThreadLock )
-                {
-                    LastItem = Items[ _CurrentIndex ];
-
-                    if ( _CurrentIndex + 1 < Items.Count )
-                    {
-                        _CurrentIndex++;
-                        NextItem = Items[ _CurrentIndex ];
-                    }
-                }
-            }
+            return AddTransformation ( Transformation, Original, Result, EventData );
+        }
+        
+        public Boolean AddTransformation( EFileTransformation Transformation, IFileInformation Source, IFileInformation Result, StateEventArgs EventData = default )
+        {
+            return _Transformations.Add( new FileTransformation( Transformation, Source, Result, EventData ) );
         }
 
-        public void Reset( )
-        {
-            lock ( _ThreadLock )
-            {
-                _CurrentIndex = 0;
-                LastItem      = null;
-                NextItem      = null;
-            }
-        }
-
-        public IList<IFileInformation> Items
+        public bool Complete
         {
             get;
             set;
         }
 
-        public IFileInformation LastItem
+        public FileConversionUpdate( IFileInformation Original )
         {
-            get;
-            private set;
+            _Transformations = new HashSet<FileTransformation>( );
+
+            this.Original = Original;
         }
 
-        public IFileInformation NextItem
+        public IFileInformation Original
         {
             get;
-            private set;
         }
 
-        public float PercentComplete
+        public IEnumerable<FileTransformation> Transformations
         {
             get
             {
-                lock ( _ThreadLock )
-                {
-                    return ( Items == null ) ? -1 : ( Items.Count > 0 ) ? _CurrentIndex / Items.Count : 1;
-                }
-            }
-        }
-
-        public bool Completed
-        {
-            get
-            {
-                lock ( _ThreadLock )
-                {
-                    return Items == null || Items.Count == 0 || Items[ Items.Count - 1 ] == LastItem;
-                }
+                return _Transformations;
             }
         }
     }

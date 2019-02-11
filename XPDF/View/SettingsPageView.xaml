@@ -47,19 +47,35 @@
         <vcs:LabeledCheckboxUserControl Grid.Row="2" IsChecked="{Binding EnablePDF, Mode=TwoWay}" Label="{Binding PEnablePDF, Source={x:Static vm:LocalizationViewModel.Instance}}" 
                                         FontWeight="{StaticResource FontWeightKey}" FontSize="{StaticResource FontSizeKey}" Height="{StaticResource LabledCheckboxSizeKey}"/>
 
-        <vcs:LabeledCheckboxUserControl Grid.Row="3" IsChecked="{Binding EnableAutoPrint, Mode=TwoWay}" Label="{Binding PEnableAutoPrint, Source={x:Static vm:LocalizationViewModel.Instance}}" 
-                                        FontWeight="{StaticResource FontWeightKey}" FontSize="{StaticResource FontSizeKey}" Height="{StaticResource LabledCheckboxSizeKey}"
-                                        IsEnabled="False"/>
-
-        <vcs:LabeledCheckboxUserControl Grid.Row="4" IsChecked="{Binding InheritFileName, Mode=TwoWay}" Label="{Binding PInheritFileName, Source={x:Static vm:LocalizationViewModel.Instance}}" 
+        <vcs:LabeledCheckboxUserControl Grid.Row="3" IsChecked="{Binding InheritFileName, Mode=TwoWay}" Label="{Binding PInheritFileName, Source={x:Static vm:LocalizationViewModel.Instance}}" 
                                         FontWeight="{StaticResource FontWeightKey}" FontSize="{StaticResource FontSizeKey}" Height="{StaticResource LabledCheckboxSizeKey}"/>
+
+        <vcs:LabeledCheckboxUserControl Grid.Row="4" IsChecked="{Binding PrintingEnabled, Mode=TwoWay}" Label="{Binding PEnableAutoPrint, Source={x:Static vm:LocalizationViewModel.Instance}}" 
+                                        FontWeight="{StaticResource FontWeightKey}" FontSize="{StaticResource FontSizeKey}" Height="{StaticResource LabledCheckboxSizeKey}"
+                                        IsEnabled="True"/>
+
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="15,0,0,0" IsEnabled="{Binding PrintingEnabled, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Printer, Source={x:Static vm:LocalizationViewModel.Instance}}"
+                       FontSize="{StaticResource FontSizeKey}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Column="1" Grid.Row="0" Text=": " FontSize="{StaticResource FontSizeKey}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <ComboBox Grid.Column="3" Grid.Row="0" Margin="0,1.5" ItemsSource="{Binding PrinterList}" SelectedItem="{Binding SelectedPrinter}"/>
+        </Grid>
 
         <vcs:LabeledCheckboxUserControl Grid.Row="5" IsChecked="{Binding RememberDirectories, Mode=TwoWay}" Label="{Binding PRememberDirectories, Source={x:Static vm:LocalizationViewModel.Instance}}" 
                                         FontWeight="{StaticResource FontWeightKey}" FontSize="{StaticResource FontSizeKey}" Height="{StaticResource LabledCheckboxSizeKey}"/>
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2" Margin="15,0,0,0" IsEnabled="{Binding UseDefaultDirectories}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="85"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -68,26 +84,27 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
+            
             <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Source, Source={x:Static vm:LocalizationViewModel.Instance}}"
                        FontSize="{StaticResource FontSizeKey}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
             <TextBlock Grid.Column="1" Grid.Row="0" Text=": " FontSize="{StaticResource FontSizeKey}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <vcs:PathwaySelector Grid.Column="2" Grid.Row="0" x:Name="SourcePathwaySelector" Margin="0,0,0,1.5"
+            <vcs:PathwaySelector Grid.Column="2" Grid.Row="0" x:Name="SourcePathwaySelector" Margin="0,1.5"
                                 TextBoxPlaceholder="{Binding TypePathHere, Source={x:Static vm:LocalizationViewModel.Instance}}"
                                 TextBoxText="{Binding Path=DefaultSourceDirectory, Mode=TwoWay, UpdateSourceTrigger=Default}"
                                 ButtonCommand="{Binding Path=SelectDefaultSourceCommand}"
                                 ButtonContent="{Binding Search, Source={x:Static vm:LocalizationViewModel.Instance}}"/>
 
+            
             <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Destination, Source={x:Static vm:LocalizationViewModel.Instance}}"
                        FontSize="{StaticResource FontSizeKey}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
             <TextBlock Grid.Column="1" Grid.Row="1" Text=": " FontSize="{StaticResource FontSizeKey}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <vcs:PathwaySelector Grid.Column="2" Grid.Row="1" x:Name="DestinationPathwaySelector" Margin="0,1.5,0,0"
+            <vcs:PathwaySelector Grid.Column="2" Grid.Row="1" x:Name="DestinationPathwaySelector" Margin="0,1.5"
                                 TextBoxPlaceholder="{Binding TypePathHere, Source={x:Static vm:LocalizationViewModel.Instance}}"
                                 TextBoxText="{Binding Path=DefaultDestinationDirectory, Mode=TwoWay, UpdateSourceTrigger=Default}"
                                 ButtonCommand="{Binding Path=SelectDefaultDestinationCommand}"

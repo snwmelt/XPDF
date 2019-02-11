@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Xml;
 using Walkways.Extensions.Attributes;
-using Walkways.Extensions.Strings;
 using XPDF.Model.Enums;
 using XPDF.Model.Event;
 using XPDF.Model.Event.Enums;
-using XPDF.Model.Event.Interface;
 using XPDF.Model.Interface;
 using XPDF.Properties;
 
@@ -21,12 +20,13 @@ namespace XPDF.Model.FatturaElettronica12
     {
         #region Private Variables
 
-        Boolean                 _Aborting         = false;
-        Scanner                 _DirectoryScanner = null;
-        IFileConverter          _FEFileConverter  = new FatturaElecttronicaFileConverter( );
-        private readonly Object _ThreadLockObject = new Object( );
-        EXPDFConverterState     _State            = EXPDFConverterState.Unavailable;
-        FileConversionUpdate    _UpdateContainer  = new FileConversionUpdate( null );
+        Boolean                 _Aborting            = false;
+        Scanner                 _DirectoryScanner    = null;
+        IFileConverter          _FEFileConverter     = new FatturaElecttronicaFileConverter( );
+        EXPDFConverterState     _State               = EXPDFConverterState.Unavailable;
+        private readonly Object _ThreadLockObject    = new Object( );
+        FileConversionQueue     _FileConversionQueue = new FileConversionQueue( );
+        HashSet<String>         _DocumentsToPrint    = new HashSet<String>( );
 
         #endregion
 
@@ -38,13 +38,48 @@ namespace XPDF.Model.FatturaElettronica12
         private void _Abort( Exception Exception = null )
         {
             SetState( EXPDFConverterState.Available, Exception );
+            Thread.Sleep( 500 );
         }
 
         public void Abort( )
         {
+            _Aborting = true;
             _Abort( );
         }
-        
+
+        public Boolean Aborting
+        {
+            get
+            {
+                return _Aborting;
+            }
+        }
+
+
+        public long NumberToProcess
+        {
+            get
+            {
+                return _FileConversionQueue.Count;
+            }
+        }
+
+        public float PercentCompleted
+        {
+            get
+            {
+                return _FileConversionQueue.PercentItterated;
+            }
+        }
+
+        public long NumberProcessed
+        {
+            get
+            {
+                return _FileConversionQueue.ItteratedOver;
+            }
+        }
+
         private string[] GetExtensionStrings( )
         {
             List<String> resutlt = new List<String>( );
@@ -66,12 +101,13 @@ namespace XPDF.Model.FatturaElettronica12
                 throw new InvalidOperationException( "Converter State Is Incompatable With Chosen Action" );
 
             SetState( EXPDFConverterState.Working );
+            _Aborting = false;
 
             if ( String.IsNullOrEmpty( PathToDestinationDirectory ) )
                 PathToDestinationDirectory = PathToSourceDirectory;
 
-            _UpdateContainer.Reset( );
-            _UpdateContainer.Items.Clear( );
+            _FileConversionQueue.Reset( );
+            _DocumentsToPrint.Clear( );
 
             _DirectoryScanner = new Scanner( PathToSourceDirectory )
             {
@@ -85,7 +121,7 @@ namespace XPDF.Model.FatturaElettronica12
             {
                 if ( State == EXPDFConverterState.Working && !_Aborting )
                 {
-                    _UpdateContainer.Items.Add( new FileInformation( new Uri( e.FullName ) ) );
+                    _FileConversionQueue.EnQueueFile( new FileInformation( new Uri( e.FullName ) ) );
                 }
             };
 
@@ -93,107 +129,191 @@ namespace XPDF.Model.FatturaElettronica12
             {
                 _DirectoryScanner.Scan( );
 
-                ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
-
-                if ( !_UpdateContainer.Completed )
+                if ( _FileConversionQueue.Count > 0 )
                     ProcessFiles( PathToDestinationDirectory );
-
-                SetState( EXPDFConverterState.Available );
-
             } ) ).Start( );
+        }
+
+        private void _InvokeFileProgressUpdateEvent( FileConversionUpdate _FileConversionUpdate )
+        {
+            FileConversionUpdateEvent?.Invoke( this, _FileConversionUpdate );
         }
 
         private void ProcessFiles( String Destination )
         {
-            //Parallel.ForEach<IFileInformation>( _UpdateContainer.Items.AsEnumerable( ),
-            //new Action<IFileInformation, ParallelLoopState>( ( IFileInformation Element, ParallelLoopState state ) =>
-            //{
-            //    if ( State != EXPDFConverterState.Working || _Aborting )
-            //    {
-            //        state.Break( );
-            //    }
-            //
-            //    _UpdateContainer.IncrementProgress( );
-            //
-            //    try
-            //    {
-            //        Convert( _UpdateContainer.LastItem );
-            //    }
-            //    catch ( Exception Ex )
-            //    {
-            //        ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
-            //    }
-            //
-            //    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
-            //
-            //    if ( _UpdateContainer.Completed )
-            //        SetState( EXPDFConverterState.Available );
-            //
-            //} ) );
-
             while ( State == EXPDFConverterState.Working && !_Aborting )
             {
+                FileConversionUpdate _FileConversionUpdate = null;
+
                 try
                 {
-                    _UpdateContainer.IncrementProgress( );
+                    _FileConversionUpdate = new FileConversionUpdate( _FileConversionQueue.GetNext( ) );
 
-                    IFileInformation ConvertedFileInfo = null;
+                    _DocumentsToPrint.Add( _ConvertDocument( _FileConversionUpdate, Destination ) );
 
-                    if ( _UpdateContainer.LastItem.FormatInformation.FileExtension != EFileExtension.XML )
-                    {
-                        IFileInformation _AutoXML = TryGenerateXMLFile( _UpdateContainer.LastItem );
-
-                        ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( 1 );
-
-                        try
-                        {
-                            if ( Settings.Default.EnablePDF )
-                            {
-                                ConvertedFileInfo = _FEFileConverter.Convert( _AutoXML );
-                                ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( 1 );
-                            }
-                        }
-                        finally
-                        {
-                            if ( !Settings.Default.EnableXML )
-                            {
-                                File.Delete( _AutoXML.Path.LocalPath );
-                                ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( -1 );
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if ( Settings.Default.EnablePDF )
-                        {
-                            ConvertedFileInfo = Convert( _UpdateContainer.LastItem );
-                            ViewModel.SettingsViewModel.Singleton.IncrementConvertedFilesCount( 1 );
-                        }
-                    }
-
-                    if ( !Settings.Default.InheritFileName && ConvertedFileInfo != null )
-                    {
-                        if ( File.Exists( Destination + "\\" + ConvertedFileInfo.FallbackPath ) )
-                            File.Delete( Destination + "\\" + ConvertedFileInfo.FallbackPath );
-
-                        File.Move( ConvertedFileInfo.Path.LocalPath, Destination + "\\" + ConvertedFileInfo.FallbackPath );
-                    }
+                    _InvokeFileProgressUpdateEvent( _FileConversionUpdate );
                 }
                 catch ( Exception Ex )
                 {
-                    ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer, null, Ex ) );
+                    if ( _FileConversionUpdate is null )
+                    {
+                        _FileConversionUpdate = new FileConversionUpdate( null );
+
+                        _FileConversionUpdate.AddTransformation( new FileTransformation( EFileTransformation.Failed,
+                                                                                         _FileConversionUpdate.Original,
+                                                                                         null,
+                                                                                         new StateEventArgs( ESourceState.Unstable, Ex ) ) );
+                    }
+                    
+                    _InvokeFileProgressUpdateEvent( _FileConversionUpdate );
                 }
 
 
-                ProgressUpdateEvent?.Invoke( this, new StateChangeEventArgs<IProgressUpdate<IFileInformation>>( _UpdateContainer ) );
+                if ( _FileConversionQueue.PercentItterated == 1 )
+                {
+                    if ( PrintDocuments )
+                    {
+                        Parallel.ForEach<String>( _DocumentsToPrint,
+                        new Action<String, ParallelLoopState>( ( String _Document, ParallelLoopState state ) =>
+                        {
+                            if ( _Aborting )
+                            {
+                                state.Break( );
+                            }
+                            else
+                            {
+                                if ( !String.IsNullOrEmpty( _Document ) )
+                                {
+                                    PDFPrinter.Print( _Document, Settings.Default.SelectedPrinter );
+                                    Log.Commit( "Sent To Printer:\t" + _Document );
+                                }
+                            }
+                        } ) );
 
+                        Log.Commit( );
+                        Log.Commit( );
+                    }
 
-                if ( _UpdateContainer.Completed )
                     SetState( EXPDFConverterState.Available );
+                }
+            }
+        }
+
+        private String _ConvertDocument( FileConversionUpdate _FileConversionUpdate, String Destination )
+        {
+            IFileInformation ConvertedFileInfo = _FileConversionUpdate.Original;
+
+            if ( ConvertedFileInfo.FormatInformation.FileExtension != EFileExtension.XML )
+            {
+                IFileInformation _AutoXML = TryGenerateXMLFile( ConvertedFileInfo, Destination, _FileConversionUpdate );
+
+                if ( _AutoXML == null )
+                    return null;
+
+
+                try
+                {
+                    if ( !Settings.Default.EnablePDF )
+                        return null;
+
+                    ConvertedFileInfo = _FEFileConverter.Convert( _AutoXML );
+
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.ConvertedToCopied, _AutoXML, ConvertedFileInfo );
+
+                    if ( ConvertedFileInfo == null )
+                        return null;
+                }
+                catch ( Exception Ex )
+                {
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.Failed,
+                                                             _AutoXML,
+                                                             null,
+                                                             new StateEventArgs( ESourceState.Failed, Ex ) );
+
+                    throw Ex;
+                }
+                finally
+                {
+                    if ( !Settings.Default.EnableXML )
+                    {
+                        File.Delete( _AutoXML.Path.LocalPath );
+
+                        _FileConversionUpdate.AddTransformation( EFileTransformation.Deleted, null );
+                    }
+                }
+            }
+            else
+            {
+                if ( !Settings.Default.EnablePDF )
+                    return null;
+
+                try
+                {
+                    ConvertedFileInfo = Convert( ConvertedFileInfo );
+
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.ConvertedToCopied, ConvertedFileInfo );
+                }
+                catch ( Exception Ex )
+                {
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.Failed, 
+                                                             ConvertedFileInfo, 
+                                                             new StateEventArgs( ESourceState.Failed, Ex ) );
+
+                    throw Ex;
+                }
+
+                
+
+                if ( ConvertedFileInfo == null )
+                    return null;
+            }
+
+            if ( ConvertedFileInfo != null )
+            {
+                if ( !Settings.Default.InheritFileName )
+                {
+                    if ( File.Exists( ConvertedFileInfo.FallbackPath ) )
+                        File.Delete( ConvertedFileInfo.FallbackPath );
+
+                    File.Move( ConvertedFileInfo.Path.LocalPath, ConvertedFileInfo.FallbackPath );
+
+                    ConvertedFileInfo = new FileInformation( ConvertedFileInfo.FormatInformation, ConvertedFileInfo.FallbackPath );
+
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.RenamedTo, ConvertedFileInfo );
+                }
+
+                if ( Destination != ConvertedFileInfo.Directory )
+                {
+                    if ( File.Exists( Destination + "\\" + ConvertedFileInfo.FileName ) )
+                        File.Delete( Destination + "\\" + ConvertedFileInfo.FileName );
+
+                    File.Move( ConvertedFileInfo.Path.LocalPath, Destination + "\\" + ConvertedFileInfo.FileName );
+
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.RenamedTo, new FileInformation( ConvertedFileInfo.FormatInformation, 
+                                                                                                                 Destination + "\\" + ConvertedFileInfo.FileName ) );
+
+                    return Destination + "\\" + ConvertedFileInfo.FileName;
+                }
+
+                return ConvertedFileInfo.Path.LocalPath;
+            }
+
+            return null;
+        }
+
+        private Boolean PrintDocuments
+        {
+            get
+            {
+                return Settings.Default.PrintingEnabled && 
+                       Settings.Default.AutoPrintAuthorised && 
+                       Settings.Default.EnablePDF &&
+                       !String.IsNullOrEmpty( Settings.Default.SelectedPrinter ) &&
+                       ( _DocumentsToPrint.Count > 0 );
             }
         }
         
-        private IFileInformation TryGenerateXMLFile( IFileInformation _FileInformation )
+        private IFileInformation TryGenerateXMLFile( IFileInformation _FileInformation, String Destination, FileConversionUpdate _FileConversionUpdate )
         {
             String FileText = File.ReadAllText( _FileInformation.Path.LocalPath );
 
@@ -206,9 +326,9 @@ namespace XPDF.Model.FatturaElettronica12
             String _RawBoundedData  = FileText.Substring( _XMLStartIndex, _XMLEndIndex );
             String _PossibleXMLData = XML.Conventions.Header + Conventions.Header + CleanInvalidXmlChars( _RawBoundedData ) + Conventions.Footer;
 
-            FileInformation _ResultFileInformation = new FileInformation( new FileFormat( EFileExtension.XML, EFormat.Uknown, "" ), _FileInformation.Path.LocalPath + ".xml" );
+            FileInformation _ResultFileInformation = new FileInformation( new FileFormat( EFileExtension.XML, EFormat.Uknown, "" ), Destination + "\\" + _FileInformation.FileName + ".xml" );
 
-            using ( XmlReader _XmlReader = XmlReader.Create( new StringReader( _PossibleXMLData ), new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true } ) )
+            using (  XmlReader _XmlReader = XmlReader.Create( new StringReader( _PossibleXMLData ), new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true } ) )
             {
                 Fattura _Fattura = new Fattura( );
             
@@ -222,15 +342,22 @@ namespace XPDF.Model.FatturaElettronica12
                         {
                             _Fattura.WriteXml( _XmlWriter );
                         }
+
+                        _FileConversionUpdate.AddTransformation( EFileTransformation.ConvertedToCopied, _FileInformation, _ResultFileInformation );
                     }
                     else
                     {
                         throw new ArgumentException( "Invalid XMLPA FileContent " );
                     }
                 }
-                catch
+                catch ( Exception Ex )
                 {
                     File.WriteAllText( _ResultFileInformation.Path.LocalPath, _PossibleXMLData );
+
+                    _FileConversionUpdate.AddTransformation( EFileTransformation.ConvertedToCopied, 
+                                                             _FileInformation, 
+                                                             _ResultFileInformation,
+                                                             new StateEventArgs( ESourceState.Unstable, Ex ) );
                 }
             }
             
@@ -263,12 +390,15 @@ namespace XPDF.Model.FatturaElettronica12
             }
         }
 
-        public event EventHandler<StateChangeEventArgs<IProgressUpdate<IFileInformation>>> ProgressUpdateEvent;
-        
+        public event EventHandler<FileConversionUpdate> FileConversionUpdateEvent;
+
         private void SetState( EXPDFConverterState _EXPDFConverterState, Exception _Exception = null )
         {
             State = _EXPDFConverterState;
-            StateChangedEvent?.Invoke( this, new StateChangeEventArgs<EXPDFConverterState>( _EXPDFConverterState, State, _Exception ) );
+
+            StateChangedEvent?.Invoke( this, new StateEventArgs<EXPDFConverterState>( State, 
+                                                                                     ( _Exception is null ) ? ESourceState.Stable : ESourceState.Unstable, 
+                                                                                     _Exception ) );
         }
 
         public IFileInformation Convert( IFileInformation Input )
@@ -323,6 +453,6 @@ namespace XPDF.Model.FatturaElettronica12
             }
         }
 
-        public event EventHandler<StateChangeEventArgs<EXPDFConverterState>> StateChangedEvent;
+        public event EventHandler<StateEventArgs<EXPDFConverterState>> StateChangedEvent;
     }
 }

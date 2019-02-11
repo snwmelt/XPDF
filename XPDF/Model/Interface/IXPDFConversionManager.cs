@@ -1,7 +1,6 @@
 ﻿using System;
 using XPDF.Model.Event;
 using XPDF.Model.Event.Enums;
-using XPDF.Model.Event.Interface;
 
 namespace XPDF.Model.Interface
 {
@@ -11,10 +10,17 @@ namespace XPDF.Model.Interface
 
         void ConvertAll( string PathToSourceDirectory, string PathToDestinationDirectory );
 
-        event EventHandler<StateChangeEventArgs<IProgressUpdate<IFileInformation>>> ProgressUpdateEvent;
+        event EventHandler<FileConversionUpdate> FileConversionUpdateEvent;
+
+        long NumberProcessed { get; }
+
+        long NumberToProcess { get; }
+        
+        float PercentCompleted { get; }
 
         EXPDFConverterState State { get; }
+        bool Aborting { get; }
 
-        event EventHandler<StateChangeEventArgs<EXPDFConverterState>> StateChangedEvent;
+        event EventHandler<StateEventArgs<EXPDFConverterState>> StateChangedEvent;
     }
 }

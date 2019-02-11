@@ -62,12 +62,12 @@ namespace XPDF.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EnableAutoPrint {
+        public bool AutoPrintAuthorised {
             get {
-                return ((bool)(this["EnableAutoPrint"]));
+                return ((bool)(this["AutoPrintAuthorised"]));
             }
             set {
-                this["EnableAutoPrint"] = value;
+                this["AutoPrintAuthorised"] = value;
             }
         }
         
@@ -200,6 +200,42 @@ namespace XPDF.Properties {
             }
             set {
                 this["TempSourceDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedPrinter {
+            get {
+                return ((string)(this["SelectedPrinter"]));
+            }
+            set {
+                this["SelectedPrinter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrintingEnabled {
+            get {
+                return ((bool)(this["PrintingEnabled"]));
+            }
+            set {
+                this["PrintingEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EULANotified {
+            get {
+                return ((bool)(this["EULANotified"]));
+            }
+            set {
+                this["EULANotified"] = value;
             }
         }
     }

@@ -26,6 +26,31 @@ namespace XPDF.Model
             FallbackPath      = null;
         }
 
+
+        public String Directory
+        {
+            get
+            {
+                return System.IO.Path.GetDirectoryName( Path.LocalPath );
+            }
+        }
+
+        public String ExtensionlessFileName
+        {
+            get
+            {
+                return System.IO.Path.GetFileNameWithoutExtension( Path.LocalPath );
+            }
+        }
+
+        public String FileName
+        {
+            get
+            {
+                return System.IO.Path.GetFileName( Path.LocalPath );
+            }
+        }
+
         public FileInformation( String Path ) : this( new Uri( Path ) )
         {
         }

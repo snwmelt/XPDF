@@ -80,7 +80,9 @@ namespace XPDF.Model.FatturaElettronica12
 
             _PDFDocument.Close( );
 
-            return new FileInformation( new FileFormat( EFileExtension.PDF, EFormat.PDF, "1.4" ), new Uri( Input.Path.LocalPath + ".pdf" ), _FileName.Replace( @"/", "" ) + ".pdf" );
+            return new FileInformation( new FileFormat( EFileExtension.PDF, EFormat.PDF, "1.4" ), 
+                                        new Uri( Input.Path.LocalPath + ".pdf" ),
+                                        Input.Directory + "\\" + _FileName.Replace( @"/", "" ) + ".pdf" );
         }
 
         private string _XMLPAPDFFileName( )

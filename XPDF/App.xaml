@@ -10,6 +10,9 @@
         <SolidColorBrush x:Key="TextBoxBorderBrushSolidColorBrush"  Color="Gray"/>
         <SolidColorBrush x:Key="ListBoxBorderBrushSolidColorBrush"  Color="Gray"/>
 
+        <Style TargetType="{x:Type ComboBox}" >
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrushSolidColorBrush}"/>
+        </Style>
         
         <Style x:Name="MinimalButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>

@@ -54,6 +54,10 @@
 
         </Grid>
 
+        <vc:LabeledCheckboxUserControl Grid.Row="2" HorizontalAlignment="Left" Label="{Binding PPrintAll, Source={x:Static vm:LocalizationViewModel.Instance}}"
+                                       IsEnabled="{Binding PrintingConfigured, Source={x:Static vm:SettingsViewModel.Singleton}}" FontSize="16" Height="18"
+                                       IsChecked="{Binding AutoPrintAuthorised, Source={x:Static vm:SettingsViewModel.Singleton}, Mode=TwoWay}"/>
+
         <Button Grid.Row="2" HorizontalAlignment="Right" Width="105" Height="35" Margin="1,0" Command="{Binding Path=XPDFConvertCommand}">
             <Label>
                 <Label.Style>

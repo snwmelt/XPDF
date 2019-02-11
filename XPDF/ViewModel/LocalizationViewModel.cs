@@ -89,11 +89,27 @@ namespace XPDF.ViewModel
             }
         }
 
+        public String PPrintAll
+        {
+            get
+            {
+                return LocalisedUI.PPrintAll + " PDF ";
+            }
+        }
+
         public String PRememberDirectories
         {
             get
             {
                 return LocalisedUI.PRememberDirectories;
+            }
+        }
+
+        public String Printer
+        {
+            get
+            {
+                return LocalisedUI.Printer;
             }
         }
 

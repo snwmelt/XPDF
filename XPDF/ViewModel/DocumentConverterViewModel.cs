@@ -4,10 +4,11 @@ using System.ComponentModel;
 using Walkways.MVVM.ViewModel;
 using XPDF.Model.FatturaElettronica12;
 using XPDF.Model.Event;
-using XPDF.Model.Event.Interface;
 using XPDF.Model.Interface;
 using XPDF.View.Localization;
 using System.IO;
+using XPDF.Model.Event.Enums;
+using XPDF.Model;
 
 namespace XPDF.ViewModel
 {
@@ -31,18 +32,31 @@ namespace XPDF.ViewModel
             XPDFConvertCommand       = new CommandRelay<Object>( XPDFConvert, ConversionInteractionAllowed );
             ConversionInProgress     = false;
 
-            _XPDFConverter.ProgressUpdateEvent += UpdateProgress;
+            _XPDFConverter.FileConversionUpdateEvent += _CProgressUpdateEventHandler;
+            _XPDFConverter.StateChangedEvent         += _CStateChangedEventHandler;
         }
-        
-        private void UpdateProgress( object sender, StateChangeEventArgs<IProgressUpdate<IFileInformation>> e )
+
+        private void _CStateChangedEventHandler( object sender, StateEventArgs<EXPDFConverterState> e )
         {
-            if ( e.CurrentState.Completed )
+            if ( e.Subject == EXPDFConverterState.Available )
             {
-                if ( ConversionInProgress )
+                if ( _ConversionInProgress )
                 {
                     ToggleConversionState( );
+                    Log.AmmendBreak( );
                 }
             }
+            
+            if ( e.Subject == EXPDFConverterState.Working )
+            {
+                if ( !_ConversionInProgress )
+                    ToggleConversionState( );
+            }
+        }
+
+        private void _CProgressUpdateEventHandler( object sender, FileConversionUpdate e )
+        {
+            Log.Commit( e );
         }
 
         public bool ConversionInProgress
@@ -150,15 +164,13 @@ namespace XPDF.ViewModel
         {
             if ( ConversionInProgress )
             {
-                _XPDFConverter.Abort( );
-
-                ToggleConversionState( );
+                if ( !_XPDFConverter.Aborting )
+                    _XPDFConverter.Abort( );
             }
             else
             {
-                ToggleConversionState( );
-
-                _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
+                if ( _XPDFConverter.State == EXPDFConverterState.Available )
+                    _XPDFConverter.ConvertAll( SelectedSourceText, SelectedDestinationText );
             }
         }
 

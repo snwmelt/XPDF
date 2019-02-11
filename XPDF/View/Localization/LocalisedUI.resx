@@ -165,4 +165,10 @@
   <data name="TypePathHere" xml:space="preserve">
     <value>Type Path Here</value>
   </data>
+  <data name="PPrintAll" xml:space="preserve">
+    <value>Print All</value>
+  </data>
+  <data name="Printer" xml:space="preserve">
+    <value>Printer</value>
+  </data>
 </root>

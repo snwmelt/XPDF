@@ -142,11 +142,29 @@ namespace XPDF.View.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print All.
+        /// </summary>
+        public static string PPrintAll {
+            get {
+                return ResourceManager.GetString("PPrintAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember Source and Destination.
         /// </summary>
         public static string PRememberDirectories {
             get {
                 return ResourceManager.GetString("PRememberDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Printer.
+        /// </summary>
+        public static string Printer {
+            get {
+                return ResourceManager.GetString("Printer", resourceCulture);
             }
         }
         

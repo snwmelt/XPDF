@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>3.10.1.%2a</ApplicationVersion>
+    <ApplicationVersion>5.10.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -53,6 +53,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -125,7 +126,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Model\Event\Enums\EFileTransformation.cs" />
+    <Compile Include="Model\Event\Enums\ESourceState.cs" />
+    <Compile Include="Model\Event\FileTransformation.cs" />
+    <Compile Include="Model\Event\Interface\IFileConversionUpdate.cs" />
+    <Compile Include="Model\Event\StateEventArgs.cs" />
+    <Compile Include="Model\Event\StateEventArgs`1.cs" />
+    <Compile Include="Model\Log.cs" />
+    <Compile Include="Model\PDFPrinter.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\Controls\LabeledCheckboxUserControl.xaml.cs">
@@ -166,11 +174,9 @@
     <Compile Include="Model\FatturaElettronica12\Conventions.cs" />
     <Compile Include="Model\FiscalCodeID.cs" />
     <Compile Include="Model\Enums\EFormat.cs" />
+    <Compile Include="Model\Event\FileConversionQueue.cs" />
     <Compile Include="Model\Event\FileConversionUpdate.cs" />
-    <Compile Include="Model\Event\ProgressUpdate.cs" />
     <Compile Include="Model\Event\Enums\EXPDFConverterState.cs" />
-    <Compile Include="Model\Event\Interface\IProgressUpdate`1.cs" />
-    <Compile Include="Model\Event\StateChangeEventArgs.cs" />
     <Compile Include="Model\FatturaElettronica12\FatturaElecttronicaConversionManager.cs" />
     <Compile Include="Model\FatturaElettronica12\FatturaElecttronicaFileConverter.cs" />
     <Compile Include="Model\FatturaElettronica12\DocumentDataContainer.cs" />

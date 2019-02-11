@@ -1,8 +1,10 @@
 ﻿using Ookii.Dialogs.Wpf;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using Walkways.MVVM.ViewModel;
+using XPDF.Model;
 using XPDF.Properties;
 using XPDF.View.Localization;
 
@@ -49,6 +51,40 @@ namespace XPDF.ViewModel
         }
 
 
+        public Boolean AutoPrintAuthorised
+        {
+            get
+            {
+                return Settings.Default.AutoPrintAuthorised;
+            }
+
+            set
+            {
+                Settings.Default.AutoPrintAuthorised = value;
+                _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged );
+
+                if ( !Settings.Default.EULANotified )
+                {
+                    PDFPrinter.VerifyAdobeEULA( );
+
+                    Settings.Default.EULANotified = true;
+                }
+            }
+        }
+
+        public long ConvertedFilesCount
+        {
+            private set
+            {
+                Settings.Default.ConvertedFilesCount = value;
+                _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "ConvertedFilesCount" );
+            }
+            get
+            {
+                return Settings.Default.ConvertedFilesCount;
+            }
+        }
+
         public String DefaultDestinationDirectory
         {
             get
@@ -91,17 +127,26 @@ namespace XPDF.ViewModel
             }
         }
 
-        public Boolean? EnableAutoPrint
+        public Boolean? PrintingConfigured
         {
             get
             {
-                return Settings.Default.EnableAutoPrint;
+                return ( PrintingEnabled ?? false ) && !String.IsNullOrEmpty(SelectedPrinter);
+            }
+        }
+
+        public Boolean? PrintingEnabled
+        {
+            get
+            {
+                return Settings.Default.PrintingEnabled;
             }
 
             set
             {
-                Settings.Default.EnableAutoPrint = value.Value;
+                Settings.Default.PrintingEnabled = value.Value;
                 _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged );
+                _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "PrintingConfigured" );
             }
         }
 
@@ -163,10 +208,9 @@ namespace XPDF.ViewModel
             return Settings.Default.TempSourceDirectory;
         }
 
-        public void IncrementConvertedFilesCount( int Value )
+        public void IncrementConvertedFilesCount( long Value )
         {
-            Settings.Default.ConvertedFilesCount += Value;
-            _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "ConvertedFilesCount" );
+            ConvertedFilesCount += Value;
         }
 
         public Boolean? InheritFileName
@@ -181,6 +225,11 @@ namespace XPDF.ViewModel
                 Settings.Default.InheritFileName = value.Value;
                 _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged );
             }
+        }
+
+        public ObservableCollection<String> PrinterList
+        {
+            get;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -212,6 +261,21 @@ namespace XPDF.ViewModel
             get;
         }
 
+        public String SelectedPrinter
+        {
+            get
+            {
+                return Settings.Default.SelectedPrinter;
+            }
+
+            set
+            {
+                Settings.Default.SelectedPrinter = value;
+                _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged );
+                _INPCInvoker.NotifyPropertyChanged( ref PropertyChanged, "PrintingConfigured" );
+            }
+        }
+
         private SettingsViewModel( )
         {
             _INPCInvoker = new INPCInvoker( this );
@@ -219,12 +283,15 @@ namespace XPDF.ViewModel
 
             SelectDefaultDestinationCommand = new CommandRelay<object>( _InvokeSelectDefaultDestinationDirectory );
             SelectDefaultSourceCommand      = new CommandRelay<object>( _InvokeSelectDefaultSourceDirectory );
+            PrinterList                     = new ObservableCollection<String>(  );
+            
+            foreach( String PrinterName in System.Drawing.Printing.PrinterSettings.InstalledPrinters )
+            {
+                PrinterList.Add( PrinterName );
+            }
 
             Settings.Default.TempDestinationDirectory = null;
             Settings.Default.TempSourceDirectory      = null;
-
-            if ( Debugger.IsAttached )
-                Settings.Default.Reset( );
         }
 
         public static readonly SettingsViewModel Singleton = new SettingsViewModel( );
